@@ -17,7 +17,8 @@
         android:layout_alignParentEnd="true"
         android:hint="Логин"
         android:textColorHint="#30000000"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:gravity="center"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -33,13 +34,14 @@
         android:hint="Пароль"
         android:textColor="#000000"
         android:textColorHint="#48000000"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:gravity="center"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Вход"
-        android:id="@+id/EnterBtn"
+        android:id="@+id/enterBtn"
         android:layout_below="@+id/passwordField"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"
@@ -50,8 +52,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Регистрация"
-        android:id="@+id/RegisterBtn"
+        android:id="@+id/registerBtn"
         android:layout_marginTop="39dp"
-        android:layout_below="@+id/EnterBtn"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/enterBtn"
+        android:layout_centerHorizontal="true"
+        android:onClick="OnRegisterBtnClick" />
 </RelativeLayout>
