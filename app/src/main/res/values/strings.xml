@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">StockStore</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_activity_stocks">StocksActivity</string>
+
+    <string name="drawer_item_profile">Профиль</string>
+    <string name="drawer_item_stocks">Акции</string>
+    <string name="drawer_item_subscriptions">Подписки</string>
+    <string name="drawer_item_friends">Друзья</string>
+    <string name="drawer_item_settings">Настройки</string>
+
+</resources>
