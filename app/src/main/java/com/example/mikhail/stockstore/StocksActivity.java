@@ -54,6 +54,7 @@ public class StocksActivity extends ActionBarActivity {
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         new Drawer()
                 .withActivity(this)

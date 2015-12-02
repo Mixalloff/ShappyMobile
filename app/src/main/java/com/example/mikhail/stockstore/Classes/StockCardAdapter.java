@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.example.mikhail.stockstore.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by mikhail on 02.12.15.
@@ -39,7 +41,11 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         StocksViewHolder.stockDescription.setText(stocks.get(position).description);
         StocksViewHolder.stockPhoto.setImageResource(stocks.get(position).photoId);
 
-        StocksViewHolder.stockDate.setText(stocks.get(position).dateFinish.toString());
+        Locale ru = new Locale("ru");
+        //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",ru);
+        SimpleDateFormat format = new SimpleDateFormat("dd MMMM y",ru);
+
+        StocksViewHolder.stockDate.setText(format.format(stocks.get(position).dateFinish));
         StocksViewHolder.companyName.setText(stocks.get(position).company.name);
         StocksViewHolder.companyLogo.setImageResource(stocks.get(position).company.photoId);
     }

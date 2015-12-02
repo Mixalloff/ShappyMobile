@@ -11,7 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingTop="16dp"
             >
 
             <ImageView
@@ -43,8 +43,9 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:scaleType="centerInside"
+                android:adjustViewBounds="true"
                 android:id="@+id/stock_photo"
                 android:layout_marginTop="60dp"
                 />
@@ -54,8 +55,7 @@
                 android:layout_alignParentBottom="true"
                 android:background="#7000"
                 android:orientation="vertical"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp" >
+                 >
 
                 <TextView
                     android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:shadowRadius="6"
                     android:id="@+id/stock_name"
                     android:textColor="#FFF"
-                    android:textSize="36sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView

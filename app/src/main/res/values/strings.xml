@@ -3,7 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Настройки</string>
-    <string name="title_activity_stocks">StocksActivity</string>
+    <string name="title_activity_stocks">Акции</string>
 
     <string name="drawer_item_profile">Профиль</string>
     <string name="drawer_item_stocks">Акции</string>
