@@ -19,4 +19,9 @@
         android:paddingTop="@dimen/tool_bar_top_padding"
         android:transitionName="actionBar" />
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cards"
+        android:layout_below="@+id/toolbar" />
 </RelativeLayout>

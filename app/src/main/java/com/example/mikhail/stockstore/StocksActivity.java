@@ -3,16 +3,24 @@ package com.example.mikhail.stockstore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.mikhail.stockstore.Classes.Company;
+import com.example.mikhail.stockstore.Classes.Stock;
+import com.example.mikhail.stockstore.Classes.StockCardAdapter;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StocksActivity extends ActionBarActivity {
 
@@ -22,6 +30,23 @@ public class StocksActivity extends ActionBarActivity {
         setContentView(R.layout.activity_stocks);
 
         addToolbar();
+
+        initializeTestData();
+        RecyclerView rv = (RecyclerView)findViewById(R.id.cards);
+       // rv.setHasFixedSize(true); // если не изменяется размер
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        rv.setLayoutManager(llm);
+        StockCardAdapter adapter = new StockCardAdapter(stocks);
+        rv.setAdapter(adapter);
+    }
+
+
+    private List<Stock> stocks;
+    private void initializeTestData() {
+        stocks = new ArrayList<>();
+        stocks.add(new Stock("Играй как Пеле!", "Cобери всю коллекцию от легендарного Пеле", R.drawable.magnit_stock1, new Company("МАГНИТ", R.drawable.magnit_logo)));
+        stocks.add(new Stock("Всегда низкие цены!", "Скидки к чаю", R.drawable.magnit_stock2, new Company("МАГНИТ", R.drawable.magnit_logo)));
+        stocks.add(new Stock("Праздничные будни", "В понедельник в нашем магазине скидки на чай", R.drawable.magnit_stock3, new Company("МАГНИТ", R.drawable.magnit_logo)));
     }
 
     // Добавление пользовательского тулбара

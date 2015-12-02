@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/card"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:id="@+id/company_logo"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/company_name"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:layout_toRightOf="@+id/company_logo"
+                android:layout_toEndOf="@+id/company_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/stock_date"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="10dp"
+                android:layout_below="@+id/company_name"
+                android:layout_toRightOf="@+id/company_logo"
+                android:layout_toEndOf="@+id/company_logo" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerInside"
+                android:id="@+id/stock_photo"
+                android:layout_marginTop="60dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#7000"
+                android:orientation="vertical"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:shadowColor="#000"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:id="@+id/stock_name"
+                    android:textColor="#FFF"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:id="@+id/stock_description"
+                    android:textColor="#CCC"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
