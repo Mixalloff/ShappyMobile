@@ -3,6 +3,49 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+
+        <!--EditText hint color-->
+        <item name="android:textColorHint">@color/hint_text_color</item>
+        <!-- TextInputLayout text color-->
+        <item name="colorControlActivated">@color/default_app_green</item>
+        <!-- EditText line color when EditText on-focus-->
+        <item name="colorControlHighlight">@color/default_app_green</item>
+        <!-- EditText line color when EditText  in un-focus-->
+        <item name="colorControlNormal">@color/default_app_white</item>
+
     </style>
 
+    <!--Стиль для TextInputLayout-->
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        //hint color And Label Color in False State
+        <item name="android:textColorHint">@color/hint_text_color</item>
+        <item name="android:textSize">20sp</item>
+        //Label color in True State And Bar Color False And True State
+        <item name="colorAccent">@color/default_app_green</item>
+        <item name="colorControlNormal">@color/default_app_green</item>
+        <item name="colorControlActivated">@color/default_app_green</item>
+
+    </style>
+
+    <!--Название компании, дата... Обычный текст TextView-->
+    <style name="smallTextCard" parent="style/AppTheme">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/default_app_black</item>
+    </style>
+
+    <!--Стиль для карточек-->
+    <style name="MyCardViewStyle" parent="CardView">
+        <!-- Card background color -->
+        <item name="cardBackgroundColor">@color/hint_text_color</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <color name="hint_text_color">#aaBBaa</color>
+    <color name="default_app_green">#72bb53</color>
+    <color name="default_app_white">#FFF</color>
+    <color name="default_app_black">#000</color>
 </resources>
