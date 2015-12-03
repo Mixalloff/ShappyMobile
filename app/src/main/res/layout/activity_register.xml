@@ -81,15 +81,14 @@
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
         android:id="@+id/registerBtn"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textLayoutPhone"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="69dp" />
+        android:layout_marginTop="100dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="50dp"
         android:text="Регистрация"
         android:id="@+id/registerLabel"
         android:layout_alignRight="@+id/registerBtn"
@@ -97,6 +96,6 @@
         android:layout_alignLeft="@+id/registerBtn"
         android:layout_alignStart="@+id/registerBtn"
         android:textColor="#000000"
-        android:gravity="center"/>
+        android:gravity="center" />
 
 </RelativeLayout>

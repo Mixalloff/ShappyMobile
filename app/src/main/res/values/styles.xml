@@ -28,15 +28,14 @@
     </style>
 
     <!--Название компании, дата... Обычный текст TextView-->
-    <style name="smallTextCard" parent="style/AppTheme">
-        <item name="android:textSize">18sp</item>
+    <style name="darkText" parent="style/AppTheme">
         <item name="android:textColor">@color/default_app_black</item>
     </style>
 
     <!--Стиль для карточек-->
     <style name="MyCardViewStyle" parent="CardView">
         <!-- Card background color -->
-        <item name="cardBackgroundColor">@color/hint_text_color</item>
+        <item name="cardBackgroundColor">@color/card_color</item>
         <item name="android:foreground">?android:selectableItemBackground</item>
         <item name="cardElevation">2dp</item>
         <item name="cardCornerRadius">5dp</item>
@@ -44,8 +43,9 @@
         <item name="android:layout_margin">8dp</item>
     </style>
 
-    <color name="hint_text_color">#aaBBaa</color>
+    <color name="hint_text_color">#AABBAA</color>
     <color name="default_app_green">#72bb53</color>
     <color name="default_app_white">#FFF</color>
     <color name="default_app_black">#000</color>
+    <color name="card_color">#0c0d0d0d</color>
 </resources>
