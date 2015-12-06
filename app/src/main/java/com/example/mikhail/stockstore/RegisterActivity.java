@@ -8,7 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -47,8 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
         String Phone =  ((EditText) findViewById(R.id.phoneText)).getText().toString();
         String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
 
-        String response = WorkWithServer.executePost("auth/register/user", "login="+Email+"&password="+Password);
-        WorkWithServer.saveToken(WorkWithServer.parseToken(response));
+        //String response = WorkWithServer.executePost("auth/register/user", "login="+Email+"&password="+Password);
+        //WorkWithServer.saveToken(WorkWithServer.parseToken(response));
+
+        JSONObject response = APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password);
+        try {
+            WorkWithServer.saveToken(response.get("data").toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Intent intent = new Intent(RegisterActivity.this, StocksActivity.class);
         startActivity(intent);

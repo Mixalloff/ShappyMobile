@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.Company;
 import com.example.mikhail.stockstore.Classes.Stock;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
@@ -40,7 +41,13 @@ public class StocksActivity extends ActionBarActivity {
 
         //WorkWithServer.deleteToken();
         try {
-            JSONObject data = new JSONObject(WorkWithServer.executeGet("stocks/all?token=" + token));
+            //JSONObject data = new JSONObject(WorkWithServer.executeGet("stocks/all?token=" + token));
+
+            // Тестирование метода
+            JSONObject data = APIRequestConstructor.getAllStocks(this);
+            Toast.makeText(getApplicationContext(), data.toString(),
+                    Toast.LENGTH_SHORT).show();
+
             // Проверка типа ответа. Если не stock, значит перекидываем на страницу авторизации
             if (!data.get("type").toString().equals("stock")){
                 Intent intent = new Intent(StocksActivity.this, StartActivity.class);
