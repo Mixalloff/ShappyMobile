@@ -1,9 +1,14 @@
 package com.example.mikhail.stockstore;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+import com.example.mikhail.stockstore.Classes.WorkWithServer;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -33,5 +38,19 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onRegisterBtnClick(View view) {
+        String Name =  ((EditText) findViewById(R.id.nameText)).getText().toString();
+        String Surname =  ((EditText) findViewById(R.id.surnameText)).getText().toString();
+        String Email =  ((EditText) findViewById(R.id.emailText)).getText().toString();
+        String Phone =  ((EditText) findViewById(R.id.phoneText)).getText().toString();
+        String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
+
+        String response = WorkWithServer.executePost("auth/register/user", "login="+Email+"&password="+Password);
+        WorkWithServer.saveToken(WorkWithServer.parseToken(response));
+
+        Intent intent = new Intent(RegisterActivity.this, StocksActivity.class);
+        startActivity(intent);
     }
 }

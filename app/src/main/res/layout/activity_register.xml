@@ -14,7 +14,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:id="@+id/nameText"
             android:hint="Имя"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -32,10 +32,10 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText2"
+            android:id="@+id/surnameText"
             android:hint="Фамилия"
             android:textColorHint="#49000000"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/nameText"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
@@ -51,7 +51,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText3"
+            android:id="@+id/emailText"
             android:hint="Email"
             android:textColorHint="#49000000"
             android:layout_alignParentRight="true"
@@ -69,8 +69,24 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
+            android:id="@+id/phoneText"
             android:hint="Телефон"
+            android:textColorHint="#49000000"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textLayoutPhone"
+        android:id="@+id/textLayoutPassword"
+        android:theme="@style/TextLabel">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/passwordText"
+            android:hint="Пароль"
             android:textColorHint="#49000000"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -81,9 +97,10 @@
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
         android:id="@+id/registerBtn"
-        android:layout_below="@+id/textLayoutPhone"
+        android:layout_below="@+id/textLayoutPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:onClick="onRegisterBtnClick" />
 
     <TextView
         android:layout_width="wrap_content"

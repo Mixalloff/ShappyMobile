@@ -1,5 +1,6 @@
 package com.example.mikhail.stockstore;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,16 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.Company;
 import com.example.mikhail.stockstore.Classes.Stock;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
+import com.example.mikhail.stockstore.Classes.WorkWithServer;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,23 @@ public class StocksActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stocks);
+
+        // Подгружаем токен, если есть
+        String token = WorkWithServer.getToken(this);
+
+        //WorkWithServer.deleteToken();
+        try {
+            JSONObject data = new JSONObject(WorkWithServer.executeGet("stocks/all?token=" + token));
+            // Проверка типа ответа. Если не stock, значит перекидываем на страницу авторизации
+            if (!data.get("type").toString().equals("stock")){
+                Intent intent = new Intent(StocksActivity.this, StartActivity.class);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Необходимо авторизоваться!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         addToolbar();
 

@@ -4,9 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.mikhail.stockstore.Classes.WorkWithServer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class StartActivity extends ActionBarActivity {
 
@@ -14,6 +22,9 @@ public class StartActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        // Подгружаем токен, если есть
+        WorkWithServer.getToken(this);
     }
 
     @Override
@@ -39,6 +50,19 @@ public class StartActivity extends ActionBarActivity {
     }
 
     public void onEnterBtnClick(View view) {
+       // WorkWithServer.executePost("auth/register/user", "login=aaaaaa&password=bbbbbb");
+
+
+        String Login = ((EditText)findViewById(R.id.loginField)).getText().toString();
+        String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
+        String authString = WorkWithServer.executePost("auth/authorize", "login="+Login+"&password="+Password);
+        WorkWithServer.saveToken(WorkWithServer.parseToken(authString));
+
+
+
+        Toast.makeText(getApplicationContext(), WorkWithServer.getToken(this),
+                Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(StartActivity.this, StocksActivity.class);
         startActivity(intent);
     }
