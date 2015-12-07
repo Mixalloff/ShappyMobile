@@ -33,7 +33,8 @@ public class APIRequestConstructor {
     public static JSONObject userAuthorize(String login, String password){
         try {
             return new JSONObject(WorkWithServer.executePost("auth/authorize",
-                    "login="+login+
+                    "type=user"+
+                    "&login="+login+
                     "&password="+password
             ));
         } catch (JSONException e) {

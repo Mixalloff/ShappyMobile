@@ -11,5 +11,6 @@
     <string name="drawer_item_friends">Друзья</string>
     <string name="drawer_item_settings">Настройки</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="drawer_item_exit">Выход</string>
 
 </resources>

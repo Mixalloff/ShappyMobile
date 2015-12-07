@@ -1,21 +1,17 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Entities;
 
-import com.example.mikhail.stockstore.R;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by mikhail on 02.12.15.
  */
 public class Stock {
-    String name;
-    Date dateStart;
-    Date dateFinish;
-    int photoId;
-    String description;
-    Company company;
+    public String name;
+    public Date dateStart;
+    public Date dateFinish;
+    public int photoId;
+    public String description;
+    public Company company;
 
     public Stock(String name, String description, int photoId, Company company){
         this.name = name;

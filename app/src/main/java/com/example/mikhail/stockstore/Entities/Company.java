@@ -1,4 +1,4 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Entities;
 
 /**
  * Created by mikhail on 02.12.15.

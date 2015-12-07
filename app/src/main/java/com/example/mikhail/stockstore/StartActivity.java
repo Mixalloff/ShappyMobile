@@ -11,12 +11,53 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class StartActivity extends ActionBarActivity {
+    private ResponseInterface handler = new ResponseInterface() {
+        @Override
+        public void onInternalServerError(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUnknownRequestUri(JSONObject response) {
+
+        }
+
+        @Override
+        public void onError(JSONObject response) {
+            Toast.makeText(getApplicationContext(), response.toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onRegister(JSONObject response) {
+
+        }
+
+        @Override
+        public void onGetToken(JSONObject response) {
+            try {
+                WorkWithServer.saveToken(response.get("data").toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(getApplicationContext(), "Токен получен!",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onUserGetAllStocks(JSONObject response) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +91,20 @@ public class StartActivity extends ActionBarActivity {
     }
 
     public void onEnterBtnClick(View view) {
-       // WorkWithServer.executePost("auth/register/user", "login=aaaaaa&password=bbbbbb");
+       // WorkWithServer.executePost("auth/register/user", "login=aaaaaa&password=aaaaaa");
 
 
         String Login = ((EditText)findViewById(R.id.loginField)).getText().toString();
         String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
-        String authString = WorkWithServer.executePost("auth/authorize", "login="+Login+"&password="+Password);
-        WorkWithServer.saveToken(WorkWithServer.parseToken(authString));
 
+        try {
+            ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        // String authString = WorkWithServer.executePost("auth/authorize", "login="+Login+"&password="+Password);
+        //WorkWithServer.saveToken(WorkWithServer.parseToken(authString));
 
         Toast.makeText(getApplicationContext(), WorkWithServer.getToken(this),
                 Toast.LENGTH_SHORT).show();
