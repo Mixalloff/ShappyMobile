@@ -7,16 +7,57 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
+    private ResponseInterface handler = new ResponseInterface() {
 
-    @Override
+        @Override
+        public void onInternalServerError(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUnknownRequestUri(JSONObject response) {
+
+        }
+
+        @Override
+        public void onError(JSONObject response) {
+
+        }
+
+        @Override
+        public void onRegister(JSONObject response) {
+            try {
+                WorkWithServer.saveToken(response.get("data").toString());
+                Toast.makeText(getApplicationContext(), "Токен: " + response.get("data").toString(), Toast.LENGTH_SHORT).show();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void onGetToken(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetAllStocks(JSONObject response) {
+
+        }
+    };
+
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
@@ -54,9 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
         //String response = WorkWithServer.executePost("auth/register/user", "login="+Email+"&password="+Password);
         //WorkWithServer.saveToken(WorkWithServer.parseToken(response));
 
-        JSONObject response = APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password);
         try {
-            WorkWithServer.saveToken(response.get("data").toString());
+            ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
         } catch (JSONException e) {
             e.printStackTrace();
         }

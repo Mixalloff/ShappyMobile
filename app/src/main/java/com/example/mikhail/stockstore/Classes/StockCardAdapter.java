@@ -1,5 +1,7 @@
 package com.example.mikhail.stockstore.Classes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -40,7 +44,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
     public void onBindViewHolder(StocksViewHolder holder, int position) {
         StocksViewHolder.stockName.setText(stocks.get(position).name);
         StocksViewHolder.stockDescription.setText(stocks.get(position).description);
-        StocksViewHolder.stockPhoto.setImageResource(stocks.get(position).photoId);
+       // StocksViewHolder.stockPhoto.setImageResource(stocks.get(position).photoId);
+
+        CommonFunctions.getPhotoByURL(stocks.get(position).photo, StocksViewHolder.stockPhoto);
 
         Locale ru = new Locale("ru");
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",ru);
@@ -48,7 +54,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
         StocksViewHolder.stockDate.setText(format.format(stocks.get(position).dateFinish));
         StocksViewHolder.companyName.setText(stocks.get(position).company.name);
-        StocksViewHolder.companyLogo.setImageResource(stocks.get(position).company.photoId);
+
+       // StocksViewHolder.companyLogo.setImageResource(stocks.get(position).company.photo);
+        CommonFunctions.getPhotoByURL(stocks.get(position).company.photo,StocksViewHolder.companyLogo);
     }
 
     @Override

@@ -52,8 +52,8 @@ public class APIRequestConstructor {
             return new JSONObject(response);
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 }
