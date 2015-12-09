@@ -1,12 +1,21 @@
 package com.example.mikhail.stockstore.Classes;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +29,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -28,8 +39,16 @@ import java.net.URL;
  */
 public class CommonFunctions {
 
+    // Установка картинки в ImageView из Bitmap
+    public static void setPhotoToImageView(Bitmap photo, ImageView imageView) {
+        imageView.setImageBitmap(photo);
+    }
+
     // Загрузка картинки по URL в заданное ImageView
-    public static void getPhotoByURL(String photoURL, ImageView imageView) {
+    public static void setPhotoToImageView(String photoURL, ImageView imageView) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         URL newurl = null;
         try {
             newurl = new URL(photoURL);
@@ -38,6 +57,27 @@ public class CommonFunctions {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Bitmap getPhoto(String src){
+        // Асинхронное выполнение
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        URL newurl = null;
+        try {
+            newurl = new URL(src);
+            return BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public static Bitmap getPhoto(int resId, Resources resources){
+        Bitmap photo = BitmapFactory.decodeResource(resources, resId);
+        return photo;
     }
 
     // Добавление пользовательского Navigation View и тулбара
@@ -100,3 +140,4 @@ public class CommonFunctions {
         });
     }*/
 }
+

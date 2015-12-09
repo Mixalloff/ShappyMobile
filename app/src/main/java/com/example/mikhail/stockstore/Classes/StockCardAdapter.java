@@ -46,7 +46,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         StocksViewHolder.stockDescription.setText(stocks.get(position).description);
        // StocksViewHolder.stockPhoto.setImageResource(stocks.get(position).photoId);
 
-        CommonFunctions.getPhotoByURL(stocks.get(position).photo, StocksViewHolder.stockPhoto);
+        CommonFunctions.setPhotoToImageView(stocks.get(position).photo, StocksViewHolder.stockPhoto);
 
         Locale ru = new Locale("ru");
         //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",ru);
@@ -56,7 +56,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         StocksViewHolder.companyName.setText(stocks.get(position).company.name);
 
        // StocksViewHolder.companyLogo.setImageResource(stocks.get(position).company.photo);
-        CommonFunctions.getPhotoByURL(stocks.get(position).company.photo,StocksViewHolder.companyLogo);
+        CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo,StocksViewHolder.companyLogo);
     }
 
     @Override

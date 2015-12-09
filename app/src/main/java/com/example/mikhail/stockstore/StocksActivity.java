@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
+import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Company;
@@ -71,7 +72,7 @@ public class StocksActivity extends ActionBarActivity {
             /*Toast.makeText(getApplicationContext(), response.toString(),
                              Toast.LENGTH_SHORT).show();*/
             // Обновляем список акций
-            stocks.clear();
+        //    stocks.clear();
             try {
                 JSONArray data = new JSONArray(response.get("data").toString());
                 int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
@@ -92,6 +93,7 @@ public class StocksActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        GlobalVariables.setDefaultPhoto(R.drawable.default_photo, getResources());
         initializeTestData();
 
         super.onCreate(savedInstanceState);
