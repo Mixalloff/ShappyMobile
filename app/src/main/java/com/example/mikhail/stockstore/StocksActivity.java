@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
+import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -72,7 +73,7 @@ public class StocksActivity extends ActionBarActivity {
             /*Toast.makeText(getApplicationContext(), response.toString(),
                              Toast.LENGTH_SHORT).show();*/
             // Обновляем список акций
-        //    stocks.clear();
+            stocks.clear();
             try {
                 JSONArray data = new JSONArray(response.get("data").toString());
                 int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
@@ -93,7 +94,9 @@ public class StocksActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Инициализация фото по умолчанию
         GlobalVariables.setDefaultPhoto(R.drawable.default_photo, getResources());
+        // Тестовые данные
         initializeTestData();
 
         super.onCreate(savedInstanceState);
@@ -111,7 +114,7 @@ public class StocksActivity extends ActionBarActivity {
             e1.printStackTrace();
         }
 
-        addNavigationView();
+        CommonFunctions.addNavigationView(this);
       //  addTabs();
 
         loadRecyclerView();
@@ -147,69 +150,6 @@ public class StocksActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-    }
-
-    // Добавление пользовательского Navigation View и тулбара
-    private void addNavigationView(){
-        // Handle Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Drawer drawer = new Drawer();
-            drawer
-                .withActivity(this)
-                .withToolbar(toolbar)
-                .withActionBarDrawerToggle(true)
-                .withHeader(R.layout.drawer_header)
-                .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3),
-
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out)
-                        /*new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
-                        new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_github).withBadge("12+").withIdentifier(1)*/
-                )
-                .build();
-        drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l, IDrawerItem iDrawerItem) {
-                if (iDrawerItem instanceof Nameable) {
-                    switch (((Nameable) iDrawerItem).getNameRes()) {
-                        case R.string.drawer_item_profile: {
-                            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_stocks: {
-                            Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_subscriptions: {
-                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(StocksActivity.this, SubscribesActivity.class);
-                            startActivity(intent);
-                        }
-                        case R.string.drawer_item_settings: {
-                            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_friends: {
-                            Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_exit: {
-                            WorkWithServer.deleteToken();
-                            Intent intent = new Intent(StocksActivity.this, StartActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                }
-            }
-        });
     }
 
     @Override

@@ -12,6 +12,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,9 +21,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StartActivity;
 import com.example.mikhail.stockstore.StocksActivity;
+import com.example.mikhail.stockstore.SubscribesActivity;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -81,12 +85,12 @@ public class CommonFunctions {
     }
 
     // Добавление пользовательского Navigation View и тулбара
-    /*private void addNavigationView(Activity activity){
+    public static void addNavigationView(final AppCompatActivity activity) {
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        activity.setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawer drawer = new Drawer();
         drawer
                 .withActivity(activity)
@@ -110,34 +114,63 @@ public class CommonFunctions {
                 if (iDrawerItem instanceof Nameable) {
                     switch (((Nameable) iDrawerItem).getNameRes()) {
                         case R.string.drawer_item_profile: {
-                            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_stocks: {
-                            Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
                             break;
                         }
                         case R.string.drawer_item_subscriptions: {
-                            Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
                             break;
                         }
                         case R.string.drawer_item_settings: {
-                            Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_friends: {
-                            Toast.makeText(activity.getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_exit: {
                             WorkWithServer.deleteToken();
-                            Intent intent = new Intent(StocksActivity.this, StartActivity.class);
-                            startActivity(intent);
+                            activity.startActivity(new Intent(activity.getBaseContext(), StartActivity.class));
+
                         }
                     }
                 }
             }
         });
-    }*/
+    }
+
+    // Добавление вкладок
+    public static void addTabs(final AppCompatActivity activity, ViewPager pager,ViewPagerAdapter adapter,SlidingTabLayout tabs,CharSequence Titles[],int Numboftabs){
+
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        adapter =  new ViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
+
+        // Assigning ViewPager View and setting the adapter
+        pager = (ViewPager) activity.findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) activity.findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return activity.getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
+    }
 }
+
 
