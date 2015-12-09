@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <TextView
+    <!--<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -12,6 +12,11 @@
         android:id="@+id/textView"
         android:textColor="@color/tabsScrollColor"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cards" />
 
 </RelativeLayout>

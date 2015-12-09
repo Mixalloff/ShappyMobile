@@ -102,22 +102,26 @@ public class StocksActivity extends ActionBarActivity {
 
         //WorkWithServer.deleteToken();
 
-            //JSONObject data = new JSONObject(WorkWithServer.executeGet("stocks/all?token=" + token));
-            try {
-                ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(this), handler);
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
+        //JSONObject data = new JSONObject(WorkWithServer.executeGet("stocks/all?token=" + token));
+        try {
+            ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(this), handler);
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
 
         addNavigationView();
-        addTabs();
+      //  addTabs();
 
+        loadRecyclerView();
+
+    }
+
+    public void loadRecyclerView(){
         RecyclerView rv = (RecyclerView)findViewById(R.id.cards);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
         adapter = new StockCardAdapter(stocks);
         rv.setAdapter(adapter);
-
     }
 
     private List<Stock> stocks;
