@@ -1,55 +1,101 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
-import com.example.mikhail.stockstore.R;
-import com.example.mikhail.stockstore.StartActivity;
-import com.example.mikhail.stockstore.StocksActivity;
+import com.example.mikhail.stockstore.Classes.ViewPagerAdapter;
+import com.example.mikhail.stockstore.Classes.WorkWithServer;
+import com.example.mikhail.stockstore.Modules.*;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+public class SubscribesActivity extends AppCompatActivity {
 
-/**
- * Created by mikhail on 09.12.15.
- */
-public class CommonFunctions {
+   // android.support.v7.widget.Toolbar toolbar;
+    ViewPager pager;
+    ViewPagerAdapter adapter;
+    SlidingTabLayout tabs;
+    CharSequence Titles[]={"Лента","Компании","Категории"};
+    int Numboftabs =3;
 
-    // Загрузка картинки по URL в заданное ImageView
-    public static void getPhotoByURL(String photoURL, ImageView imageView) {
-        URL newurl = null;
-        try {
-            newurl = new URL(photoURL);
-            Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-            imageView.setImageBitmap(mIcon_val);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_subscribes);
+
+        addNavigationView();
+        addTabs();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_subscribes, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void addTabs(){
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+
+        // Assigning ViewPager View and setting the adapter
+        pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                return getResources().getColor(R.color.tabsScrollColor);
+            }
+        });
+
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
+    }
+
+
+
     // Добавление пользовательского Navigation View и тулбара
-    /*private void addNavigationView(Activity activity){
+    private void addNavigationView(){
         // Handle Toolbar
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawer drawer = new Drawer();
         drawer
-                .withActivity(activity)
+                .withActivity(this)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggle(true)
                 .withHeader(R.layout.drawer_header)
@@ -61,7 +107,6 @@ public class CommonFunctions {
 
                         new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withName(R.string.drawer_item_settings),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withName(R.string.drawer_item_exit)
-
                 )
                 .build();
         drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -86,17 +131,17 @@ public class CommonFunctions {
                             break;
                         }
                         case R.string.drawer_item_friends: {
-                            Toast.makeText(activity.getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "5", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_exit: {
                             WorkWithServer.deleteToken();
-                            Intent intent = new Intent(StocksActivity.this, StartActivity.class);
+                            Intent intent = new Intent(SubscribesActivity.this, StartActivity.class);
                             startActivity(intent);
                         }
                     }
                 }
             }
         });
-    }*/
+    }
 }

@@ -12,7 +12,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="16dp"
+            android:paddingTop="8dp"
             >
 
             <ImageView
@@ -21,7 +21,6 @@
                 android:scaleType="centerInside"
                 android:id="@+id/company_logo"
                 android:paddingLeft="5dp"
-                android:paddingTop="5dp"
                 />
 
             <TextView
@@ -30,6 +29,7 @@
                 android:id="@+id/company_name"
                 android:textStyle="bold"
                 android:paddingLeft="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/company_logo"
                 android:layout_toEndOf="@+id/company_logo"
                 style="@style/darkText"/>
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
                 android:id="@+id/stock_photo"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="2dp"
                 android:layout_below="@+id/company_logo"
                 android:adjustViewBounds="true"
                 />

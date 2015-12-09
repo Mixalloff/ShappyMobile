@@ -12,5 +12,10 @@
     <string name="drawer_item_settings">Настройки</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="drawer_item_exit">Выход</string>
+    <string name="title_activity_subscribes">SubscribesActivity</string>
+
+    <color name="ColorPrimary">#00897B</color>
+    <color name="ColorPrimaryDark">#00695C</color>
+    <color name="tabsScrollColor">#004D40</color>
 
 </resources>

@@ -15,6 +15,9 @@
 
         <item name="tabIndicatorColor">#0000FF</item>
 
+        <item name="colorPrimary">@color/ColorPrimary</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+
     </style>
 
     <!--Стиль для TextInputLayout-->

@@ -25,7 +25,8 @@ public class Company {
 
     public Company(String str){
         if (str.equals("{}")){
-            new Company();
+            this.name = defaultName;
+            this.photo = defaultPhoto;
         }
         else{
             try {

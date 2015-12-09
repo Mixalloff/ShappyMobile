@@ -74,7 +74,8 @@ public class StocksActivity extends ActionBarActivity {
             stocks.clear();
             try {
                 JSONArray data = new JSONArray(response.get("data").toString());
-                for (int i = 0; i < data.length(); i++){
+                int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
+                for (int i = 0; i < count; i++){
                     JSONObject stock = new JSONObject(data.get(i).toString());
                     stocks.add(new Stock(stock));
                 }
@@ -85,6 +86,9 @@ public class StocksActivity extends ActionBarActivity {
     };
 
     StockCardAdapter adapter;
+
+    // Максимальное количество подгружаемых акций
+    int countOfLoadingStocks = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,13 +157,13 @@ public class StocksActivity extends ActionBarActivity {
                 .withActionBarDrawerToggle(true)
                 .withHeader(R.layout.drawer_header)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user).withName(R.string.drawer_item_profile),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1).withName(R.string.drawer_item_friends),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2).withName(R.string.drawer_item_stocks),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3).withName(R.string.drawer_item_subscriptions),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3),
 
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withName(R.string.drawer_item_settings),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withName(R.string.drawer_item_exit)
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out)
                         /*new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
                         new DividerDrawerItem(),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_github).withBadge("12+").withIdentifier(1)*/
@@ -180,7 +184,8 @@ public class StocksActivity extends ActionBarActivity {
                         }
                         case R.string.drawer_item_subscriptions: {
                             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_SHORT).show();
-                            break;
+                            Intent intent = new Intent(StocksActivity.this, SubscribesActivity.class);
+                            startActivity(intent);
                         }
                         case R.string.drawer_item_settings: {
                             Toast.makeText(getApplicationContext(), "4", Toast.LENGTH_SHORT).show();
