@@ -147,8 +147,14 @@ public class CommonFunctions {
     }
 
     // Добавление вкладок
-    public static void addTabs(final AppCompatActivity activity, ViewPager pager,ViewPagerAdapter adapter,SlidingTabLayout tabs,CharSequence Titles[],int Numboftabs){
-
+    public static void addTabs(final AppCompatActivity activity){
+        ViewPager pager;
+        ViewPagerAdapter adapter;
+        SlidingTabLayout tabs;
+        // Заголовки вкладок
+        CharSequence Titles[]={"Лента","Компании","Категории"};
+        // Количество вкладок
+        int Numboftabs =3;
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
 

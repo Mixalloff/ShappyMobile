@@ -17,6 +17,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StockStore.iws" />
@@ -49,39 +50,10 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+              <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#1653:3144" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_stocks.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.806452">
-              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="27" selection-end-column="46" />
-              <folding>
-                <element signature="e#901#930#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_subscribes.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_subscribes.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7419353">
-              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,11 +62,37 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_stocks.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_subscribes.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_subscribes.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="44" column="40" selection-start-line="17" selection-start-column="4" selection-end-line="44" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -133,31 +131,9 @@
       <file leaf-file-name="CommonFunctions.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19550173">
-              <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
-              <folding>
-                <element signature="e#3680#3708#0" expanded="true" />
-                <element signature="e#3755#3783#0" expanded="true" />
-                <element signature="e#3843#3871#0" expanded="true" />
-                <element signature="e#3952#3980#0" expanded="true" />
-                <element signature="e#4040#4067#0" expanded="true" />
-                <element signature="e#4147#4174#0" expanded="true" />
-                <element signature="e#4234#4268#0" expanded="true" />
-                <element signature="e#4347#4381#0" expanded="true" />
-                <element signature="e#4442#4471#0" expanded="true" />
-                <element signature="e#4517#4546#0" expanded="true" />
-                <element signature="e#4606#4631#0" expanded="true" />
-                <element signature="e#4682#4707#0" expanded="true" />
-                <element signature="e#5139#5167#0" expanded="true" />
-                <element signature="e#5402#5429#0" expanded="true" />
-                <element signature="e#5777#5811#0" expanded="true" />
-                <element signature="e#6163#6192#0" expanded="true" />
-                <element signature="e#6427#6455#0" expanded="true" />
-                <element signature="e#6690#6715#0" expanded="true" />
-                <element signature="e#6978#6979#0" expanded="true" />
-                <element signature="e#7913#8135#0" expanded="true" />
-                <element signature="e#8134#8135#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.37716264">
+              <caret line="155" column="29" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1721,10 +1697,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Entities/Stock.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Entities/Company.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/LoadImage.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java" />
       </list>
     </option>
   </component>
@@ -1766,7 +1742,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1961,9 +1936,10 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2191,7 +2167,6 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2210,6 +2185,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2244,18 +2220,6 @@
           <line>85</line>
           <properties />
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java</url>
-          <line>42</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java</url>
-          <line>113</line>
-          <properties />
-          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Entities/Stock.java</url>
@@ -2320,25 +2284,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_start.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="101" column="40" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
           <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.mikepenz.materialdrawer/library/0.9.5/jars/classes.jar!/com/mikepenz/materialdrawer/Drawer.class">
@@ -2366,7 +2330,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2374,7 +2337,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="598" column="0" selection-start-line="598" selection-start-column="0" selection-end-line="598" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2433,9 +2395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2443,10 +2402,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7493" column="13" selection-start-line="7493" selection-start-column="13" selection-end-line="7493" selection-end-column="13" />
-          <folding>
-            <element signature="e#183456#183457#0" expanded="false" />
-            <element signature="e#183507#183508#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2468,9 +2423,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2489,14 +2441,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/tool_bar.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Modules/SlidingTabLayout.java">
@@ -2523,36 +2475,36 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/all_companies_tab.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.83871">
           <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/all_categories_tab.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/all_categories_tab.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.7419353">
           <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/drawer_header.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/drawer_header.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/sources/android-23/org/json/JSONStringer.java">
@@ -2566,34 +2518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="638" column="0" selection-start-line="638" selection-start-column="0" selection-end-line="638" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#29272#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4878#4879#0" expanded="false" />
-            <element signature="e#4915#4916#0" expanded="false" />
-            <element signature="e#5095#5096#0" expanded="false" />
-            <element signature="e#5163#5164#0" expanded="false" />
-            <element signature="e#7938#7939#0" expanded="false" />
-            <element signature="e#7982#7983#0" expanded="false" />
-            <element signature="e#13885#13886#0" expanded="false" />
-            <element signature="e#13935#13936#0" expanded="false" />
-            <element signature="e#14385#14386#0" expanded="false" />
-            <element signature="e#14440#14441#0" expanded="false" />
-            <element signature="e#14989#14990#0" expanded="false" />
-            <element signature="e#15036#15037#0" expanded="false" />
-            <element signature="e#15782#15783#0" expanded="false" />
-            <element signature="e#15828#15829#0" expanded="false" />
-            <element signature="e#16937#16938#0" expanded="false" />
-            <element signature="e#16987#16988#0" expanded="false" />
-            <element signature="e#18056#18057#0" expanded="false" />
-            <element signature="e#18094#18095#0" expanded="false" />
-            <element signature="e#19426#19427#0" expanded="false" />
-            <element signature="e#19466#19467#0" expanded="false" />
-            <element signature="e#20645#20646#0" expanded="false" />
-            <element signature="e#20687#20688#0" expanded="false" />
-            <element signature="e#23784#23785#0" expanded="false" />
-            <element signature="e#23841#23842#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2612,25 +2536,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/all_stocks_tab.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.193548">
           <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/stock_card.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/stock_card.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Android/Sdk/sources/android-23/android/view/ViewRootImpl.java">
@@ -2644,7 +2568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2689,7 +2612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2178" column="0" selection-start-line="2178" selection-start-column="0" selection-end-line="2178" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2735,78 +2657,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_subscribes.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="44" column="40" selection-start-line="17" selection-start-column="4" selection-end-line="44" selection-end-column="40" />
+          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/StocksActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#1653:3144" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_stocks.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/SubscribesActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.806452">
-          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="27" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
           <folding>
-            <element signature="e#901#930#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_subscribes.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7419353">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/mikhail/stockstore/Classes/CommonFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19550173">
-          <caret line="111" column="21" selection-start-line="111" selection-start-column="21" selection-end-line="111" selection-end-column="21" />
-          <folding>
-            <element signature="e#3680#3708#0" expanded="true" />
-            <element signature="e#3755#3783#0" expanded="true" />
-            <element signature="e#3843#3871#0" expanded="true" />
-            <element signature="e#3952#3980#0" expanded="true" />
-            <element signature="e#4040#4067#0" expanded="true" />
-            <element signature="e#4147#4174#0" expanded="true" />
-            <element signature="e#4234#4268#0" expanded="true" />
-            <element signature="e#4347#4381#0" expanded="true" />
-            <element signature="e#4442#4471#0" expanded="true" />
-            <element signature="e#4517#4546#0" expanded="true" />
-            <element signature="e#4606#4631#0" expanded="true" />
-            <element signature="e#4682#4707#0" expanded="true" />
-            <element signature="e#5139#5167#0" expanded="true" />
-            <element signature="e#5402#5429#0" expanded="true" />
-            <element signature="e#5777#5811#0" expanded="true" />
-            <element signature="e#6163#6192#0" expanded="true" />
-            <element signature="e#6427#6455#0" expanded="true" />
-            <element signature="e#6690#6715#0" expanded="true" />
-            <element signature="e#6978#6979#0" expanded="true" />
-            <element signature="e#7913#8135#0" expanded="true" />
-            <element signature="e#8134#8135#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.37716264">
+          <caret line="155" column="29" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

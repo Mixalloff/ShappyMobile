@@ -23,19 +23,13 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 public class SubscribesActivity extends AppCompatActivity {
 
-    ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Лента","Компании","Категории"};
-    int Numboftabs =3;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribes);
 
         CommonFunctions.addNavigationView(this);
-        CommonFunctions.addTabs(this,pager,adapter,tabs,Titles,Numboftabs);
+        CommonFunctions.addTabs(this);
     }
 
     @Override
