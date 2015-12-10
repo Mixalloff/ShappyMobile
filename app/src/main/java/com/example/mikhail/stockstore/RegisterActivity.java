@@ -92,9 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
         String Phone =  ((EditText) findViewById(R.id.phoneText)).getText().toString();
         String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
 
-        //String response = WorkWithServer.executePost("auth/register/user", "login="+Email+"&password="+Password);
-        //WorkWithServer.saveToken(WorkWithServer.parseToken(response));
-
         try {
             ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
         } catch (JSONException e) {

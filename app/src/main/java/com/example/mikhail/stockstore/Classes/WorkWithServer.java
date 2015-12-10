@@ -23,6 +23,7 @@ public class WorkWithServer {
     public static String serverURL = "https://obscure-headland-5700.herokuapp.com/";
     private static SharedPreferences settings;
 
+    // Отправляет запрос GET
     public static String executeGet(String targetURL) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -76,13 +77,8 @@ public class WorkWithServer {
             String line;
             while((line = rd.readLine()) != null){
                 response.append(line);
-                //response.append("\r");
             }
             rd.close();
-            /*JSONObject data = new JSONObject(response.toString());
-            String token = data.getString("data");
-            saveToken(token);
-            return token;*/
             return response.toString();
         }catch (Exception e){
             e.printStackTrace();
@@ -121,7 +117,8 @@ public class WorkWithServer {
             SharedPreferences.Editor e = settings.edit();
             e.clear();
             e.putString("token", token);
-            e.commit();
+            //e.commit();
+            e.apply();
         }catch(Exception e){
 
         }

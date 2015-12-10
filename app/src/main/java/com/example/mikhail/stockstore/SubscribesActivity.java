@@ -1,25 +1,11 @@
 package com.example.mikhail.stockstore;
 
-import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
-import com.example.mikhail.stockstore.Classes.ViewPagerAdapter;
-import com.example.mikhail.stockstore.Classes.WorkWithServer;
-import com.example.mikhail.stockstore.Modules.*;
-import com.mikepenz.iconics.typeface.FontAwesome;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 public class SubscribesActivity extends AppCompatActivity {
 

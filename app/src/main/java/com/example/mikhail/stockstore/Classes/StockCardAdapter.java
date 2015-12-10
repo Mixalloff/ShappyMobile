@@ -44,18 +44,15 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
     public void onBindViewHolder(StocksViewHolder holder, int position) {
         StocksViewHolder.stockName.setText(stocks.get(position).name);
         StocksViewHolder.stockDescription.setText(stocks.get(position).description);
-       // StocksViewHolder.stockPhoto.setImageResource(stocks.get(position).photoId);
 
         CommonFunctions.setPhotoToImageView(stocks.get(position).photo, StocksViewHolder.stockPhoto);
 
         Locale ru = new Locale("ru");
-        //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",ru);
         SimpleDateFormat format = new SimpleDateFormat("dd MMMM y",ru);
 
         StocksViewHolder.stockDate.setText(format.format(stocks.get(position).dateFinish));
         StocksViewHolder.companyName.setText(stocks.get(position).company.name);
 
-       // StocksViewHolder.companyLogo.setImageResource(stocks.get(position).company.photo);
         CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo,StocksViewHolder.companyLogo);
     }
 

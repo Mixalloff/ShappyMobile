@@ -28,9 +28,6 @@ public class Stock {
     public String description;
     public Company company;
 
-    // Фото по умолчанию (брать из ресурсов)
-   // Bitmap defaultPhoto = CommonFunctions.getPhoto(R.drawable.default_photo);
-
     public Stock(String name, String description, String photo, Company company){
         this.name = name;
         this.dateStart = new Date();
@@ -53,14 +50,12 @@ public class Stock {
         String defaultName = "default name";
         Date defaultDateStart = new Date();
         Date defaultDateFinish = new Date();
-      //  String defaultPhoto = "http://www.designofsignage.com/application/symbol/building/image/600x600/no-photo.jpg";
         String defaultDescription = "default name";
 
         try {
             this.name = stockObj.has("name") ? stockObj.getString("name") : defaultName;
             this.dateStart = stockObj.has("dateStart") ? new Date(Date.parse(stockObj.getString("dateStart"))) : defaultDateStart;
             this.dateFinish = stockObj.has("dateFinish") ? new Date(Date.parse(stockObj.getString("dateFinish"))) : defaultDateFinish;
-           // this.photo = stockObj.has("photo") ? stockObj.getString("defaultPhoto") : defaultPhoto;
             this.photo = stockObj.has("photo") ? CommonFunctions.getPhoto(stockObj.getString("photo")) : GlobalVariables.defaultPhoto;
             this.description =  stockObj.has("description") ? stockObj.getString("description") : defaultDescription;
 

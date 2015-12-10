@@ -17,10 +17,6 @@ public class Company {
     public Bitmap photo;
 
     private String defaultName = "default name";
-   // private String defaultPhoto = "http://www.designofsignage.com/application/symbol/building/image/600x600/no-photo.jpg";
-
-    // Фото по умолчанию (брать из ресурсов)
-   // Bitmap defaultPhoto = CommonFunctions.getPhoto(R.drawable.default_photo);
 
     public Company(String name, String photo){
         this.name = name;
@@ -41,7 +37,6 @@ public class Company {
             try {
                 JSONObject json = new JSONObject(str);
                 this.name = json.has("name") ? json.getString("name") : defaultName;
-                //this.photo = json.has("photo") ? json.getString("photo") : defaultPhoto;
                 this.photo = json.has("photo") ? CommonFunctions.getPhoto(json.getString("photo")) : GlobalVariables.defaultPhoto;
             } catch (JSONException e) {
                 e.printStackTrace();

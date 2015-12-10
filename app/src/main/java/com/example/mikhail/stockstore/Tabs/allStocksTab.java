@@ -74,10 +74,9 @@ public class allStocksTab extends Fragment {
     }
 
     private void initializeTestData() {
-       // stocks = new ArrayList<>();
-        String defaultPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
-        String defaultCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        stocks.add(new Stock("Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", defaultPhoto, new Company("NIKE", defaultCompanyPhoto)));
+        String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
+        String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
+        stocks.add(new Stock("Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto)));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -93,10 +92,6 @@ public class allStocksTab extends Fragment {
 
         @Override
         public void onError(JSONObject response) {
-            /*Toast.makeText(getApplicationContext(), response.toString(),
-                    Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(StocksActivity.this, StartActivity.class);
-            startActivity(intent);*/
             startActivity(new Intent(getContext(),StartActivity.class));
         }
 
@@ -112,8 +107,6 @@ public class allStocksTab extends Fragment {
 
         @Override
         public void onUserGetAllStocks(JSONObject response) {
-            /*Toast.makeText(getApplicationContext(), response.toString(),
-                             Toast.LENGTH_SHORT).show();*/
             try {
                 // Обновляем список акций
                 stocks.clear();

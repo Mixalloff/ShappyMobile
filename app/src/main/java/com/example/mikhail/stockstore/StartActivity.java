@@ -91,9 +91,6 @@ public class StartActivity extends ActionBarActivity {
     }
 
     public void onEnterBtnClick(View view) {
-       // WorkWithServer.executePost("auth/register/user", "login=aaaaaa&password=aaaaaa");
-
-
         String Login = ((EditText)findViewById(R.id.loginField)).getText().toString();
         String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
 
@@ -102,9 +99,6 @@ public class StartActivity extends ActionBarActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        // String authString = WorkWithServer.executePost("auth/authorize", "login="+Login+"&password="+Password);
-        //WorkWithServer.saveToken(WorkWithServer.parseToken(authString));
 
         Toast.makeText(getApplicationContext(), WorkWithServer.getToken(this),
                 Toast.LENGTH_SHORT).show();

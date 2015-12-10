@@ -7,14 +7,6 @@
     tools:context="com.example.mikhail.stockstore.SubscribesActivity"
     android:padding="0dp">
 
-    <!--<include
-        android:id="@+id/tool_bar"
-        layout="@layout/drawer_header"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        />
-        -->
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
