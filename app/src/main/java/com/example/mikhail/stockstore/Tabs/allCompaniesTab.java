@@ -56,8 +56,6 @@ public class allCompaniesTab extends Fragment {
             e1.printStackTrace();
         }
 
-
-
         return v;
     }
 
