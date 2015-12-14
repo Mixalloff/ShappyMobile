@@ -37,7 +37,7 @@ public class Company {
             try {
                 JSONObject json = new JSONObject(str);
                 this.name = json.has("name") ? json.getString("name") : defaultName;
-                this.photo = json.has("photo") ? CommonFunctions.getPhoto(json.getString("photo")) : GlobalVariables.defaultPhoto;
+                this.photo = json.has("logo") ? CommonFunctions.getPhoto(json.getString("logo")) : GlobalVariables.defaultPhoto;
             } catch (JSONException e) {
                 e.printStackTrace();
             }

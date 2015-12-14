@@ -32,7 +32,7 @@ public class APIRequestConstructor {
     // Возвращает JSON объект с ответом сервера
     public static JSONObject userAuthorize(String login, String password){
         try {
-            return new JSONObject(WorkWithServer.executePost("auth/authorize",
+            return new JSONObject(WorkWithServer.executePost("auth/authorize/user",
                     "type=user"+
                     "&login="+login+
                     "&password="+password

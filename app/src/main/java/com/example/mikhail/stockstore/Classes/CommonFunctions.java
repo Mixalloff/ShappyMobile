@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
+import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StartActivity;
 import com.example.mikhail.stockstore.StocksActivity;
@@ -37,6 +38,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by mikhail on 09.12.15.
@@ -114,7 +118,7 @@ public class CommonFunctions {
                 if (iDrawerItem instanceof Nameable) {
                     switch (((Nameable) iDrawerItem).getNameRes()) {
                         case R.string.drawer_item_profile: {
-                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
                             break;
                         }
                         case R.string.drawer_item_stocks: {
@@ -176,6 +180,17 @@ public class CommonFunctions {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
+    }
+
+    // Парсит дату из формата сервера в стандартный
+    public static Date dateFormat(String target){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        try {
+            return sdf.parse(target);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 

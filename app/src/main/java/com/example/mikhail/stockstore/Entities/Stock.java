@@ -15,7 +15,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by mikhail on 02.12.15.
@@ -27,6 +31,8 @@ public class Stock {
     public Bitmap photo;
     public String description;
     public Company company;
+
+    public String serv = "https://obscure-headland-5700.herokuapp.com";
 
     public Stock(String name, String description, String photo, Company company){
         this.name = name;
@@ -54,9 +60,11 @@ public class Stock {
 
         try {
             this.name = stockObj.has("name") ? stockObj.getString("name") : defaultName;
-            this.dateStart = stockObj.has("dateStart") ? new Date(Date.parse(stockObj.getString("dateStart"))) : defaultDateStart;
-            this.dateFinish = stockObj.has("dateFinish") ? new Date(Date.parse(stockObj.getString("dateFinish"))) : defaultDateFinish;
-            this.photo = stockObj.has("photo") ? CommonFunctions.getPhoto(stockObj.getString("photo")) : GlobalVariables.defaultPhoto;
+
+            this.dateStart = stockObj.has("startDate") ? CommonFunctions.dateFormat(stockObj.getString("startDate")) : defaultDateStart;
+            this.dateFinish = stockObj.has("endDate") ? CommonFunctions.dateFormat(stockObj.getString("endDate")) : defaultDateFinish;
+
+            this.photo = stockObj.has("logo") ? CommonFunctions.getPhoto(serv + stockObj.getString("logo")) : GlobalVariables.defaultPhoto;
             this.description =  stockObj.has("description") ? stockObj.getString("description") : defaultDescription;
 
             this.company = new Company(stockObj.get("company").toString());

@@ -31,6 +31,10 @@
             android:name=".SubscribesActivity"
             android:label="@string/title_activity_subscribes" >
         </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
     </application>
 
 </manifest>
