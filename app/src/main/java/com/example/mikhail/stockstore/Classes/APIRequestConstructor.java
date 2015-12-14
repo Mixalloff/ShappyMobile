@@ -56,4 +56,16 @@ public class APIRequestConstructor {
         }
     }
 
+    // Получение всех категорий
+    public static JSONObject getAllCompanies(Activity activity){
+        try {
+            String token = WorkWithServer.getToken(activity);
+            String response = WorkWithServer.executeGet("companies/all?token=" + token);
+            return new JSONObject(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

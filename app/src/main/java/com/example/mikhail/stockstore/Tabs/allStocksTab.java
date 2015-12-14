@@ -121,6 +121,11 @@ public class allStocksTab extends Fragment {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void onUserGetAllCompanies(JSONObject response) {
+
+        }
     };
 
 }

@@ -20,6 +20,8 @@ public class ServerResponseHandler implements ResponseInterface{
 
             case "stock": { handler.onUserGetAllStocks(response); break;}
 
+            case "companies": { handler.onUserGetAllCompanies(response); break; }
+
             default: {};
         }
     }
@@ -51,6 +53,11 @@ public class ServerResponseHandler implements ResponseInterface{
 
     @Override
     public void onUserGetAllStocks(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetAllCompanies(JSONObject response) {
 
     }
 }

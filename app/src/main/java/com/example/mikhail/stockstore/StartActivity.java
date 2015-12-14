@@ -57,6 +57,11 @@ public class StartActivity extends ActionBarActivity {
         public void onUserGetAllStocks(JSONObject response) {
 
         }
+
+        @Override
+        public void onUserGetAllCompanies(JSONObject response) {
+
+        }
     };
 
     @Override

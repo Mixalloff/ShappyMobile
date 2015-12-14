@@ -15,4 +15,6 @@ public interface ResponseInterface {
     public void onGetToken(JSONObject response);
 
     public void onUserGetAllStocks(JSONObject response);
+
+    public void onUserGetAllCompanies(JSONObject response);
 }

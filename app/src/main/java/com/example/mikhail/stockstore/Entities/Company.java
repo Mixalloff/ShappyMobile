@@ -28,6 +28,15 @@ public class Company {
         this.photo = GlobalVariables.defaultPhoto;
     }
 
+    public Company(JSONObject companyObj){
+        try {
+            this.name = companyObj.has("name") ? companyObj.getString("name") : defaultName;
+            this.photo = companyObj.has("logo") ? CommonFunctions.getPhoto(GlobalVariables.server + companyObj.getString("logo")) : GlobalVariables.defaultPhoto;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Company(String str){
         if (str.equals("{}")){
             this.name = defaultName;

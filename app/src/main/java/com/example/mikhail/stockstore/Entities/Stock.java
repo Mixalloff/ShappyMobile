@@ -32,7 +32,7 @@ public class Stock {
     public String description;
     public Company company;
 
-    public String serv = "https://obscure-headland-5700.herokuapp.com";
+    //public String server = "https://obscure-headland-5700.herokuapp.com";
 
     public Stock(String name, String description, String photo, Company company){
         this.name = name;
@@ -64,7 +64,7 @@ public class Stock {
             this.dateStart = stockObj.has("startDate") ? CommonFunctions.dateFormat(stockObj.getString("startDate")) : defaultDateStart;
             this.dateFinish = stockObj.has("endDate") ? CommonFunctions.dateFormat(stockObj.getString("endDate")) : defaultDateFinish;
 
-            this.photo = stockObj.has("logo") ? CommonFunctions.getPhoto(serv + stockObj.getString("logo")) : GlobalVariables.defaultPhoto;
+            this.photo = stockObj.has("logo") ? CommonFunctions.getPhoto(GlobalVariables.server + stockObj.getString("logo")) : GlobalVariables.defaultPhoto;
             this.description =  stockObj.has("description") ? stockObj.getString("description") : defaultDescription;
 
             this.company = new Company(stockObj.get("company").toString());
