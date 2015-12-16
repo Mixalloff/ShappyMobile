@@ -9,7 +9,8 @@ import android.graphics.Bitmap;
  */
 public class GlobalVariables {
     public static Bitmap defaultPhoto;
-    public static String server = "https://obscure-headland-5700.herokuapp.com";
+
+    public static String server = "http://ec2-54-200-218-253.us-west-2.compute.amazonaws.com:8080";
 
     public static void setDefaultPhoto(int resID, Resources resources){
         defaultPhoto = CommonFunctions.getPhoto(resID, resources);

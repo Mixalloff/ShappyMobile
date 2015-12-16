@@ -20,7 +20,7 @@
         android:id="@+id/cards" />-->
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/gridView"
+        android:id="@+id/companies_gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnWidth="90dp"

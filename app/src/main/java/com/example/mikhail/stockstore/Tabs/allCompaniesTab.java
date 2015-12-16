@@ -38,14 +38,14 @@ import java.util.List;
 public class allCompaniesTab extends Fragment {
     CompanyCardAdapter adapter;
     private List<Company> companies = new ArrayList<>();
-    RecyclerView rv;
-    int countOfLoadingCompanies = 5;
+    //RecyclerView rv;
+    int countOfLoadingCompanies = 10;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_companies_tab, container, false);
 
-        rv = (RecyclerView) v.findViewById(R.id.cards);
+        //rv = (RecyclerView) v.findViewById(R.id.cards);
         initGridView(container,v);
         initializeTestData();
 
@@ -70,7 +70,7 @@ public class allCompaniesTab extends Fragment {
 
     // Инициализация GridView
     public void initGridView(ViewGroup container,View v) {
-        GridView gridview = (GridView) v.findViewById(R.id.gridView);
+        GridView gridview = (GridView) v.findViewById(R.id.companies_gridView);
         gridview.setAdapter(new CompanyCardAdapter(companies, this.getContext()));
         gridview.setOnItemClickListener(gridviewOnItemClickListener);
     }

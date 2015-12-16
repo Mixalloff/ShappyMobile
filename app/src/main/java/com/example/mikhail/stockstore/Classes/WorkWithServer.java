@@ -20,7 +20,8 @@ import java.net.URL;
  * Created by mikhail on 06.12.15.
  */
 public class WorkWithServer {
-    public static String serverURL = "https://obscure-headland-5700.herokuapp.com/";
+
+    //public static String serverURL = GlobalVariables.server;
     private static SharedPreferences settings;
 
     // Отправляет запрос GET
@@ -33,7 +34,7 @@ public class WorkWithServer {
         String line;
         String result = "";
         try {
-            url = new URL(serverURL+targetURL);
+            url = new URL(GlobalVariables.server + "/" + targetURL);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -55,7 +56,7 @@ public class WorkWithServer {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
-            URL url = new URL(serverURL + targetURL);
+            URL url = new URL(GlobalVariables.server + "/" + targetURL);
 
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");

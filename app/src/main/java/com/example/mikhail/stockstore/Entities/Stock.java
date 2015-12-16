@@ -32,7 +32,6 @@ public class Stock {
     public String description;
     public Company company;
 
-    //public String server = "https://obscure-headland-5700.herokuapp.com";
 
     public Stock(String name, String description, String photo, Company company){
         this.name = name;
