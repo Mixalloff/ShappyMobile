@@ -133,5 +133,10 @@ public class allCompaniesTab extends Fragment {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void onUserAddStock(JSONObject response) {
+
+        }
     };
 }

@@ -10,14 +10,11 @@
     <string name="drawer_item_subscriptions">Подписки</string>
     <string name="drawer_item_friends">Друзья</string>
     <string name="drawer_item_settings">Настройки</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Регистрация</string>
     <string name="drawer_item_exit">Выход</string>
-    <string name="title_activity_subscribes">SubscribesActivity</string>
+    <string name="title_activity_subscribes">Подписки</string>
 
-    <color name="ColorPrimary">#00897B</color>
-    <color name="ColorPrimaryDark">#00695C</color>
-    <color name="tabsScrollColor">#004D40</color>
-    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_profile">Профиль</string>
 
 
     <!--FontAwesome icons-->

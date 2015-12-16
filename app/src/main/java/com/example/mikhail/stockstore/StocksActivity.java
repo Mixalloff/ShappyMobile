@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 public class StocksActivity extends ActionBarActivity {
 

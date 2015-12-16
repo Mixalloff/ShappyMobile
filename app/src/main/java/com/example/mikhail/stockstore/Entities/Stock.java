@@ -30,10 +30,12 @@ public class Stock {
     public Date dateFinish;
     public Bitmap photo;
     public String description;
+    public String id;
     public Company company;
 
 
-    public Stock(String name, String description, String photo, Company company){
+    public Stock(String id, String name, String description, String photo, Company company){
+        this.id = id;
         this.name = name;
         this.dateStart = new Date();
         this.dateFinish = new Date();
@@ -42,7 +44,8 @@ public class Stock {
         this.company = company;
     }
 
-    public Stock(String name, String description, String photo, Company company, Date dateStart, Date dateFinish) {
+    public Stock(String id, String name, String description, String photo, Company company, Date dateStart, Date dateFinish) {
+        this.id = id;
         this.name = name;
         this.dateStart = dateStart;
         this.dateFinish = dateFinish;
@@ -58,6 +61,7 @@ public class Stock {
         String defaultDescription = "default name";
 
         try {
+            this.id = stockObj.has("id") ? stockObj.getString("id") : "0";
             this.name = stockObj.has("name") ? stockObj.getString("name") : defaultName;
 
             this.dateStart = stockObj.has("startDate") ? CommonFunctions.dateFormat(stockObj.getString("startDate")) : defaultDateStart;

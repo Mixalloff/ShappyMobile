@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="3dp"
-    >
+    android:padding="3dp">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,20 +29,19 @@
                 android:paddingLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/company_logo"
-                android:layout_toEndOf="@+id/company_logo"
-                style="@style/darkText"/>
+                style="@style/darkText"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/stock_date"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
                 android:paddingLeft="10dp"
                 android:layout_below="@+id/company_name"
                 android:layout_toRightOf="@+id/company_logo"
-                android:layout_toEndOf="@+id/company_logo"
-                style="@style/darkText"/>
+                style="@style/darkText"
+                android:layout_toLeftOf="@+id/add_stock_btn"
+                android:layout_toStartOf="@+id/add_stock_btn" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -81,6 +79,15 @@
                     android:layout_below="@+id/stock_name"
                     android:textSize="12sp"
                     android:paddingBottom="10dp" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/add_stock_btn"
+                android:background="@drawable/add_btn"
+                android:layout_alignBottom="@+id/stock_date"
+                android:layout_alignRight="@+id/company_name"
+                android:layout_alignEnd="@+id/company_name" />
             <!--</LinearLayout>-->
 
         </RelativeLayout>

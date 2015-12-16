@@ -60,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
         public void onUserGetAllCompanies(JSONObject response) {
 
         }
+
+        @Override
+        public void onUserAddStock(JSONObject response) {
+
+        }
     };
 
         @Override

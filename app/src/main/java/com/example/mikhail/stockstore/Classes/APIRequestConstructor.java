@@ -68,4 +68,23 @@ public class APIRequestConstructor {
         }
     }
 
+    // Подписка на акцию с id = stockId
+    public static JSONObject userAddStock(Activity activity, String stockId){
+        try {
+            String token = WorkWithServer.getToken(activity);
+           /* String response = WorkWithServer.executePost("user/addstock",
+                    "token=" + token + "&id=" + stockId);*/
+            return new JSONObject(WorkWithServer.executePost("users/addstock",
+                    "token=" + token +
+                    "&id="+stockId)
+            );
+           // return new JSONObject(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
 }

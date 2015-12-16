@@ -50,11 +50,11 @@ public class allStocksTab extends Fragment {
         initializeTestData();
 
         // Отправляем запрос на получение всех акций
-        try {
+       /* try {
             ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(getActivity()), handler);
         } catch (JSONException e1) {
             e1.printStackTrace();
-        }
+        }*/
 
         rv = (RecyclerView) v.findViewById(R.id.cards);
 
@@ -76,7 +76,7 @@ public class allStocksTab extends Fragment {
     private void initializeTestData() {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        stocks.add(new Stock("Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto)));
+        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto)));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -124,6 +124,11 @@ public class allStocksTab extends Fragment {
 
         @Override
         public void onUserGetAllCompanies(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserAddStock(JSONObject response) {
 
         }
     };

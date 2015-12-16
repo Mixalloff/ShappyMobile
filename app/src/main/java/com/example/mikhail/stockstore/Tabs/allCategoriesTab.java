@@ -111,6 +111,11 @@ public class allCategoriesTab extends Fragment {
         public void onUserGetAllCompanies(JSONObject response) {
 
         }
+
+        @Override
+        public void onUserAddStock(JSONObject response) {
+
+        }
     };
 }
 
