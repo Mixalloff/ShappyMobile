@@ -84,7 +84,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                     @Override
                     public void onError(JSONObject response) {
-
+                        Toast.makeText(v.getContext().getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -109,6 +109,11 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                     @Override
                     public void onUserAddStock(JSONObject response) {
+                        Toast.makeText(v.getContext().getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onUserGetFeed(JSONObject response) {
 
                     }
                 };

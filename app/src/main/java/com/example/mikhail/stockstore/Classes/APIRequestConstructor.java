@@ -85,6 +85,18 @@ public class APIRequestConstructor {
         }
     }
 
+    // Получение всех акций на стене пользователя
+    public static JSONObject userGetFeed(Activity activity){
+        try {
+            String token = WorkWithServer.getToken(activity);
+            String response = WorkWithServer.executeGet("users/feed?token=" + token);
+            return new JSONObject(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 }

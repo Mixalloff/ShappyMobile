@@ -67,6 +67,11 @@ public class StartActivity extends ActionBarActivity {
         public void onUserAddStock(JSONObject response) {
 
         }
+
+        @Override
+        public void onUserGetFeed(JSONObject response) {
+
+        }
     };
 
     @Override

@@ -12,10 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +45,75 @@ public class ProfileActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-
+        // Отправляем запрос на получение всех акций
+        try {
+            ServerResponseHandler.CheckResponse(APIRequestConstructor.userGetFeed(this), handler);
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
     }
 
-    public void setLogos(){
+    private ResponseInterface handler = new ResponseInterface() {
+
+        @Override
+        public void onInternalServerError(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUnknownRequestUri(JSONObject response) {
+
+        }
+
+        @Override
+        public void onError(JSONObject response) {
+
+        }
+
+        @Override
+        public void onRegister(JSONObject response) {
+
+        }
+
+        @Override
+        public void onGetToken(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetAllStocks(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetAllCompanies(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserAddStock(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetFeed(JSONObject response) {
+            try {
+                // Обновляем список акций
+                stocks.clear();
+
+                JSONArray data = new JSONArray(response.get("data").toString());
+                int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
+                for (int i = 0; i < count; i++){
+                    JSONObject stock = new JSONObject(data.get(i).toString());
+                    stocks.add(new Stock(stock));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+        public void setLogos(){
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont-4.3.0.ttf");
 
         TextView email = (TextView) findViewById(R.id.email_logo);

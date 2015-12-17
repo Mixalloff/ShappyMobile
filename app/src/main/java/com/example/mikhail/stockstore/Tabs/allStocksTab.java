@@ -50,11 +50,11 @@ public class allStocksTab extends Fragment {
         initializeTestData();
 
         // Отправляем запрос на получение всех акций
-       /* try {
+        try {
             ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(getActivity()), handler);
         } catch (JSONException e1) {
             e1.printStackTrace();
-        }*/
+        }
 
         rv = (RecyclerView) v.findViewById(R.id.cards);
 
@@ -129,6 +129,11 @@ public class allStocksTab extends Fragment {
 
         @Override
         public void onUserAddStock(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetFeed(JSONObject response) {
 
         }
     };

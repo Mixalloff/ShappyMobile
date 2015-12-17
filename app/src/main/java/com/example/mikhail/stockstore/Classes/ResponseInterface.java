@@ -19,4 +19,5 @@ public interface ResponseInterface {
     public void onUserGetAllCompanies(JSONObject response);
 
     public void onUserAddStock(JSONObject response);
+    public void onUserGetFeed(JSONObject response);
 }
