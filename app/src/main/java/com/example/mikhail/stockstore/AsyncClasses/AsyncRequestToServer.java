@@ -8,6 +8,8 @@ import android.os.StrictMode;
 
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
 
 import org.json.JSONException;
@@ -26,8 +28,12 @@ import java.net.URL;
 public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 {
 
-    private static String method = "";
+    //private static String method = "";
     private static String urlParams = "";
+    Activity activity;
+    private ResponseInterface handler;
+
+    public void setHandler(ResponseInterface handler){ this.handler = handler; }
 
     public AsyncRequestToServer(Activity activity){
         this.activity = activity;
@@ -111,7 +117,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             }
         }
     }
-Activity activity;
+
     // Здесь делайте всю длительную по времени работу.
     protected JSONObject doInBackground(String... targetURL)
     {
@@ -152,9 +158,16 @@ Activity activity;
         //setProgressPercent(progress[0]);
     }
 
-    // Этот метод будет вызван, когда doInBackground() завершится.
-    protected void onPostExecute(String result)
+    // Этот метод будет вызван, когда doInBackground() завершится
+    protected void onPostExecute(JSONObject result)
     {
+        try {
+            // Если есть обработчик, выполняем соответствующую функцию
+            if (handler != null)
+                ServerResponseHandler.CheckResponse(result, handler);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         //showNotification("Downloaded " + result + " bytes");
     }
 

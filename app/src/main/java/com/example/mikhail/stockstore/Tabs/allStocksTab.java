@@ -1,7 +1,11 @@
 package com.example.mikhail.stockstore.Tabs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,27 +49,22 @@ public class allStocksTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.all_stocks_tab,container,false);
+        View v = inflater.inflate(R.layout.all_stocks_tab, container, false);
 
         // Подгружаем токен, если есть
         String token = WorkWithServer.getToken(getActivity());
 
         // Тестовые карточки
-        initializeTestData();
-
-        // Отправляем запрос на получение всех акций
-        try {
-            AsyncRequestToServer a = new AsyncRequestToServer(getActivity());
-            a.setActivity(getActivity());
-            //ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(getActivity()), handler);
-            ServerResponseHandler.CheckResponse(a.execute(APIConstants.GET_ALL_STOCKS).get(), handler);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
+      //  initializeTestData();
 
         rv = (RecyclerView) v.findViewById(R.id.cards);
 
         initRecyclerView(container);
+
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
+        request.setActivity(getActivity());
+        request.setHandler(handler);
+        request.execute(APIConstants.GET_ALL_STOCKS);
 
         return v;
     }
@@ -145,3 +145,5 @@ public class allStocksTab extends Fragment {
     };
 
 }
+
+
