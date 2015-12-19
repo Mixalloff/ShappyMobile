@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StocksActivity;
@@ -119,8 +120,12 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 };
 
                 try {
-                    ServerResponseHandler.CheckResponse(APIRequestConstructor.userAddStock(host, stocks.get(position).id), handler);
-                } catch (JSONException e) {
+                    AsyncRequestToServer request = new AsyncRequestToServer(host);
+                    request.setParameters(APIRequestConstructor.userAddStockParameters(host, stocks.get(position).id));
+                    ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_ADD_STOCK).get(), handler);
+
+                    //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAddStock(host, stocks.get(position).id), handler);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

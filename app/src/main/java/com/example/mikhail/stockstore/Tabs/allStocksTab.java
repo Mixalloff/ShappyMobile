@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -51,8 +54,11 @@ public class allStocksTab extends Fragment {
 
         // Отправляем запрос на получение всех акций
         try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(getActivity()), handler);
-        } catch (JSONException e1) {
+            AsyncRequestToServer a = new AsyncRequestToServer(getActivity());
+            a.setActivity(getActivity());
+            //ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllStocks(getActivity()), handler);
+            ServerResponseHandler.CheckResponse(a.execute(APIConstants.GET_ALL_STOCKS).get(), handler);
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
 

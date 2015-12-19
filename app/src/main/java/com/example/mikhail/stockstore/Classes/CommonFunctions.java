@@ -1,26 +1,18 @@
 package com.example.mikhail.stockstore.Classes;
 
-import android.app.Activity;
-import android.app.Application;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
 import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
@@ -33,10 +25,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,28 +42,32 @@ public class CommonFunctions {
 
     // Загрузка картинки по URL в заданное ImageView
     public static void setPhotoToImageView(String photoURL, ImageView imageView) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.setThreadPolicy(policy);
+
+        AsyncGetPhoto loader = new AsyncGetPhoto();
 
         URL newurl = null;
         try {
             newurl = new URL(photoURL);
-            Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+            Bitmap mIcon_val = loader.execute(photoURL).get(); //BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
             imageView.setImageBitmap(mIcon_val);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static Bitmap getPhoto(String src){
+    public static Bitmap getPhoto(String photoURL){
         // Асинхронное выполнение
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.setThreadPolicy(policy);
+
+        AsyncGetPhoto loader = new AsyncGetPhoto();
 
         URL newurl = null;
         try {
-            newurl = new URL(src);
-            return BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+            newurl = new URL(photoURL);
+            return loader.execute(photoURL).get();//BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -193,5 +185,3 @@ public class CommonFunctions {
         }
     }
 }
-
-

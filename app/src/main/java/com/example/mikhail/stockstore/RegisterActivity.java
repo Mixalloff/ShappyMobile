@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -108,8 +111,11 @@ public class RegisterActivity extends AppCompatActivity {
         String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
 
         try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
-        } catch (JSONException e) {
+            AsyncRequestToServer request = new AsyncRequestToServer(this);
+            request.setParameters(APIRequestConstructor.registerParameters(Name, Surname, Email, Phone, Password));
+            ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_REGISTER).get(), handler);
+            //ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

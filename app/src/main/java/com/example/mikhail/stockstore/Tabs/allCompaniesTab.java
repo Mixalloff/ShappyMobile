@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
@@ -46,13 +48,16 @@ public class allCompaniesTab extends Fragment {
         View v = inflater.inflate(R.layout.all_companies_tab, container, false);
 
         //rv = (RecyclerView) v.findViewById(R.id.cards);
-        initGridView(container,v);
-        initializeTestData();
+        initGridView(container, v);
+     //   initializeTestData();
 
         // Отправляем запрос на получение всех акций
         try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllCompanies(getActivity()), handler);
-        } catch (JSONException e1) {
+            AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
+            request.setActivity(getActivity());
+            //ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllCompanies(getActivity()), handler);
+            ServerResponseHandler.CheckResponse(request.execute(APIConstants.GET_ALL_COMPANIES).get(), handler);
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
 

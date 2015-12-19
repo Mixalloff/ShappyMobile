@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -110,8 +112,11 @@ public class StartActivity extends ActionBarActivity {
         String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
 
         try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
-        } catch (JSONException e) {
+            AsyncRequestToServer request = new AsyncRequestToServer(this);
+            request.setParameters(APIRequestConstructor.authParameters(Login, Password));
+            ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_AUTH).get(), handler);
+            //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

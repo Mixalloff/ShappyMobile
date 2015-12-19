@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
@@ -47,8 +49,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Отправляем запрос на получение всех акций
         try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.userGetFeed(this), handler);
-        } catch (JSONException e1) {
+
+            ServerResponseHandler.CheckResponse(new AsyncRequestToServer(this).execute(APIConstants.USER_GET_FEED).get(), handler);
+            //ServerResponseHandler.CheckResponse(APIRequestConstructor.userGetFeed(this), handler);
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
     }
