@@ -42,6 +42,47 @@ public class allCompaniesTab extends Fragment {
     private List<Company> companies = new ArrayList<>();
     //RecyclerView rv;
     int countOfLoadingCompanies = 10;
+    AsyncRequestToServer request;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+        request = new AsyncRequestToServer(getActivity(), handler);
+        request.execute(APIConstants.GET_ALL_COMPANIES);
+    }
+
+    /*public void onPause(){
+        super.onPause();
+        request.cancel(true);
+        Toast.makeText(getContext().getApplicationContext(), "Компании pause", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getContext().getApplicationContext(), "Компании destroy", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext().getApplicationContext(), "Компании onResume", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Toast.makeText(getContext().getApplicationContext(), "Компании saveInstanse", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onStart() {
+        super.onStart();
+        Toast.makeText(getContext().getApplicationContext(), "Компании onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onStop() {
+        super.onStop();
+        Toast.makeText(getContext().getApplicationContext(), "Компании onStop", Toast.LENGTH_SHORT).show();
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,15 +92,8 @@ public class allCompaniesTab extends Fragment {
         initGridView(container, v);
      //   initializeTestData();
 
-        // Отправляем запрос на получение всех акций
-        try {
-            AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
-            request.setActivity(getActivity());
-            //ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllCompanies(getActivity()), handler);
-            ServerResponseHandler.CheckResponse(request.execute(APIConstants.GET_ALL_COMPANIES).get(), handler);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
+       // AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+        //request.execute(APIConstants.GET_ALL_COMPANIES);
 
         return v;
     }
@@ -133,7 +167,7 @@ public class allCompaniesTab extends Fragment {
                     JSONObject stock = new JSONObject(data.get(i).toString());
                     companies.add(new Company(stock));
                 }
-                //rv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }

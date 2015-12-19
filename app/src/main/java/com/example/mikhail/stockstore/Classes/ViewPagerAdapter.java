@@ -31,17 +31,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0: {
-                allStocksTab tab1 = new allStocksTab();
-                return tab1;
+                return new allStocksTab();
             }
             case 1: {
-                allCompaniesTab tab2 = new allCompaniesTab();
-                return tab2;
+                return new allCompaniesTab();
             }
             default: {
-                allCategoriesTab tab3 = new allCategoriesTab();
-                return tab3;
+                return new allCategoriesTab();
             }
+           // default: {return null;}
         }
     }
 

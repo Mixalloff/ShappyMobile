@@ -150,7 +150,7 @@ public class CommonFunctions {
         // Заголовки вкладок
         CharSequence Titles[]={"Лента","Компании","Категории"};
         // Количество вкладок
-        int Numboftabs =3;
+        int Numboftabs = 3;
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
 
@@ -160,13 +160,14 @@ public class CommonFunctions {
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) activity.findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        tabs.setDistributeEvenly(false); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
 
         // Setting Custom Color for the Scroll bar indicator of the Tab View
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return activity.getResources().getColor(R.color.tabsScrollColor);
+                //return activity.getResources().getColor(R.color.tabsScrollColor);
+                return activity.getResources().getColor(R.color.default_app_white);
             }
         });
 

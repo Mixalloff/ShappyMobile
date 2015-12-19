@@ -46,6 +46,56 @@ public class allStocksTab extends Fragment {
     private List<Stock> stocks = new ArrayList<>();
     RecyclerView rv;
     int countOfLoadingStocks = 5;
+    AsyncRequestToServer request;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+
+// Тестовые карточки
+        initializeTestData();
+        request = new AsyncRequestToServer(getActivity(), handler);
+        request.execute(APIConstants.GET_ALL_STOCKS);
+
+        Toast.makeText(getContext().getApplicationContext(), "Акции onCreate", Toast.LENGTH_SHORT).show();
+    }
+
+    /*public void onPause(){
+        super.onPause();
+        request.cancel(true);
+        Toast.makeText(getContext().getApplicationContext(), "Акции pause", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getContext().getApplicationContext(), "Акции destroy", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext().getApplicationContext(), "Акции onResume", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Toast.makeText(getContext().getApplicationContext(), "Акции saveInstanse", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onStart() {
+        super.onStart();
+        Toast.makeText(getContext().getApplicationContext(), "Акции onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onStop() {
+        super.onStop();
+        Toast.makeText(getContext().getApplicationContext(), "Акции onStop", Toast.LENGTH_SHORT).show();
+    }*/
+
+    /*public void onRestart() {
+        super.onRestart();
+        Toast.makeText(getContext().getApplicationContext(), "Акции restart", Toast.LENGTH_SHORT).show();
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,18 +103,8 @@ public class allStocksTab extends Fragment {
 
         // Подгружаем токен, если есть
         String token = WorkWithServer.getToken(getActivity());
-
-        // Тестовые карточки
-      //  initializeTestData();
-
         rv = (RecyclerView) v.findViewById(R.id.cards);
-
         initRecyclerView(container);
-
-        AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
-        request.setActivity(getActivity());
-        request.setHandler(handler);
-        request.execute(APIConstants.GET_ALL_STOCKS);
 
         return v;
     }
@@ -123,6 +163,7 @@ public class allStocksTab extends Fragment {
                     JSONObject stock = new JSONObject(data.get(i).toString());
                     stocks.add(new Stock(stock));
                 }
+                adapter.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }

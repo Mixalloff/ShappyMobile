@@ -80,12 +80,20 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                     @Override
                     public void onUnknownRequestUri(JSONObject response) {
-                        Toast.makeText(v.getContext().getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("data"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
                     public void onError(JSONObject response) {
-                        Toast.makeText(v.getContext().getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("data"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -110,7 +118,11 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                     @Override
                     public void onUserAddStock(JSONObject response) {
-                        Toast.makeText(v.getContext().getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("name") + " добавлена на стену", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -120,9 +132,13 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 };
 
                 try {
-                    AsyncRequestToServer request = new AsyncRequestToServer(host);
+                    /*AsyncRequestToServer request = new AsyncRequestToServer(host);
                     request.setParameters(APIRequestConstructor.userAddStockParameters(host, stocks.get(position).id));
-                    ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_ADD_STOCK).get(), handler);
+                    ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_ADD_STOCK).get(), handler);*/
+
+                    AsyncRequestToServer request = new AsyncRequestToServer(host, handler);
+                    request.setParameters(APIRequestConstructor.userAddStockParameters(host, stocks.get(position).id));
+                    request.execute(APIConstants.USER_ADD_STOCK);
 
                     //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAddStock(host, stocks.get(position).id), handler);
                 } catch (Exception e) {

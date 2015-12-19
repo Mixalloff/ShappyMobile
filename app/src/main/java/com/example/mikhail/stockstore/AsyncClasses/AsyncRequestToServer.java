@@ -39,6 +39,11 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.activity = activity;
     }
 
+    public AsyncRequestToServer(Activity activity, ResponseInterface handler){
+        this.activity = activity;
+        this.handler = handler;
+    }
+
     public void setParameters(String urlParams){
      //   this.method = method;
        this.urlParams = urlParams;

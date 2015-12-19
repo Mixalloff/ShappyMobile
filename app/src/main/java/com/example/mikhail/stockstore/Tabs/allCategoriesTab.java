@@ -41,13 +41,6 @@ public class allCategoriesTab extends Fragment {
         initGridView(container,v);
         initializeTestData();
 
-        // Отправляем запрос на получение всех акций
-       /* try {
-            ServerResponseHandler.CheckResponse(APIRequestConstructor.getAllCategories(getActivity()), handler);
-        } catch (JSONException e1) {
-            e1.printStackTrace();
-        }*/
-
         return v;
     }
 

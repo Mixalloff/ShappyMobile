@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        initializeTestData();
+        //initializeTestData();
         CommonFunctions.addNavigationView(this);
         setLogos();
         rv = (RecyclerView)findViewById(R.id.cards);
@@ -48,13 +48,17 @@ public class ProfileActivity extends AppCompatActivity {
         initRecyclerView();
 
         // Отправляем запрос на получение всех акций
-        try {
+       /* try {
 
             ServerResponseHandler.CheckResponse(new AsyncRequestToServer(this).execute(APIConstants.USER_GET_FEED).get(), handler);
             //ServerResponseHandler.CheckResponse(APIRequestConstructor.userGetFeed(this), handler);
         } catch (Exception e1) {
             e1.printStackTrace();
-        }
+        }*/
+
+        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+        //request.setHandler(handler);
+        request.execute(APIConstants.USER_GET_FEED);
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -111,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
                     JSONObject stock = new JSONObject(data.get(i).toString());
                     stocks.add(new Stock(stock));
                 }
+                adapter.notifyDataSetChanged();
             } catch (Exception e) {
                 e.printStackTrace();
             }
