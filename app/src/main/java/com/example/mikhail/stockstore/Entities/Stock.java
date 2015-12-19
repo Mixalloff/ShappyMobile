@@ -33,8 +33,10 @@ public class Stock {
     public String id;
     public Company company;
 
+    public boolean isAdded;
 
-    public Stock(String id, String name, String description, String photo, Company company){
+
+    public Stock(String id, String name, String description, String photo, Company company, boolean isAdded){
         this.id = id;
         this.name = name;
         this.dateStart = new Date();
@@ -42,9 +44,10 @@ public class Stock {
         this.photo = CommonFunctions.getPhoto(photo);
         this.description = description;
         this.company = company;
+        this.isAdded = isAdded;
     }
 
-    public Stock(String id, String name, String description, String photo, Company company, Date dateStart, Date dateFinish) {
+    public Stock(String id, String name, String description, String photo, Company company, Date dateStart, Date dateFinish, boolean isAdded) {
         this.id = id;
         this.name = name;
         this.dateStart = dateStart;
@@ -52,6 +55,7 @@ public class Stock {
         this.photo = CommonFunctions.getPhoto(photo);
         this.description = description;
         this.company = company;
+        this.isAdded = isAdded;
     }
 
     public Stock(JSONObject stockObj){
@@ -63,14 +67,13 @@ public class Stock {
         try {
             this.id = stockObj.has("id") ? stockObj.getString("id") : "0";
             this.name = stockObj.has("name") ? stockObj.getString("name") : defaultName;
-
             this.dateStart = stockObj.has("startDate") ? CommonFunctions.dateFormat(stockObj.getString("startDate")) : defaultDateStart;
             this.dateFinish = stockObj.has("endDate") ? CommonFunctions.dateFormat(stockObj.getString("endDate")) : defaultDateFinish;
-
             this.photo = stockObj.has("logo") ? CommonFunctions.getPhoto(GlobalVariables.server + stockObj.getString("logo")) : GlobalVariables.defaultPhoto;
             this.description =  stockObj.has("description") ? stockObj.getString("description") : defaultDescription;
-
             this.company = new Company(stockObj.get("company").toString());
+
+            this.isAdded = stockObj.has("isAdded") && (boolean) stockObj.get("isAdded");
         } catch (JSONException e) {
             e.printStackTrace();
         }

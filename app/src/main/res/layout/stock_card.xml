@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
+            android:paddingTop="3dp"
             >
 
             <ImageView
@@ -81,13 +81,13 @@
                     android:paddingBottom="10dp" />
 
             <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:id="@+id/add_stock_btn"
                 android:background="@drawable/add_btn"
-                android:layout_alignBottom="@+id/stock_date"
-                android:layout_alignRight="@+id/company_name"
-                android:layout_alignEnd="@+id/company_name" />
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
             <!--</LinearLayout>-->
 
         </RelativeLayout>

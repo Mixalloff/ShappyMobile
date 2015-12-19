@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -106,6 +107,9 @@ public class allStocksTab extends Fragment {
         rv = (RecyclerView) v.findViewById(R.id.cards);
         initRecyclerView(container);
 
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        rv.setItemAnimator(itemAnimator);
+
         return v;
     }
 
@@ -122,7 +126,7 @@ public class allStocksTab extends Fragment {
     private void initializeTestData() {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto)));
+        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -156,12 +160,14 @@ public class allStocksTab extends Fragment {
             try {
                 // Обновляем список акций
                 stocks.clear();
+               // adapter.notifyItemRemoved(0);
 
                 JSONArray data = new JSONArray(response.get("data").toString());
                 int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
                 for (int i = 0; i < count; i++){
                     JSONObject stock = new JSONObject(data.get(i).toString());
                     stocks.add(new Stock(stock));
+                   // adapter.notifyItemInserted(i);
                 }
                 adapter.notifyDataSetChanged();
             } catch (Exception e) {
