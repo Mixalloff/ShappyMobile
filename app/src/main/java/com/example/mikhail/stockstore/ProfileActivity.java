@@ -47,17 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-        // Отправляем запрос на получение всех акций
-       /* try {
-
-            ServerResponseHandler.CheckResponse(new AsyncRequestToServer(this).execute(APIConstants.USER_GET_FEED).get(), handler);
-            //ServerResponseHandler.CheckResponse(APIRequestConstructor.userGetFeed(this), handler);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }*/
-
         AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
-        //request.setHandler(handler);
+        request.setSpinnerMessage("Загрузка акций");
         request.execute(APIConstants.USER_GET_FEED);
     }
 

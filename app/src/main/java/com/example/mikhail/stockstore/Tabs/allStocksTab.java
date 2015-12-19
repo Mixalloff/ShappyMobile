@@ -55,11 +55,12 @@ public class allStocksTab extends Fragment {
         setHasOptionsMenu(true);
 
 // Тестовые карточки
-        initializeTestData();
+        //initializeTestData();
         request = new AsyncRequestToServer(getActivity(), handler);
+        request.setSpinnerMessage("Загрузка акций");
         request.execute(APIConstants.GET_ALL_STOCKS);
 
-        Toast.makeText(getContext().getApplicationContext(), "Акции onCreate", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext().getApplicationContext(), "Акции onCreate", Toast.LENGTH_SHORT).show();
     }
 
     /*public void onPause(){

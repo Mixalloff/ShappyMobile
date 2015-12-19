@@ -22,6 +22,14 @@
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
     </style>
 
+    <!-- ToolBar -->
+    <!-- <style name="ToolBarStyle" parent="Theme.AppCompat">
+         <item name="android:textColorPrimary">@android:color/white</item>
+         <item name="android:textColorSecondary">@android:color/holo_green_dark</item>
+         <item name="actionMenuTextColor">@android:color/holo_green_dark</item>
+         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+     </style>-->
+
     <!--Стиль для TextInputLayout-->
     <style name="TextLabel" parent="TextAppearance.AppCompat">
         //hint color And Label Color in False State
@@ -31,6 +39,7 @@
         <item name="colorAccent">@color/default_app_green</item>
         <item name="colorControlNormal">@color/default_app_green</item>
         <item name="colorControlActivated">@color/default_app_green</item>
+        <item name="android:textColorPrimary">@color/default_app_black</item>
 
     </style>
 

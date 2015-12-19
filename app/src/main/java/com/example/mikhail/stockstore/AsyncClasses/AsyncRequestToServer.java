@@ -1,6 +1,7 @@
 package com.example.mikhail.stockstore.AsyncClasses;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -44,18 +45,31 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.handler = handler;
     }
 
+    private static String spinnerMessage = "Загрузка";
+
     public void setParameters(String urlParams){
      //   this.method = method;
        this.urlParams = urlParams;
+    }
+
+    public void setSpinnerMessage(String message){
+        this.spinnerMessage = message;
     }
 
     public void setActivity(Activity activity){
         this.activity = activity;
     }
 
+    ProgressDialog spinner;
+
     // Метод выполняется перед началом doInBackground()
     protected void onPreExecute(){
-
+        spinner = new ProgressDialog(activity);
+        spinner.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        spinner.setMessage(spinnerMessage);
+        spinner.setIndeterminate(true); // выдать значок ожидания
+        spinner.setCancelable(true);
+        spinner.show();
     }
 
     // Отправляет GET запрос
@@ -92,14 +106,14 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            connection.setRequestProperty("Content-Length", Integer.toString(this.urlParams.getBytes().length));
+            connection.setRequestProperty("Content-Length", Integer.toString(urlParams.getBytes().length));
             connection.setRequestProperty("Content-Language", "en-US");
             connection.setUseCaches(false);
             connection.setDoOutput(true);
 
             // Request
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-            wr.writeBytes(this.urlParams);
+            wr.writeBytes(urlParams);
             wr.close();
 
             // Response
@@ -128,13 +142,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     {
         for (int i = 0; i < targetURL.length; i++)
         {
-            //targetURL[i] = GlobalVariables.server + targetURL[i];
-
-            /*switch(this.method){
-                case GET: { return sendGetRequest(targetURL[i]); }
-                case POST: { return sendPostRequest(targetURL[i]); }
-                default:{}
-            }*/
 
             switch(targetURL[i]){
                 case APIConstants.GET_ALL_STOCKS: { return getAllStocks(); }
@@ -166,6 +173,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Этот метод будет вызван, когда doInBackground() завершится
     protected void onPostExecute(JSONObject result)
     {
+        spinner.cancel();
         try {
             // Если есть обработчик, выполняем соответствующую функцию
             if (handler != null)
