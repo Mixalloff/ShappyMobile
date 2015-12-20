@@ -2,22 +2,30 @@ package com.example.mikhail.stockstore.AsyncClasses;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
+import android.view.View;
 
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.WorkWithServer;
+import com.example.mikhail.stockstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,8 +36,8 @@ import java.net.URL;
  */
 public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 {
+    SwipeRefreshLayout swipe = null;
 
-    //private static String method = "";
     private static String urlParams = "";
     Activity activity;
     private ResponseInterface handler;
@@ -38,6 +46,10 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     public AsyncRequestToServer(Activity activity){
         this.activity = activity;
+    }
+
+    public void setSwipeRefresh(SwipeRefreshLayout swipe){
+        this.swipe = swipe;
     }
 
     public AsyncRequestToServer(Activity activity, ResponseInterface handler){
@@ -60,16 +72,25 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.activity = activity;
     }
 
-    ProgressDialog spinner;
-
     // Метод выполняется перед началом doInBackground()
     protected void onPreExecute(){
-        spinner = new ProgressDialog(activity);
-        spinner.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        spinner.setMessage(spinnerMessage);
-        spinner.setIndeterminate(true); // выдать значок ожидания
-        spinner.setCancelable(true);
-        spinner.show();
+        /*if(swipe != null){
+            swipe.setRefreshing(true);
+        }*/
+    }
+
+    // Проверяет, есть ли соединение
+    public static boolean hasConnection(final Context context)
+    {
+        try {
+            ConnectivityManager connectManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            boolean internetAvailable = (connectManager.getNetworkInfo(
+                    ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED);
+            return internetAvailable;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     // Отправляет GET запрос
@@ -140,24 +161,38 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Здесь делайте всю длительную по времени работу.
     protected JSONObject doInBackground(String... targetURL)
     {
-        for (int i = 0; i < targetURL.length; i++)
-        {
+        if (AsyncRequestToServer.hasConnection(activity)) {
+            for (String url : targetURL) {
 
-            switch(targetURL[i]){
-                case APIConstants.GET_ALL_STOCKS: { return getAllStocks(); }
-                case APIConstants.GET_ALL_COMPANIES: { return getAllCompanies(); }
-                case APIConstants.USER_AUTH: { return userAuthorize(); }
-                case APIConstants.USER_REGISTER: { return userRegister(); }
-             //   case APIConstants.GET_ALL_CATEGORIES: { return getAllCategories; }
-                case APIConstants.USER_ADD_STOCK: { return userAddStock(); }
-                case APIConstants.USER_GET_FEED: { return userGetFeed(); }
+                switch (url) {
+                    case APIConstants.GET_ALL_STOCKS: {
+                        return getAllStocks();
+                    }
+                    case APIConstants.GET_ALL_COMPANIES: {
+                        return getAllCompanies();
+                    }
+                    case APIConstants.USER_AUTH: {
+                        return userAuthorize();
+                    }
+                    case APIConstants.USER_REGISTER: {
+                        return userRegister();
+                    }
+                    //   case APIConstants.GET_ALL_CATEGORIES: { return getAllCategories; }
+                    case APIConstants.USER_ADD_STOCK: {
+                        return userAddStock();
+                    }
+                    case APIConstants.USER_GET_FEED: {
+                        return userGetFeed();
+                    }
 
-                default:{}
+                    default: {
+                    }
+                }
+
+                // Ранний выход, если был вызван cancel().
+                if (isCancelled())
+                    break;
             }
-
-            // Ранний выход, если был вызван cancel().
-            if (isCancelled())
-                break;
         }
         return null;
 
@@ -173,7 +208,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Этот метод будет вызван, когда doInBackground() завершится
     protected void onPostExecute(JSONObject result)
     {
-        spinner.cancel();
         try {
             // Если есть обработчик, выполняем соответствующую функцию
             if (handler != null)
@@ -181,6 +215,8 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        if (swipe != null) { swipe.setRefreshing(false); }
         //showNotification("Downloaded " + result + " bytes");
     }
 

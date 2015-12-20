@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,48 +57,15 @@ public class allStocksTab extends Fragment {
 
 // Тестовые карточки
         //initializeTestData();
-        request = new AsyncRequestToServer(getActivity(), handler);
+
+       /* request = new AsyncRequestToServer(getActivity(), handler);
+        request.setSwipeRefresh(this.getView());
         request.setSpinnerMessage("Загрузка акций");
-        request.execute(APIConstants.GET_ALL_STOCKS);
+        request.execute(APIConstants.GET_ALL_STOCKS);*/
 
         //Toast.makeText(getContext().getApplicationContext(), "Акции onCreate", Toast.LENGTH_SHORT).show();
     }
 
-    /*public void onPause(){
-        super.onPause();
-        request.cancel(true);
-        Toast.makeText(getContext().getApplicationContext(), "Акции pause", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(getContext().getApplicationContext(), "Акции destroy", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onResume() {
-        super.onResume();
-        Toast.makeText(getContext().getApplicationContext(), "Акции onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Toast.makeText(getContext().getApplicationContext(), "Акции saveInstanse", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onStart() {
-        super.onStart();
-        Toast.makeText(getContext().getApplicationContext(), "Акции onStart", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onStop() {
-        super.onStop();
-        Toast.makeText(getContext().getApplicationContext(), "Акции onStop", Toast.LENGTH_SHORT).show();
-    }*/
-
-    /*public void onRestart() {
-        super.onRestart();
-        Toast.makeText(getContext().getApplicationContext(), "Акции restart", Toast.LENGTH_SHORT).show();
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,11 +75,27 @@ public class allStocksTab extends Fragment {
         String token = WorkWithServer.getToken(getActivity());
         rv = (RecyclerView) v.findViewById(R.id.cards);
         initRecyclerView(container);
+        initSwipe(v);
 
-        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        rv.setItemAnimator(itemAnimator);
+        //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        //rv.setItemAnimator(itemAnimator);
 
         return v;
+    }
+
+    // Инициализация SwipeLayout
+    public void initSwipe(View v){
+        // Обновление при скролле вниз
+        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                request = new AsyncRequestToServer(getActivity(), handler);
+                request.setSwipeRefresh(swipe);
+                request.setSpinnerMessage("Загрузка акций");
+                request.execute(APIConstants.GET_ALL_STOCKS);
+            }
+        });
     }
 
     // Инициализация RecyclerView карточек

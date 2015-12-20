@@ -17,14 +17,15 @@ public class StockInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
-
+       // MyParcelable object = (MyParcelable) getIntent().getParcelableExtra("myData");
        // Intent intent = getIntent();
-       // Stock stock = intent.getParcelableExtra("stock");
-        Stock stock = null;
-        Bundle b = getIntent().getExtras();
+        Stock stock = (Stock)getIntent().getParcelableExtra("stock");
+       // Stock stock = null;
+
+        /*Bundle b = getIntent().getExtras();
         if(b != null) {
             stock = b.getParcelable("stock");
-        }
+        }*/
 
         /*Bitmap stockPhoto = (Bitmap)intent.getParcelableExtra("stockPhoto");
         String stockName = intent.getStringExtra("stockName");

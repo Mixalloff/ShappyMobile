@@ -84,7 +84,7 @@ public class Stock implements Parcelable{
 
     @Override
     public int describeContents() {
-        return hashCode();
+        return 0;
     }
 
     @Override
@@ -96,8 +96,8 @@ public class Stock implements Parcelable{
         dest.writeString(description);
         dest.writeByte((byte) (this.isAdded ? 1 : 0));
 
-      // dest.writeParcelable(this.photo, flags);
-        dest.writeValue(this.photo);
+        dest.writeParcelable(this.photo, flags);
+        //dest.writeValue(this.photo);
 
 
         //dest.writeParcelable(this.company, flags);
@@ -112,10 +112,11 @@ public class Stock implements Parcelable{
         this.description = source.readString();
         this.isAdded = source.readByte() != 0;
 
-       // this.photo = source.readParcelable(Bitmap.class.getClassLoader());
 
+        this.photo = source.readParcelable(Bitmap.class.getClassLoader());
+      //  this.photo = (Bitmap)source.readParcelable(getClass().getClassLoader());
         //this.company = source.readParcelable(Company.class.getClassLoader());
-        this.photo = (Bitmap) source.readValue(Bitmap.class.getClassLoader());
+      //  this.photo = (Bitmap) source.readValue(Bitmap.class.getClassLoader());
     }
 
 
