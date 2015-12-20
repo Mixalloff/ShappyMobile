@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card"
-        style="@style/MyCardViewStyle">
+        style="@style/MyCardViewStyle"
+        android:clickable="true">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

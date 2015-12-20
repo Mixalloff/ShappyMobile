@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
@@ -24,7 +27,7 @@ import java.util.Locale;
 /**
  * Created by mikhail on 02.12.15.
  */
-public class Stock {
+public class Stock implements Parcelable{
     public String name;
     public Date dateStart;
     public Date dateFinish;
@@ -79,4 +82,53 @@ public class Stock {
         }
     }
 
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(name);
+        dest.writeLong(this.dateStart.getTime());
+        dest.writeLong(this.dateFinish.getTime());
+        dest.writeString(description);
+        dest.writeByte((byte) (this.isAdded ? 1 : 0));
+
+      // dest.writeParcelable(this.photo, flags);
+        dest.writeValue(this.photo);
+
+
+        //dest.writeParcelable(this.company, flags);
+
+    }
+
+    public Stock(Parcel source){
+        this.id = source.readString();
+        this.name = source.readString();
+        this.dateStart = new Date(source.readLong());
+        this.dateFinish = new Date(source.readLong());
+        this.description = source.readString();
+        this.isAdded = source.readByte() != 0;
+
+       // this.photo = source.readParcelable(Bitmap.class.getClassLoader());
+
+        //this.company = source.readParcelable(Company.class.getClassLoader());
+        this.photo = (Bitmap) source.readValue(Bitmap.class.getClassLoader());
+    }
+
+
+    public static final Parcelable.Creator<Stock> CREATOR = new Parcelable.Creator<Stock>() {
+
+        @Override
+        public Stock createFromParcel(Parcel source) {
+            return new Stock(source);
+        }
+
+        @Override
+        public Stock[] newArray(int size) {
+            return new Stock[size];
+        }
+    };
 }

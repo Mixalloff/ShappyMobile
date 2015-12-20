@@ -1,8 +1,11 @@
 package com.example.mikhail.stockstore.Classes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,13 +20,16 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
+import com.example.mikhail.stockstore.StockInfoActivity;
 import com.example.mikhail.stockstore.StocksActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -51,33 +57,33 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
     }
 
     @Override
-    public void onBindViewHolder(StocksViewHolder holder, final int position) {
-        StocksViewHolder.stockName.setText(stocks.get(position).name);
-        StocksViewHolder.stockDescription.setText(stocks.get(position).description);
+    public void onBindViewHolder(final StocksViewHolder holder, final int position) {
+        holder.stockName.setText(stocks.get(position).name);
+        holder.stockDescription.setText(stocks.get(position).description);
 
-        CommonFunctions.setPhotoToImageView(stocks.get(position).photo, StocksViewHolder.stockPhoto);
+        CommonFunctions.setPhotoToImageView(stocks.get(position).photo, holder.stockPhoto);
 
         Locale ru = new Locale("ru");
         SimpleDateFormat format = new SimpleDateFormat("dd MMMM y",ru);
 
-        StocksViewHolder.stockDate.setText(format.format(stocks.get(position).dateFinish));
-        StocksViewHolder.companyName.setText(stocks.get(position).company.name);
+        holder.stockDate.setText(format.format(stocks.get(position).dateFinish));
+        holder.companyName.setText(stocks.get(position).company.name);
 
-        CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, StocksViewHolder.companyLogo);
+        CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
 
         //StocksViewHolder.isAdded = stocks.get(position).isAdded;
         if (stocks.get(position).isAdded){
-            StocksViewHolder.addStockBtn.setBackgroundResource(R.drawable.added);
+            holder.addStockBtn.setBackgroundResource(R.drawable.added);
         }
 
-        StocksViewHolder.addStockBtn.setOnClickListener(new View.OnClickListener() {
+        holder.addStockBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 //Toast.makeText(v.getContext().getApplicationContext(), stocks.get(position).id, Toast.LENGTH_SHORT).show();
                 Activity host = (Activity) v.getContext();
                 // APIRequestConstructor.userAddStock(host, stocks.get(position).id);
 
-                StocksViewHolder.addStockBtn.setBackgroundResource(R.drawable.added);
+                holder.addStockBtn.setBackgroundResource(R.drawable.added);
 
                 ResponseInterface handler;
 
@@ -153,6 +159,20 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
             }
         });
+
+        holder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Toast.makeText(v.getContext().getApplicationContext(), "Clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(holder.itemView.getContext(), StockInfoActivity.class);
+                /*intent.putExtra("stockPhoto", stocks.get(position).photo);
+                intent.putExtra("stockName", stocks.get(position).name);
+                intent.putExtra("stockDescription", stocks.get(position).description);*/
+                Bundle b = new Bundle();
+                b.putParcelable("stock", stocks.get(position));
+                //intent.putExtra( "stock", stocks.get(position));
+               // holder.itemView.getContext().startActivity(intent.putExtras(b));
+            }
+        });
     }
 
 
@@ -163,21 +183,21 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
     }
 
     public static class StocksViewHolder extends RecyclerView.ViewHolder {
-        public static CardView cv;
-        public static TextView stockName;
-        public static TextView stockDescription;
-        public static ImageView stockPhoto;
+        public CardView cv;
+        public TextView stockName;
+        public TextView stockDescription;
+        public ImageView stockPhoto;
 
-        public static TextView companyName;
-        public static ImageView companyLogo;
-        public static TextView stockDate;
-        public static boolean isAdded;
+        public TextView companyName;
+        public ImageView companyLogo;
+        public TextView stockDate;
+        public boolean isAdded;
 
-        public static ImageButton addStockBtn;
+        public ImageButton addStockBtn;
 
-        StocksViewHolder(View itemView) {
+        StocksViewHolder(final View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cards);
+            cv = (CardView)itemView.findViewById(R.id.card);
 
             stockName = (TextView)itemView.findViewById(R.id.stock_name);
             stockDescription = (TextView)itemView.findViewById(R.id.stock_description);

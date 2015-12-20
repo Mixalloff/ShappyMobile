@@ -387,5 +387,6 @@
     <string name="fa_vimeo_square">&#xf194;</string>
     <string name="fa_try">&#xf195;</string>
     <string name="fa_plus_square_o">&#xf196;</string>
+    <string name="title_activity_stock_info">StockInfoActivity</string>
 
 </resources>

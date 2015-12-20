@@ -85,7 +85,7 @@ public class CommonFunctions {
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
+      //  toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
         activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Drawer drawer = new Drawer();
         drawer
