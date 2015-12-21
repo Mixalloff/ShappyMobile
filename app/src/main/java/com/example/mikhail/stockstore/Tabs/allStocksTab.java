@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -87,15 +88,30 @@ public class allStocksTab extends Fragment {
     public void initSwipe(View v){
         // Обновление при скролле вниз
         final SwipeRefreshLayout swipe = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+        swipe.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                /*new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        request = new AsyncRequestToServer(getActivity(), handler);
+                        request.setSwipeRefresh(swipe);
+                        request.setSpinnerMessage("Загрузка акций");
+                        request.execute(APIConstants.GET_ALL_STOCKS);
+                    }
+                },0);*/
+
                 request = new AsyncRequestToServer(getActivity(), handler);
                 request.setSwipeRefresh(swipe);
                 request.setSpinnerMessage("Загрузка акций");
                 request.execute(APIConstants.GET_ALL_STOCKS);
             }
         });
+
     }
 
     // Инициализация RecyclerView карточек

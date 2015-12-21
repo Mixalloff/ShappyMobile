@@ -19,7 +19,7 @@ public class StockInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stock_info);
        // MyParcelable object = (MyParcelable) getIntent().getParcelableExtra("myData");
        // Intent intent = getIntent();
-        Stock stock = (Stock)getIntent().getParcelableExtra("stock");
+
        // Stock stock = null;
 
         /*Bundle b = getIntent().getExtras();
@@ -31,13 +31,15 @@ public class StockInfoActivity extends AppCompatActivity {
         String stockName = intent.getStringExtra("stockName");
         String stockDescription = intent.getStringExtra("stockDescription");*/
 
+       /* Stock stock = (Stock)getIntent().getParcelableExtra("stock");
         ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
         TextView stockName = (TextView) findViewById(R.id.stockName);
         TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
 
-       // stockPhoto.setImageBitmap(stock.photo);
         stockName.setText(stock.name);
-        stockDescription.setText(stock.description);
+        stockDescription.setText(stock.description);*/
+
+
     }
 
     @Override
