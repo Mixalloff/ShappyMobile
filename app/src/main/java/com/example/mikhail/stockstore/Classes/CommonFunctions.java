@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -190,13 +191,26 @@ public class CommonFunctions {
     }
 
 
-    public static byte[] compressImage(Bitmap bmp){
+    public static void compressImageToParsel(Bitmap bmp, Parcel pars){
+        byte[] photoBytes = CommonFunctions.compressImage(bmp);
+        pars.writeInt(photoBytes.length);
+        pars.writeByteArray(photoBytes);
+    }
+
+    public static Bitmap uncompressImageFromParsel(Parcel pars){
+        int length = pars.readInt();
+        byte[] bytes = new byte[length];
+        pars.readByteArray(bytes);
+        return CommonFunctions.uncompressImage(bytes);
+    }
+
+    private static byte[] compressImage(Bitmap bmp){
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
 
-    public static Bitmap uncompressedImage(byte[] bytes){
+    private static Bitmap uncompressImage(byte[] bytes){
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 

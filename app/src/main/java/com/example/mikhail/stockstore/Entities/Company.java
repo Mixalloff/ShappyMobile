@@ -57,13 +57,8 @@ public class Company implements Parcelable{
 
     protected Company(Parcel in) {
         name = in.readString();
-        //photo = in.readParcelable(Bitmap.class.getClassLoader());
         defaultName = in.readString();
-
-        int length = in.readInt();
-        byte[] bytes = new byte[length];
-        in.readByteArray(bytes);
-        this.photo = CommonFunctions.uncompressedImage(bytes);
+        this.photo = CommonFunctions.uncompressImageFromParsel(in);
     }
 
     public static final Creator<Company> CREATOR = new Creator<Company>() {
@@ -86,11 +81,7 @@ public class Company implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        //dest.writeParcelable(photo, flags);
         dest.writeString(defaultName);
-
-        byte[] photoBytes = CommonFunctions.compressImage(this.photo);
-        dest.writeInt(photoBytes.length);
-        dest.writeByteArray(photoBytes);
+        CommonFunctions.compressImageToParsel(this.photo, dest);
     }
 }

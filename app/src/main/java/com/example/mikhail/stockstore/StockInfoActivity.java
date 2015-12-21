@@ -40,7 +40,7 @@ public class StockInfoActivity extends AppCompatActivity {
 
             stockName.setText(stock.name);
             stockDescription.setText(stock.description);
-            stockPhoto.setImageBitmap(stock.photo);
+            stockPhoto.setImageBitmap(stock.company.photo);
         }catch(Exception e){
             e.printStackTrace();
         }

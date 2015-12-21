@@ -97,22 +97,11 @@ public class Stock implements Parcelable{
             dest.writeLong(this.dateFinish.getTime());
             dest.writeString(description);
             dest.writeByte((byte) (this.isAdded ? 1 : 0));
-
             dest.writeParcelable(this.company, flags);
-
-            byte[] photoBytes = CommonFunctions.compressImage(this.photo);
-            dest.writeInt(photoBytes.length);
-            dest.writeByteArray(photoBytes);
-
-         //   dest.writeParcelable(this.photo, flags);
-          //  dest.writeValue(this.photo);
+            CommonFunctions.compressImageToParsel(this.photo, dest);
         }catch(Exception e) {
             e.printStackTrace();
         }
-
-        //dest.writeValue(this.photo);
-      //  dest.writeParcelable(this.company, flags);
-
     }
 
     public Stock(Parcel source){
@@ -122,14 +111,8 @@ public class Stock implements Parcelable{
         this.dateFinish = new Date(source.readLong());
         this.description = source.readString();
         this.isAdded = source.readByte() != 0;
-
         this.company = source.readParcelable(Company.class.getClassLoader());
-
-        int length = source.readInt();
-        byte[] bytes = new byte[length];
-        source.readByteArray(bytes);
-        this.photo = CommonFunctions.uncompressedImage(bytes);
-
+        this.photo = CommonFunctions.uncompressImageFromParsel(source);
     }
 
 
