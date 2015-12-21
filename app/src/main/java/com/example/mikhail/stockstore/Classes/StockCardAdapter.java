@@ -170,8 +170,10 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                // Bundle b = new Bundle();
                // b.putParcelable("stock", stocks.get(position));
                 //intent.putExtra("stock", stocks.get(position));
+
+                intent.putExtra("stock", (Parcelable) stocks.get(position));
                 holder.itemView.getContext().startActivity(intent);
-                //intent.putExtra( "stock", stocks.get(position));
+
                // holder.itemView.getContext().startActivity(intent.putExtras(b));
             }
         });

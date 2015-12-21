@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -31,6 +32,7 @@ import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StartActivity;
+import com.example.mikhail.stockstore.StockInfoActivity;
 import com.example.mikhail.stockstore.StocksActivity;
 
 import org.json.JSONArray;
@@ -57,7 +59,7 @@ public class allStocksTab extends Fragment {
         setHasOptionsMenu(true);
 
 // Тестовые карточки
-        //initializeTestData();
+       // initializeTestData();
 
        /* request = new AsyncRequestToServer(getActivity(), handler);
         request.setSwipeRefresh(this.getView());
@@ -81,7 +83,10 @@ public class allStocksTab extends Fragment {
         //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         //rv.setItemAnimator(itemAnimator);
 
+        initializeTestData(v);
+
         return v;
+
     }
 
     // Инициализация SwipeLayout
@@ -124,10 +129,19 @@ public class allStocksTab extends Fragment {
         rv.setAdapter(adapter);
     }
 
-    private void initializeTestData() {
+    private void initializeTestData(View v) {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
+        Stock testStock = new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true);
         stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true));
+        Intent intent = new Intent(v.getContext(), StockInfoActivity.class);
+
+        intent.putExtra("stock", testStock);
+        try {
+            v.getContext().startActivity(intent);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private ResponseInterface handler = new ResponseInterface() {

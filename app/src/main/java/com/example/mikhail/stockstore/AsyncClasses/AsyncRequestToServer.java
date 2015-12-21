@@ -84,10 +84,10 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     {
         try {
             ConnectivityManager connectManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            boolean internetAvailable = (connectManager.getNetworkInfo(
+            return (connectManager.getNetworkInfo(
                     ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectManager
                     .getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED);
-            return internetAvailable;
+           // return internetAvailable;
         }catch(Exception e){
             return false;
         }

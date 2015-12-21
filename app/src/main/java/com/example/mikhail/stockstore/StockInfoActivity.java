@@ -31,13 +31,19 @@ public class StockInfoActivity extends AppCompatActivity {
         String stockName = intent.getStringExtra("stockName");
         String stockDescription = intent.getStringExtra("stockDescription");*/
 
-       /* Stock stock = (Stock)getIntent().getParcelableExtra("stock");
-        ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
-        TextView stockName = (TextView) findViewById(R.id.stockName);
-        TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
+        try {
+            Intent intent = getIntent();
+            Stock stock = (Stock) intent.getParcelableExtra("stock");
+            ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
+            TextView stockName = (TextView) findViewById(R.id.stockName);
+            TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
 
-        stockName.setText(stock.name);
-        stockDescription.setText(stock.description);*/
+            stockName.setText(stock.name);
+            stockDescription.setText(stock.description);
+            stockPhoto.setImageBitmap(stock.photo);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
 
     }

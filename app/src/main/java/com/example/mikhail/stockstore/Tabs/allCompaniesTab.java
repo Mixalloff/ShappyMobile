@@ -49,8 +49,8 @@ public class allCompaniesTab extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        request = new AsyncRequestToServer(getActivity(), handler);
-        request.execute(APIConstants.GET_ALL_COMPANIES);
+       // request = new AsyncRequestToServer(getActivity(), handler);
+       // request.execute(APIConstants.GET_ALL_COMPANIES);
     }
 
     /*public void onPause(){

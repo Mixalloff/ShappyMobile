@@ -15,6 +15,7 @@ import com.example.mikhail.stockstore.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -89,18 +90,27 @@ public class Stock implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.id);
-        dest.writeString(name);
-        dest.writeLong(this.dateStart.getTime());
-        dest.writeLong(this.dateFinish.getTime());
-        dest.writeString(description);
-        dest.writeByte((byte) (this.isAdded ? 1 : 0));
+        try {
+            dest.writeString(this.id);
+            dest.writeString(name);
+            dest.writeLong(this.dateStart.getTime());
+            dest.writeLong(this.dateFinish.getTime());
+            dest.writeString(description);
+            dest.writeByte((byte) (this.isAdded ? 1 : 0));
+            //dest.writeParcelable(this.company, flags);
 
-        dest.writeParcelable(this.photo, flags);
+            byte[] photoBytes = CommonFunctions.compressImage(this.photo);
+            dest.writeInt(photoBytes.length);
+            dest.writeByteArray(photoBytes);
+
+         //   dest.writeParcelable(this.photo, flags);
+          //  dest.writeValue(this.photo);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
         //dest.writeValue(this.photo);
-
-
-        //dest.writeParcelable(this.company, flags);
+      //  dest.writeParcelable(this.company, flags);
 
     }
 
@@ -111,12 +121,13 @@ public class Stock implements Parcelable{
         this.dateFinish = new Date(source.readLong());
         this.description = source.readString();
         this.isAdded = source.readByte() != 0;
-
-
-        this.photo = source.readParcelable(Bitmap.class.getClassLoader());
-      //  this.photo = (Bitmap)source.readParcelable(getClass().getClassLoader());
         //this.company = source.readParcelable(Company.class.getClassLoader());
-      //  this.photo = (Bitmap) source.readValue(Bitmap.class.getClassLoader());
+
+        int length = source.readInt();
+        byte[] bytes = new byte[length];
+        source.readByteArray(bytes);
+        this.photo = CommonFunctions.uncompressedImage(bytes);
+
     }
 
 

@@ -83,7 +83,7 @@
                 >
 
                 <ImageView
-                    android:id="@+id/main.backdrop"
+                    android:id="@+id/stockPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -108,14 +108,31 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:lineSpacingExtra="8dp"
-                android:text="@string/big_text"
-                android:padding="@dimen/activity_horizontal_margin"
-                />
+                android:orientation="vertical"
+                android:gravity="top">
+
+                <TextView
+                    android:layout_width="318dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Large Text"
+                    android:textSize="22sp"
+                    android:id="@+id/stockName"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/big_text"
+                    android:lineSpacingExtra="8dp"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:textColor="#555"
+                    android:textSize="14sp"
+                    android:id="@+id/stockDescription"/>
+            </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
         <android.support.design.widget.FloatingActionButton

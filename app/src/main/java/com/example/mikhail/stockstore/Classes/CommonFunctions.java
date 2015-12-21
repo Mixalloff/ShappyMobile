@@ -25,6 +25,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,11 +68,13 @@ public class CommonFunctions {
         URL newurl = null;
         try {
             newurl = new URL(photoURL);
-            return loader.execute(photoURL).get();//BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+            Bitmap resultPhoto = loader.execute(photoURL).get();
+            return (resultPhoto != null) ? resultPhoto : GlobalVariables.defaultPhoto;
         } catch (Exception e) {
             e.printStackTrace();
+            return GlobalVariables.defaultPhoto;
         }
-        return null;
+        //return null;
 
     }
 
@@ -114,21 +117,21 @@ public class CommonFunctions {
                             break;
                         }
                         case R.string.drawer_item_stocks: {
-                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
                             break;
                         }
                         case R.string.drawer_item_subscriptions: {
-                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
                             break;
                         }
                         case R.string.drawer_item_settings: {
-                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_friends: {
-                            Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                         case R.string.drawer_item_exit: {
@@ -185,4 +188,16 @@ public class CommonFunctions {
             return null;
         }
     }
+
+
+    public static byte[] compressImage(Bitmap bmp){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public static Bitmap uncompressedImage(byte[] bytes){
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
 }
