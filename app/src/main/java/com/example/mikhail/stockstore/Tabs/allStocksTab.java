@@ -133,15 +133,8 @@ public class allStocksTab extends Fragment {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
         Stock testStock = new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true);
-        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true));
-        Intent intent = new Intent(v.getContext(), StockInfoActivity.class);
-
-        intent.putExtra("stock", testStock);
-        try {
-            v.getContext().startActivity(intent);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", v.getResources().getString(R.string.big_text), testPhoto, new Company("NIKE", testCompanyPhoto), true));
+  // String s = v.getResources().getString(R.string.big_text);
     }
 
     private ResponseInterface handler = new ResponseInterface() {

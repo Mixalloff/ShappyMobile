@@ -120,7 +120,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
                     android:textSize="22sp"
-                    android:id="@+id/stockName"/>
+                    android:id="@+id/stockName" />
 
                 <TextView
                     android:layout_width="match_parent"
