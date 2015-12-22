@@ -80,9 +80,6 @@ public class StartActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        // Подгружаем токен, если есть
-        WorkWithServer.getToken(this);
     }
 
     @Override

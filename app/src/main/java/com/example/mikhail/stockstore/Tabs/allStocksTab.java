@@ -1,45 +1,29 @@
 package com.example.mikhail.stockstore.Tabs;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
-import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
-import com.example.mikhail.stockstore.Classes.WorkWithServer;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StartActivity;
-import com.example.mikhail.stockstore.StockInfoActivity;
-import com.example.mikhail.stockstore.StocksActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +59,9 @@ public class allStocksTab extends Fragment {
         View v = inflater.inflate(R.layout.all_stocks_tab, container, false);
 
         // Подгружаем токен, если есть
-        String token = WorkWithServer.getToken(getActivity());
+      // String token = WorkWithServer.getToken(getActivity());
+
+
         rv = (RecyclerView) v.findViewById(R.id.cards);
         initRecyclerView(container);
         initSwipe(v);

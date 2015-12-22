@@ -16,14 +16,8 @@ public class StocksActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Инициализация фото по умолчанию
-        GlobalVariables.setDefaultPhoto(R.drawable.default_photo, getResources());
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stocks);
-
-        // Подгружаем токен, если есть
-        String token = WorkWithServer.getToken(this);
 
         CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
         CommonFunctions.addTabs(this);
