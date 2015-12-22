@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Entities.Stock;
 
 public class StockInfoActivity extends AppCompatActivity {
@@ -17,35 +18,26 @@ public class StockInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
-       // MyParcelable object = (MyParcelable) getIntent().getParcelableExtra("myData");
-       // Intent intent = getIntent();
 
-       // Stock stock = null;
+        CommonFunctions.addNavigationView(this, CommonFunctions.setToolbar(this, R.id.toolbar));
+        setInterfaceElements();
+    }
 
-        /*Bundle b = getIntent().getExtras();
-        if(b != null) {
-            stock = b.getParcelable("stock");
-        }*/
-
-        /*Bitmap stockPhoto = (Bitmap)intent.getParcelableExtra("stockPhoto");
-        String stockName = intent.getStringExtra("stockName");
-        String stockDescription = intent.getStringExtra("stockDescription");*/
-
+    // Задает значения элементам интерфейса (изображения, текст..)
+    private void setInterfaceElements(){
         try {
             Intent intent = getIntent();
-            Stock stock = (Stock) intent.getParcelableExtra("stock");
+            Stock stock = intent.getParcelableExtra("stock");
             ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
             TextView stockName = (TextView) findViewById(R.id.stockName);
             TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
 
             stockName.setText(stock.name);
             stockDescription.setText(stock.description);
-            stockPhoto.setImageBitmap(stock.company.photo);
+            stockPhoto.setImageBitmap(stock.photo);
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
     }
 
     @Override

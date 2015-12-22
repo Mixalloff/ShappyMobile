@@ -14,7 +14,7 @@ public class SubscribesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscribes);
 
-        CommonFunctions.addNavigationView(this);
+        CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
         CommonFunctions.addTabs(this);
     }
 

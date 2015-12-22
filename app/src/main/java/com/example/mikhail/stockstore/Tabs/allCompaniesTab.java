@@ -2,6 +2,7 @@ package com.example.mikhail.stockstore.Tabs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,10 +22,12 @@ import com.example.mikhail.stockstore.Classes.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
+import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StartActivity;
+import com.example.mikhail.stockstore.StockInfoActivity;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import org.json.JSONArray;
@@ -53,37 +56,6 @@ public class allCompaniesTab extends Fragment {
        // request.execute(APIConstants.GET_ALL_COMPANIES);
     }
 
-    /*public void onPause(){
-        super.onPause();
-        request.cancel(true);
-        Toast.makeText(getContext().getApplicationContext(), "Компании pause", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(getContext().getApplicationContext(), "Компании destroy", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onResume() {
-        super.onResume();
-        Toast.makeText(getContext().getApplicationContext(), "Компании onResume", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Toast.makeText(getContext().getApplicationContext(), "Компании saveInstanse", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onStart() {
-        super.onStart();
-        Toast.makeText(getContext().getApplicationContext(), "Компании onStart", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onStop() {
-        super.onStop();
-        Toast.makeText(getContext().getApplicationContext(), "Компании onStop", Toast.LENGTH_SHORT).show();
-    }*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_companies_tab, container, false);
@@ -92,8 +64,8 @@ public class allCompaniesTab extends Fragment {
         initGridView(container, v);
      //   initializeTestData();
 
-       // AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
-        //request.execute(APIConstants.GET_ALL_COMPANIES);
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+        request.execute(APIConstants.GET_ALL_COMPANIES);
 
         return v;
     }
@@ -103,7 +75,10 @@ public class allCompaniesTab extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int position,long id) {
             Toast.makeText(getContext().getApplicationContext(), companies.get(position).name, Toast.LENGTH_SHORT).show();
-           // startActivity(new Intent(getContext(),StartActivity.class));
+
+            Intent intent = new Intent(getContext(), CompanyInfoActivity.class);
+            intent.putExtra("company", companies.get(position));
+            startActivity(intent);
         }
     };
 

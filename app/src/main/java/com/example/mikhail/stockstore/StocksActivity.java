@@ -25,7 +25,7 @@ public class StocksActivity extends ActionBarActivity {
         // Подгружаем токен, если есть
         String token = WorkWithServer.getToken(this);
 
-        CommonFunctions.addNavigationView(this);
+        CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
         CommonFunctions.addTabs(this);
 
     }

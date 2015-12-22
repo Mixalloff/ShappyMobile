@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         //initializeTestData();
-        CommonFunctions.addNavigationView(this);
+        CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
         setLogos();
         rv = (RecyclerView)findViewById(R.id.cards);
 
@@ -113,7 +113,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     };
 
-        public void setLogos(){
+    public void setLogos(){
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont-4.3.0.ttf");
 
         TextView email = (TextView) findViewById(R.id.email_logo);
@@ -127,6 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void initRecyclerView(){
         Context context = this;
         LinearLayoutManager llm = new LinearLayoutManager(context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rv.setLayoutManager(llm);
         adapter = new StockCardAdapter(stocks);

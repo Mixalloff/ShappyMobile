@@ -7,7 +7,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +18,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
@@ -56,6 +61,17 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         return pvh;
     }
 
+    private void ellipsed(TextView tv, String text, float avail){
+        TextPaint textpaint = tv.getPaint();
+        tv.setText(text);
+       // float avail = tv.getMeasuredWidth();
+        String oneMore = "и ещё...";
+        String more = "и ещё %d др.";
+        CharSequence ellipsizedText = TextUtils.commaEllipsize(text, textpaint, avail,
+                oneMore, more);
+        tv.setText(ellipsizedText);
+    }
+
     @Override
     public void onBindViewHolder(final StocksViewHolder holder, final int position) {
         holder.stockName.setText(stocks.get(position).name);
@@ -75,6 +91,35 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         if (stocks.get(position).isAdded){
             holder.addStockBtn.setBackgroundResource(R.drawable.added);
         }
+
+       // ellipsed(holder.stockDescription, stocks.get(position).description, holder.stockPhoto.getWidth());
+        //ellipsed(holder.stockName, stocks.get(position).name, holder.stockPhoto.getWidth());
+
+        /*holder.stockName.setWidth(holder.stockPhoto.getWidth());
+        holder.stockName.setLines(2);
+        holder.stockDescription.setWidth(holder.stockPhoto.getWidth());
+        holder.stockDescription.setLines(2);*/
+
+        /*LinearLayout ll = (LinearLayout) holder.itemView;
+        if (ll.getOrientation() == LinearLayout.HORIZONTAL){
+            String name = stocks.get(position).name.length() <= 50 ?
+                    stocks.get(position).name : stocks.get(position).name.substring(0,50) + "...";
+            String description = stocks.get(position).description.length() <= 50 ?
+                    stocks.get(position).description : stocks.get(position).description.substring(0,50) + "...";
+
+            holder.stockName.setText(name);
+            holder.stockDescription.setText(description);
+        }*/
+
+        holder.companyLogo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CompanyInfoActivity.class);
+                intent.putExtra("company", stocks.get(position).company);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         holder.addStockBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,14 +208,8 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 Toast.makeText(v.getContext().getApplicationContext(), "Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(holder.itemView.getContext(), StockInfoActivity.class);
-                /*intent.putExtra("stockPhoto", stocks.get(position).photo);
-                intent.putExtra("stockName", stocks.get(position).name);
-                intent.putExtra("stockDescription", stocks.get(position).description);*/
-               // Bundle b = new Bundle();
-               // b.putParcelable("stock", stocks.get(position));
-                //intent.putExtra("stock", stocks.get(position));
 
+                Intent intent = new Intent(holder.itemView.getContext(), StockInfoActivity.class);
                 intent.putExtra("stock", (Parcelable) stocks.get(position));
                 holder.itemView.getContext().startActivity(intent);
 
@@ -178,8 +217,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             }
         });
     }
-
-
 
     @Override
     public int getItemCount() {

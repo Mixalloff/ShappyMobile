@@ -84,66 +84,77 @@ public class CommonFunctions {
         return photo;
     }
 
-    // Добавление пользовательского Navigation View и тулбара
-    public static void addNavigationView(final AppCompatActivity activity) {
-        // Handle Toolbar
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+    public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar){
+        Toolbar toolbar = (Toolbar) activity.findViewById(resourseToolbar);
         activity.setSupportActionBar(toolbar);
+        return toolbar;
+    }
+
+    // Добавление пользовательского Navigation View и тулбара
+    public static void addNavigationView(final AppCompatActivity activity, Toolbar toolbar) {
+        // Handle Toolbar
+       // Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+       // activity.setSupportActionBar(toolbar);
+
       //  toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Drawer drawer = new Drawer();
-        drawer
-                .withActivity(activity)
-                .withToolbar(toolbar)
-                .withActionBarDrawerToggle(true)
-                .withHeader(R.layout.drawer_header)
-                .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user).withName(R.string.drawer_item_profile),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1).withName(R.string.drawer_item_friends),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2).withName(R.string.drawer_item_stocks),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3).withName(R.string.drawer_item_subscriptions),
+        try {
+            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            Drawer drawer = new Drawer();
+            drawer
+                    .withActivity(activity)
+                    .withToolbar(toolbar)
+                    .withActionBarDrawerToggle(true)
+                    .withHeader(R.layout.drawer_header)
+                    .addDrawerItems(
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user).withName(R.string.drawer_item_profile),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1).withName(R.string.drawer_item_friends),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2).withName(R.string.drawer_item_stocks),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3).withName(R.string.drawer_item_subscriptions),
 
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withName(R.string.drawer_item_settings),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withName(R.string.drawer_item_exit)
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withName(R.string.drawer_item_settings),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withName(R.string.drawer_item_exit)
 
-                )
-                .build();
-        drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l, IDrawerItem iDrawerItem) {
-                if (iDrawerItem instanceof Nameable) {
-                    switch (((Nameable) iDrawerItem).getNameRes()) {
-                        case R.string.drawer_item_profile: {
-                            activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
-                            break;
-                        }
-                        case R.string.drawer_item_stocks: {
-                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
-                            activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
-                            break;
-                        }
-                        case R.string.drawer_item_subscriptions: {
-                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
-                            activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
-                            break;
-                        }
-                        case R.string.drawer_item_settings: {
-                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_friends: {
-                            //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                        case R.string.drawer_item_exit: {
-                            WorkWithServer.deleteToken();
-                            activity.startActivity(new Intent(activity.getBaseContext(), StartActivity.class));
+                    )
+                    .build();
+            drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l, IDrawerItem iDrawerItem) {
+                    if (iDrawerItem instanceof Nameable) {
+                        switch (((Nameable) iDrawerItem).getNameRes()) {
+                            case R.string.drawer_item_profile: {
+                                activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
+                                break;
+                            }
+                            case R.string.drawer_item_stocks: {
+                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
+                                break;
+                            }
+                            case R.string.drawer_item_subscriptions: {
+                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
+                                break;
+                            }
+                            case R.string.drawer_item_settings: {
+                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            case R.string.drawer_item_friends: {
+                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            case R.string.drawer_item_exit: {
+                                WorkWithServer.deleteToken();
+                                activity.startActivity(new Intent(activity.getBaseContext(), StartActivity.class));
 
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     // Добавление вкладок

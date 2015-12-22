@@ -123,6 +123,7 @@ public class allStocksTab extends Fragment {
     public void initRecyclerView(ViewGroup container){
         Context context = this.getActivity();
         LinearLayoutManager llm = new LinearLayoutManager(context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rv.setLayoutManager(llm);
         adapter = new StockCardAdapter(stocks);

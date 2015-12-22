@@ -20,6 +20,7 @@
                 android:scaleType="centerInside"
                 android:id="@+id/company_logo"
                 android:paddingLeft="5dp"
+                android:clickable="true"
                 />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_toStartOf="@+id/add_stock_btn" />
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitCenter"
                 android:id="@+id/stock_photo"
@@ -69,7 +70,10 @@
                     android:textColor="#000"
                     android:textSize="22sp"
                     android:layout_below="@+id/stock_photo"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Название" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -79,7 +83,10 @@
                     android:textColor="#555"
                     android:layout_below="@+id/stock_name"
                     android:textSize="12sp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="описание" />
 
             <ImageButton
                 android:layout_width="20dp"

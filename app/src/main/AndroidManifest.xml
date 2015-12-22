@@ -20,6 +20,7 @@
             android:label="@string/title_activity_stocks" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,6 +39,10 @@
         <activity
             android:name=".StockInfoActivity"
             android:label="@string/title_activity_stock_info" >
+        </activity>
+        <activity
+            android:name=".CompanyInfoActivity"
+            android:label="@string/title_activity_company_info" >
         </activity>
     </application>
 
