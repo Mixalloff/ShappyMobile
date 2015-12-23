@@ -85,7 +85,8 @@ public class allCompaniesTab extends Fragment {
     // Инициализация GridView
     public void initGridView(ViewGroup container,View v) {
         GridView gridview = (GridView) v.findViewById(R.id.companies_gridView);
-        gridview.setAdapter(new CompanyCardAdapter(companies, this.getContext()));
+        this.adapter = new CompanyCardAdapter(companies, this.getContext());
+        gridview.setAdapter(adapter);
         gridview.setOnItemClickListener(gridviewOnItemClickListener);
     }
 

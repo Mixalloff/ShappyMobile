@@ -19,6 +19,7 @@ import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,7 +61,7 @@ public class CompanyInfoActivity extends AppCompatActivity {
             TextView companyName = (TextView) findViewById(R.id.companyName);
 
             companyName.setText(company.name);
-            companyPhoto.setImageBitmap(company.photo);
+            ImageLoader.getInstance().displayImage(company.photo, companyPhoto);
         }catch(Exception e){
             e.printStackTrace();
         }

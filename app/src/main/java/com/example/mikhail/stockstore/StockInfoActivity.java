@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class StockInfoActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class StockInfoActivity extends AppCompatActivity {
 
             stockName.setText(stock.name);
             stockDescription.setText(stock.description);
-            stockPhoto.setImageBitmap(stock.photo);
+            ImageLoader.getInstance().displayImage(stock.photo, stockPhoto);
         }catch(Exception e){
             e.printStackTrace();
         }

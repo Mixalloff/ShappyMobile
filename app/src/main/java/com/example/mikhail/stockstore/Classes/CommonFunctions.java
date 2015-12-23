@@ -1,5 +1,6 @@
 package com.example.mikhail.stockstore.Classes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -25,8 +26,16 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,11 +45,6 @@ import java.util.Date;
  * Created by mikhail on 09.12.15.
  */
 public class CommonFunctions {
-
-    // Установка картинки в ImageView из Bitmap
-    public static void setPhotoToImageView(Bitmap photo, ImageView imageView) {
-        imageView.setImageBitmap(photo);
-    }
 
     // Загрузка картинки по URL в заданное ImageView
     public static void setPhotoToImageView(String photoURL, ImageView imageView) {
@@ -57,26 +61,6 @@ public class CommonFunctions {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static Bitmap getPhoto(String photoURL){
-        // Асинхронное выполнение
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
-
-        AsyncGetPhoto loader = new AsyncGetPhoto();
-
-        URL newurl = null;
-        try {
-            newurl = new URL(photoURL);
-            Bitmap resultPhoto = loader.execute(photoURL).get();
-            return (resultPhoto != null) ? resultPhoto : GlobalVariables.defaultPhoto;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return GlobalVariables.defaultPhoto;
-        }
-        //return null;
-
     }
 
     public static Bitmap getPhoto(int resId, Resources resources){
@@ -200,29 +184,4 @@ public class CommonFunctions {
             return null;
         }
     }
-
-
-    public static void compressImageToParsel(Bitmap bmp, Parcel pars){
-        byte[] photoBytes = CommonFunctions.compressImage(bmp);
-        pars.writeInt(photoBytes.length);
-        pars.writeByteArray(photoBytes);
-    }
-
-    public static Bitmap uncompressImageFromParsel(Parcel pars){
-        int length = pars.readInt();
-        byte[] bytes = new byte[length];
-        pars.readByteArray(bytes);
-        return CommonFunctions.uncompressImage(bytes);
-    }
-
-    private static byte[] compressImage(Bitmap bmp){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
-    }
-
-    private static Bitmap uncompressImage(byte[] bytes){
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
-
 }

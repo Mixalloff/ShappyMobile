@@ -29,6 +29,7 @@ import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StockInfoActivity;
 import com.example.mikhail.stockstore.StocksActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +78,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         holder.stockName.setText(stocks.get(position).name);
         holder.stockDescription.setText(stocks.get(position).description);
 
-        CommonFunctions.setPhotoToImageView(stocks.get(position).photo, holder.stockPhoto);
+      //  CommonFunctions.setPhotoToImageView(stocks.get(position).photo, holder.stockPhoto);
+        ImageLoader.getInstance().displayImage(stocks.get(position).photo, holder.stockPhoto);
+
 
         Locale ru = new Locale("ru");
         SimpleDateFormat format = new SimpleDateFormat("dd MMMM y",ru);
@@ -85,7 +88,8 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         holder.stockDate.setText(format.format(stocks.get(position).dateFinish));
         holder.companyName.setText(stocks.get(position).company.name);
 
-        CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
+       // CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
+        ImageLoader.getInstance().displayImage(stocks.get(position).company.photo, holder.companyLogo);
 
         //StocksViewHolder.isAdded = stocks.get(position).isAdded;
         if (stocks.get(position).isAdded){

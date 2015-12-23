@@ -16,24 +16,23 @@ import org.json.JSONObject;
  */
 public class Company implements Parcelable{
     public String name;
-    public Bitmap photo;
-
+    public String photo;
     private String defaultName = "default name";
 
     public Company(String name, String photo){
         this.name = name;
-        this.photo = CommonFunctions.getPhoto(photo);
+        this.photo = photo;
     }
 
     public Company(){
         this.name = defaultName;
-        this.photo = GlobalVariables.defaultPhoto;
+        this.photo = null;
     }
 
     public Company(JSONObject companyObj){
         try {
             this.name = companyObj.has("name") ? companyObj.getString("name") : defaultName;
-            this.photo = companyObj.has("logo") ? CommonFunctions.getPhoto(GlobalVariables.server + companyObj.getString("logo")) : GlobalVariables.defaultPhoto;
+            this.photo = companyObj.has("logo") ? GlobalVariables.server + companyObj.getString("logo") : null;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -42,13 +41,13 @@ public class Company implements Parcelable{
     public Company(String str){
         if (str.equals("{}")){
             this.name = defaultName;
-            this.photo = GlobalVariables.defaultPhoto;
+            this.photo = null;
         }
         else{
             try {
                 JSONObject json = new JSONObject(str);
                 this.name = json.has("name") ? json.getString("name") : defaultName;
-                this.photo = json.has("logo") ? CommonFunctions.getPhoto(GlobalVariables.server + json.getString("logo")) : GlobalVariables.defaultPhoto;
+                this.photo = json.has("logo") ? GlobalVariables.server + json.getString("logo") : null;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -58,7 +57,7 @@ public class Company implements Parcelable{
     protected Company(Parcel in) {
         name = in.readString();
         defaultName = in.readString();
-        this.photo = CommonFunctions.uncompressImageFromParsel(in);
+        photo = in.readString();
     }
 
     public static final Creator<Company> CREATOR = new Creator<Company>() {
@@ -82,6 +81,6 @@ public class Company implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(defaultName);
-        CommonFunctions.compressImageToParsel(this.photo, dest);
+        dest.writeString(photo);
     }
 }

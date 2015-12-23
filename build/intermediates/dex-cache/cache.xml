@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.2.0/jars/classes.jar"
+        jar="/home/mikhail/IdeaProjects/StockStore/app/libs/universal-image-loader-1.9.5.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="97f7e239e86ef994de894818fdd8a71d2e89d6aa">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-2cdeb67ba9a2b533b85b2e6cc28dfc7fea56ccb0.jar" />
+        sha1="442dbfb517b9ab5cb5c6da7ebf8cc28ec5bd0375">
+        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.5-046ba3c103c620521611b07e973e404a80ed00fc.jar" />
     </item>
 
 </items>
