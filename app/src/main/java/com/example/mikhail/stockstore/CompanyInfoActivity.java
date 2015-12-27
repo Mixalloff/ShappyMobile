@@ -133,7 +133,9 @@ public class CompanyInfoActivity extends AppCompatActivity {
         Context context = this;
         LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(llm);
-        adapter = new StockCardAdapter(stocks);
+
+       // rv.setHasFixedSize(true);
+        adapter = new StockCardAdapter(stocks, false);
         rv.setAdapter(adapter);
     }
 

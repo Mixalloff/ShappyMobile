@@ -77,7 +77,7 @@ public class Stock implements Parcelable{
             this.description =  stockObj.has("description") ? stockObj.getString("description") : defaultDescription;
             this.company = new Company(stockObj.get("company").toString());
 
-            this.isAdded = stockObj.has("isAdded") && (boolean) stockObj.get("isAdded");
+            this.isAdded = stockObj.has("subscribed") && (boolean) stockObj.get("subscribed");
         } catch (JSONException e) {
             e.printStackTrace();
         }

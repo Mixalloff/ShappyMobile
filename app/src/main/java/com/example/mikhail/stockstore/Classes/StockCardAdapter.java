@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +47,17 @@ import java.util.Locale;
  */
 public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.StocksViewHolder>{
     List<Stock> stocks;
+
+    // Вертикальное ли расположение recyclerView
+    private boolean isVertical = true;
+
     public StockCardAdapter(List<Stock> stocks){
         this.stocks = stocks;
+    }
+
+    public StockCardAdapter(List<Stock> stocks, boolean isVertical){
+        this.stocks = stocks;
+        this.isVertical = isVertical;
     }
 
     @Override
@@ -60,17 +70,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_card, parent, false);
         StocksViewHolder pvh = new StocksViewHolder(v);
         return pvh;
-    }
-
-    private void ellipsed(TextView tv, String text, float avail){
-        TextPaint textpaint = tv.getPaint();
-        tv.setText(text);
-       // float avail = tv.getMeasuredWidth();
-        String oneMore = "и ещё...";
-        String more = "и ещё %d др.";
-        CharSequence ellipsizedText = TextUtils.commaEllipsize(text, textpaint, avail,
-                oneMore, more);
-        tv.setText(ellipsizedText);
     }
 
     @Override
@@ -94,26 +93,39 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         //StocksViewHolder.isAdded = stocks.get(position).isAdded;
         if (stocks.get(position).isAdded){
             holder.addStockBtn.setBackgroundResource(R.drawable.added);
+           // holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
         }
 
-       // ellipsed(holder.stockDescription, stocks.get(position).description, holder.stockPhoto.getWidth());
-        //ellipsed(holder.stockName, stocks.get(position).name, holder.stockPhoto.getWidth());
+        changeColor(holder, stocks.get(position));
+        // если расоложение recyclerView горизонтальное
+        if (!this.isVertical){
 
-        /*holder.stockName.setWidth(holder.stockPhoto.getWidth());
-        holder.stockName.setLines(2);
-        holder.stockDescription.setWidth(holder.stockPhoto.getWidth());
-        holder.stockDescription.setLines(2);*/
+            holder.cardLayout.removeView(holder.companyLogo);
+            holder.cardLayout.removeView(holder.companyName);
+            holder.cardLayout.removeView(holder.stockDate);
+            holder.cardLayout.removeView(holder.stockDescription);
+            holder.cardLayout.removeView(holder.stockName);
+          //  holder.stockName.setTextSize(10);
 
-        /*LinearLayout ll = (LinearLayout) holder.itemView;
-        if (ll.getOrientation() == LinearLayout.HORIZONTAL){
-            String name = stocks.get(position).name.length() <= 50 ?
-                    stocks.get(position).name : stocks.get(position).name.substring(0,50) + "...";
-            String description = stocks.get(position).description.length() <= 50 ?
-                    stocks.get(position).description : stocks.get(position).description.substring(0,50) + "...";
+            int screenWidth = holder.itemView.getContext().getResources().getDisplayMetrics().widthPixels;
+
+            holder.cv.getLayoutParams().width = screenWidth / 2;
+           // holder.cv.getLayoutParams().height = 300;
+            holder.stockDescription.setLines(2);
+
+
+            // Максимальное количество символов в названии и описании
+            /*int maxNameSymb = 20;
+            int maxDescSymb = 50;
+            String name = stocks.get(position).name.length() <= maxNameSymb ?
+                    stocks.get(position).name : stocks.get(position).name.substring(0,maxNameSymb) + "...";
+            String description = stocks.get(position).description.length() <= maxDescSymb ?
+                    stocks.get(position).description : stocks.get(position).description.substring(0,maxDescSymb) + "...";
+
 
             holder.stockName.setText(name);
-            holder.stockDescription.setText(description);
-        }*/
+            holder.stockDescription.setText(description);*/
+        }
 
         holder.companyLogo.setOnClickListener(new View.OnClickListener() {
 
@@ -132,7 +144,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 Activity host = (Activity) v.getContext();
                 // APIRequestConstructor.userAddStock(host, stocks.get(position).id);
 
-                holder.addStockBtn.setBackgroundResource(R.drawable.added);
+               // holder.addStockBtn.setBackgroundResource(R.drawable.added);
 
                 ResponseInterface handler;
 
@@ -184,6 +196,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                     public void onUserAddStock(JSONObject response) {
                         try {
                             Toast.makeText(v.getContext().getApplicationContext(), response.getString("name") + " добавлена на стену", Toast.LENGTH_SHORT).show();
+                            changeButtonLabel(holder, stocks.get(position));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -222,6 +235,24 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         });
     }
 
+    private void changeColor(StocksViewHolder holder, Stock stock){
+        if (stock.isAdded){
+          holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
+        }
+        else{
+            holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.card_color));
+        }
+    }
+
+    private void changeButtonLabel(StocksViewHolder holder, Stock stock){
+        if (stock.isAdded){
+            holder.addStockBtn.setBackgroundResource(R.drawable.added);
+        }
+        else{
+            holder.addStockBtn.setBackgroundResource(R.drawable.add_btn);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return stocks.size();
@@ -237,6 +268,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         public ImageView companyLogo;
         public TextView stockDate;
         public boolean isAdded;
+        public RelativeLayout cardLayout;
 
         public ImageButton addStockBtn;
 
@@ -253,6 +285,8 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             stockDate = (TextView)itemView.findViewById(R.id.stock_date);
 
             addStockBtn = (ImageButton)itemView.findViewById(R.id.add_stock_btn);
+
+            cardLayout = (RelativeLayout)itemView.findViewById(R.id.card_layout);
 
             isAdded = false;
         }

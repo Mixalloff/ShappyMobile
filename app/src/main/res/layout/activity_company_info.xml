@@ -72,7 +72,8 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
                     android:textSize="22sp"
-                    android:id="@+id/companyName" />
+                    android:id="@+id/companyName"
+                    android:textColor="#000" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -88,7 +89,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/cards"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="150dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     />
 
