@@ -122,6 +122,7 @@ public class StartActivity extends ActionBarActivity {
 
         Intent intent = new Intent(StartActivity.this, StocksActivity.class);
         startActivity(intent);
+        StartActivity.this.finish();
     }
 
     public void OnRegisterBtnClick(View view) {

@@ -121,5 +121,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Intent intent = new Intent(RegisterActivity.this, StocksActivity.class);
         startActivity(intent);
+        RegisterActivity.this.finish();
     }
 }

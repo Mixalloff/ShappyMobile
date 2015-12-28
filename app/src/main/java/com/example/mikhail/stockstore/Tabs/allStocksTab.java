@@ -42,6 +42,7 @@ public class allStocksTab extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+
 // Тестовые карточки
        // initializeTestData();
 
@@ -69,7 +70,17 @@ public class allStocksTab extends Fragment {
         //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         //rv.setItemAnimator(itemAnimator);
 
-        initializeTestData(v);
+        //initializeTestData(v);
+
+        try{
+            Intent intent = getActivity().getIntent();
+            JSONObject stocksJson = new JSONObject(intent.getStringExtra("stocks"));
+            handler.onUserGetAllStocks(stocksJson);
+        }catch(Exception e){
+            e.printStackTrace();
+            request = new AsyncRequestToServer(getActivity(), handler);
+            request.execute(APIConstants.GET_ALL_STOCKS);
+        }
 
         return v;
 
