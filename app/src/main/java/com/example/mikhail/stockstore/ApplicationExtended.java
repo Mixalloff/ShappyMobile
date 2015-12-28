@@ -44,6 +44,8 @@ public class ApplicationExtended extends Application {
         // Инициализация элементов для работы с картинками
         File cacheDir = StorageUtils.getCacheDirectory(this);
         DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.default_photo)
+                .showImageForEmptyUri(R.drawable.default_photo)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .build();
