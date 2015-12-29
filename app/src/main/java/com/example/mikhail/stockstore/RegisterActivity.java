@@ -22,22 +22,6 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     private ResponseInterface handler = new ResponseInterface() {
-
-        @Override
-        public void onInternalServerError(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUnknownRequestUri(JSONObject response) {
-
-        }
-
-        @Override
-        public void onError(JSONObject response) {
-
-        }
-
         @Override
         public void onRegister(JSONObject response) {
             try {
@@ -46,46 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-        }
-
-        @Override
-        public void onGetToken(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetAllStocks(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetAllCompanies(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserAddStock(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetFeed(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByCompany(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByWord(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByFilter(JSONObject response) {
 
         }
     };

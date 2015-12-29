@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by mikhail on 07.12.15.
  */
 // Класс обработки ответа сервера. Вызывает методы реализованного пользователем интерфейса
-public class ServerResponseHandler implements ResponseInterface{
+public class ServerResponseHandler extends ResponseInterface{
 
     public static void CheckResponse(JSONObject response, ResponseInterface handler) throws JSONException {
         switch (response.get("type").toString()){

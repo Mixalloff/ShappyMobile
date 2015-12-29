@@ -6,19 +6,52 @@ import org.json.JSONObject;
  * Created by mikhail on 07.12.15.
  */
 // Интерфейс для обработки ответа сервера. Реализует все возможные ответы
-public interface ResponseInterface {
-    void onInternalServerError(JSONObject response);
-    void onUnknownRequestUri(JSONObject response);
-    void onError(JSONObject response);
+public class ResponseInterface {
+    public void onInternalServerError(JSONObject response) {
 
-    void onRegister(JSONObject response);
-    void onGetToken(JSONObject response);
-    void onUserGetAllStocks(JSONObject response);
-    void onUserGetAllCompanies(JSONObject response);
-    void onUserAddStock(JSONObject response);
-    void onUserGetFeed(JSONObject response);
+    }
 
-    void onUserGetStocksByCompany(JSONObject response);
-    void onUserGetStocksByWord(JSONObject response);
-    void onUserGetStocksByFilter(JSONObject response);
+    public void onUnknownRequestUri(JSONObject response) {
+
+    }
+
+    public void onError(JSONObject response) {
+
+    }
+
+    public void onRegister(JSONObject response) {
+
+    }
+
+    public void onGetToken(JSONObject response) {
+
+    }
+
+    public void onUserGetAllStocks(JSONObject response) {
+
+    }
+
+    public void onUserGetAllCompanies(JSONObject response) {
+
+    }
+
+    public void onUserAddStock(JSONObject response) {
+
+    }
+
+    public void onUserGetFeed(JSONObject response) {
+
+    }
+
+    public void onUserGetStocksByCompany(JSONObject response) {
+
+    }
+
+    public void onUserGetStocksByWord(JSONObject response) {
+
+    }
+
+    public void onUserGetStocksByFilter(JSONObject response) {
+
+    }
 }

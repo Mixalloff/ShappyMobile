@@ -43,33 +43,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private ResponseInterface handler = new ResponseInterface() {
-
-        @Override
-        public void onInternalServerError(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUnknownRequestUri(JSONObject response) {
-
-        }
-
         @Override
         public void onError(JSONObject response) {
             Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SplashActivity.this, StartActivity.class);
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
-        }
-
-        @Override
-        public void onRegister(JSONObject response) {
-
-        }
-
-        @Override
-        public void onGetToken(JSONObject response) {
-
         }
 
         @Override
@@ -82,35 +61,6 @@ public class SplashActivity extends AppCompatActivity {
             SplashActivity.this.finish();
         }
 
-        @Override
-        public void onUserGetAllCompanies(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserAddStock(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetFeed(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByCompany(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByWord(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByFilter(JSONObject response) {
-
-        }
     };
 
         private void initFonts(){

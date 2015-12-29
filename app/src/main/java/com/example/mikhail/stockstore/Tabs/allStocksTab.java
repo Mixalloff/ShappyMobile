@@ -136,31 +136,6 @@ public class allStocksTab extends Fragment {
 
     private ResponseInterface handler = new ResponseInterface() {
         @Override
-        public void onInternalServerError(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUnknownRequestUri(JSONObject response) {
-
-        }
-
-        @Override
-        public void onError(JSONObject response) {
-            startActivity(new Intent(getContext(),StartActivity.class));
-        }
-
-        @Override
-        public void onRegister(JSONObject response) {
-
-        }
-
-        @Override
-        public void onGetToken(JSONObject response) {
-
-        }
-
-        @Override
         public void onUserGetAllStocks(JSONObject response) {
             try {
                 // Обновляем список акций
@@ -178,36 +153,6 @@ public class allStocksTab extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-
-        @Override
-        public void onUserGetAllCompanies(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserAddStock(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetFeed(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByCompany(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByWord(JSONObject response) {
-
-        }
-
-        @Override
-        public void onUserGetStocksByFilter(JSONObject response) {
-
         }
     };
 
