@@ -7,17 +7,18 @@ import org.json.JSONObject;
  */
 // Интерфейс для обработки ответа сервера. Реализует все возможные ответы
 public interface ResponseInterface {
-    public void onInternalServerError(JSONObject response);
-    public void onUnknownRequestUri(JSONObject response);
-    public void onError(JSONObject response);
+    void onInternalServerError(JSONObject response);
+    void onUnknownRequestUri(JSONObject response);
+    void onError(JSONObject response);
 
-    public void onRegister(JSONObject response);
-    public void onGetToken(JSONObject response);
+    void onRegister(JSONObject response);
+    void onGetToken(JSONObject response);
+    void onUserGetAllStocks(JSONObject response);
+    void onUserGetAllCompanies(JSONObject response);
+    void onUserAddStock(JSONObject response);
+    void onUserGetFeed(JSONObject response);
 
-    public void onUserGetAllStocks(JSONObject response);
-
-    public void onUserGetAllCompanies(JSONObject response);
-
-    public void onUserAddStock(JSONObject response);
-    public void onUserGetFeed(JSONObject response);
+    void onUserGetStocksByCompany(JSONObject response);
+    void onUserGetStocksByWord(JSONObject response);
+    void onUserGetStocksByFilter(JSONObject response);
 }

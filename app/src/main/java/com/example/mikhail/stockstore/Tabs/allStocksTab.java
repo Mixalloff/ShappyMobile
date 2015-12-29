@@ -109,7 +109,6 @@ public class allStocksTab extends Fragment {
 
                 request = new AsyncRequestToServer(getActivity(), handler);
                 request.setSwipeRefresh(swipe);
-                request.setSpinnerMessage("Загрузка акций");
                 request.execute(APIConstants.GET_ALL_STOCKS);
             }
         });
@@ -128,10 +127,10 @@ public class allStocksTab extends Fragment {
     }
 
     private void initializeTestData(View v) {
-        String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
-        String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        Stock testStock = new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true);
-        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", v.getResources().getString(R.string.big_text), testPhoto, new Company("NIKE", testCompanyPhoto), true));
+     //   String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
+        //String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
+      //  Stock testStock = new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), true);
+       // stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", v.getResources().getString(R.string.big_text), testPhoto, new Company("1","NIKE", testCompanyPhoto), true));
   // String s = v.getResources().getString(R.string.big_text);
     }
 
@@ -193,6 +192,21 @@ public class allStocksTab extends Fragment {
 
         @Override
         public void onUserGetFeed(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
 
         }
     };

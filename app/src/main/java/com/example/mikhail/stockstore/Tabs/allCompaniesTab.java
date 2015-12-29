@@ -93,11 +93,11 @@ public class allCompaniesTab extends Fragment {
     private void initializeTestData() {
         String adidas = "http://allstarshoe.ru/wa-data/public/shop/img/Adidas_originals_logo.jpg";
         String nike = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        companies.add(new Company("Adidas", adidas));
-        companies.add(new Company("NIKE", nike));
+        companies.add(new Company("1","Adidas", adidas));
+        companies.add(new Company("1","NIKE", nike));
         //companies.add(new Company("NIKE", nike));
         //companies.add(new Company("NIKE", nike));
-        companies.add(new Company("Adidas", adidas));
+        companies.add(new Company("1","Adidas", adidas));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -156,6 +156,21 @@ public class allCompaniesTab extends Fragment {
 
         @Override
         public void onUserGetFeed(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
 
         }
     };

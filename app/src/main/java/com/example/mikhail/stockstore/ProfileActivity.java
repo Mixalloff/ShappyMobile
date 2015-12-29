@@ -41,14 +41,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         //initializeTestData();
-        CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
+        CommonFunctions.addNavigationView(this, CommonFunctions.setToolbar(this, R.id.toolbar));
         setLogos();
         rv = (RecyclerView)findViewById(R.id.cards);
 
         initRecyclerView();
 
         AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
-        request.setSpinnerMessage("Загрузка акций");
         request.execute(APIConstants.USER_GET_FEED);
     }
 
@@ -111,6 +110,21 @@ public class ProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
+
+        }
     };
 
     public void setLogos(){
@@ -137,10 +151,10 @@ public class ProfileActivity extends AppCompatActivity {
     private void initializeTestData() {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("2", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("3", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("4", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("2", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("3", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("4", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
     }
 
     @Override

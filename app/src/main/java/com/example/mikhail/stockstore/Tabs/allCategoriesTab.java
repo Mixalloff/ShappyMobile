@@ -64,9 +64,9 @@ public class allCategoriesTab extends Fragment {
         String sport = "http://icon-icons.com/icons2/38/PNG/512/dumbbell_sport_5072.png";
         String shoes = "http://icon-icons.com/icons2/28/PNG/256/shoes_adidas_2734.png";
         String products = "http://icon-icons.com/icons2/37/PNG/128/bread_food_3206.png";
-        categories.add(new Company("Спорт", sport));
-        categories.add(new Company("Обувь", shoes));
-        categories.add(new Company("Продукты", products));
+        categories.add(new Company("1","Спорт", sport));
+        categories.add(new Company("1","Обувь", shoes));
+        categories.add(new Company("1","Продукты", products));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
@@ -112,6 +112,21 @@ public class allCategoriesTab extends Fragment {
 
         @Override
         public void onUserGetFeed(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
 
         }
     };

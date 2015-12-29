@@ -24,6 +24,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,9 @@ public class CompanyInfoActivity extends AppCompatActivity {
     StockCardAdapter adapter;
     RecyclerView rv;
     int countOfLoadingStocks = 5;
+
+    // Данная компания
+    Company company;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +51,35 @@ public class CompanyInfoActivity extends AppCompatActivity {
 
        setInterfaceElements();
 
-        /*AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
-        request.setSpinnerMessage("Загрузка акций");
-        request.execute(APIConstants.USER_GET_FEED);*/
+        try {
+            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            // Тест поиска по компании
+            //request.setParameters("companyID=" + company.id);
+           // request.execute(APIConstants.USER_GET_STOCKS_BY_COMPANY);
 
-        initializeTestData();
+            // Тест поиска по нескольким параметрам
+            String word = "лучш";
+            word = URLEncoder.encode(word, "UTF-8");
+            request.setParameters("companyID=" + company.id + "&searchword="+word);
+            request.execute(APIConstants.USER_GET_STOCKS_BY_FILTER);
+
+            //Тест поиска по строке
+           /* String word = "крос";
+            word = URLEncoder.encode(word, "UTF-8");
+            //word = Charset.forName("UTF-8").encode(word).toString();
+            request.setParameters("searchword=" + word);
+            request.execute(APIConstants.USER_GET_STOCKS_BY_WORDPATH);*/
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+      //  initializeTestData();
     }
 
     private void setInterfaceElements(){
         try {
             Intent intent = getIntent();
-            Company company = intent.getParcelableExtra("company");
+            company = intent.getParcelableExtra("company");
             ImageView companyPhoto = (ImageView) findViewById(R.id.companyPhoto);
             TextView companyName = (TextView) findViewById(R.id.companyName);
 
@@ -111,6 +134,11 @@ public class CompanyInfoActivity extends AppCompatActivity {
 
         @Override
         public void onUserGetFeed(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
             try {
                 // Обновляем список акций
                 stocks.clear();
@@ -125,6 +153,16 @@ public class CompanyInfoActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
+
         }
     };
 
@@ -142,10 +180,10 @@ public class CompanyInfoActivity extends AppCompatActivity {
     private void initializeTestData() {
         String testPhoto =  "http://sportmax-abakan.ru/upload/medialibrary/9bf/eskiz.png";
         String testCompanyPhoto = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
-        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("2", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("3", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
-        stocks.add(new Stock("4", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("1", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("2", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("3", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
+        stocks.add(new Stock("4", "Наушники Nike БЕСПЛАТНО", "С 1 сентября 2015 года при единовременной покупке товаров-участников акции в магазине \"СпортМакс\" по адресу г.Абакан ул.Стофато 5д, на сумму 1500 (одна тысяча пятьсот) рублей, Покупатель БЕСПЛАТНО получает наушники Nike.", testPhoto, new Company("1","NIKE", testCompanyPhoto), false));
     }
 
     @Override

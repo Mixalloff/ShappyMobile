@@ -74,6 +74,21 @@ public class StartActivity extends ActionBarActivity {
         public void onUserGetFeed(JSONObject response) {
 
         }
+
+        @Override
+        public void onUserGetStocksByCompany(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByWord(JSONObject response) {
+
+        }
+
+        @Override
+        public void onUserGetStocksByFilter(JSONObject response) {
+
+        }
     };
 
     @Override

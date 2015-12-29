@@ -17,20 +17,24 @@ import org.json.JSONObject;
 public class Company implements Parcelable{
     public String name;
     public String photo;
+    public String id;
     private String defaultName = "default name";
 
-    public Company(String name, String photo){
+    public Company(String id, String name, String photo){
+        this.id = id;
         this.name = name;
         this.photo = photo;
     }
 
     public Company(){
+        this.id = null;
         this.name = defaultName;
         this.photo = null;
     }
 
     public Company(JSONObject companyObj){
         try {
+            this.id = companyObj.has("id") ? companyObj.getString("id") : null;
             this.name = companyObj.has("name") ? companyObj.getString("name") : defaultName;
             this.photo = companyObj.has("logo") ? GlobalVariables.server + companyObj.getString("logo") : null;
         } catch (JSONException e) {
@@ -40,12 +44,14 @@ public class Company implements Parcelable{
 
     public Company(String str){
         if (str.equals("{}")){
+            this.id = null;
             this.name = defaultName;
             this.photo = null;
         }
         else{
             try {
                 JSONObject json = new JSONObject(str);
+                this.id = json.has("id") ? json.getString("id") : null;
                 this.name = json.has("name") ? json.getString("name") : defaultName;
                 this.photo = json.has("logo") ? GlobalVariables.server + json.getString("logo") : null;
             } catch (JSONException e) {
@@ -55,8 +61,8 @@ public class Company implements Parcelable{
     }
 
     protected Company(Parcel in) {
+        id = in.readString();
         name = in.readString();
-        defaultName = in.readString();
         photo = in.readString();
     }
 
@@ -79,8 +85,8 @@ public class Company implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(name);
-        dest.writeString(defaultName);
         dest.writeString(photo);
     }
 }

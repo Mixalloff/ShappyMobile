@@ -26,6 +26,10 @@ public class ServerResponseHandler implements ResponseInterface{
 
 
 
+
+            case "stocks": { handler.onUserGetStocksByCompany(response); break;}
+
+
             default: {};
         }
     }
@@ -72,6 +76,21 @@ public class ServerResponseHandler implements ResponseInterface{
 
     @Override
     public void onUserGetFeed(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetStocksByCompany(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetStocksByWord(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetStocksByFilter(JSONObject response) {
 
     }
 }

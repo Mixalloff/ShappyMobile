@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by mikhail on 19.12.15.
@@ -38,8 +39,11 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 {
     SwipeRefreshLayout swipe = null;
 
+    // Параметры запроса
     private static String urlParams = "";
+    // Активити в которой создан объект
     Activity activity;
+    // Выполняющий действия обработчик ответа
     private ResponseInterface handler;
 
     public void setHandler(ResponseInterface handler){ this.handler = handler; }
@@ -57,15 +61,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.handler = handler;
     }
 
-    private static String spinnerMessage = "Загрузка";
-
     public void setParameters(String urlParams){
      //   this.method = method;
        this.urlParams = urlParams;
-    }
-
-    public void setSpinnerMessage(String message){
-        this.spinnerMessage = message;
     }
 
     public void setActivity(Activity activity){
@@ -102,9 +100,14 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         String result = "";
 
         try {
+
+            //String encodedUrl = URLEncoder.encode(targetURL, "UTF-8");
+           // String utf8String= new String(targetURL.getBytes("Unicode"), "UTF-8");
+
             url = new URL(GlobalVariables.server + "/" + targetURL);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) {
                 result += line;
@@ -115,6 +118,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             return null;
         }
         return result;
+
     }
 
     // Отправляет POST запрос
@@ -183,6 +187,16 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     }
                     case APIConstants.USER_GET_FEED: {
                         return userGetFeed();
+                    }
+
+                    case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
+                        return userGetStocksByCompany();
+                    }
+                    case APIConstants.USER_GET_STOCKS_BY_WORDPATH: {
+                        return userGetStocksByWord();
+                    }
+                    case APIConstants.USER_GET_STOCKS_BY_FILTER: {
+                        return userGetStocksByFilter();
                     }
 
                     default: {
@@ -296,6 +310,47 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         try {
             String token = WorkWithServer.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?token=" + token));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userGetStocksByCompany(){
+        try {
+          //  String companyId = urlParams;
+            String token = WorkWithServer.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE +
+                    "?token=" + token +
+                    "&"+urlParams));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userGetStocksByWord(){
+        try {
+           // String word = URLEncoder.encode(urlParams, "UTF-8");
+            String token = WorkWithServer.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE +
+                    "?token=" + token +
+                    "&"+urlParams));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userGetStocksByFilter(){
+        try {
+            String token = WorkWithServer.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE +
+                    "?token=" + token +
+                    "&"+urlParams));
 
         } catch (Exception e) {
             e.printStackTrace();
