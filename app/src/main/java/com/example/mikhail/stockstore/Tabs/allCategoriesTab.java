@@ -49,7 +49,7 @@ public class allCategoriesTab extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int position,long id) {
             Toast.makeText(getContext().getApplicationContext(), categories.get(position).name, Toast.LENGTH_SHORT).show();
-            // startActivity(new Intent(getContext(),StartActivity.class));
+            // startActivity(new Intent(getContext(),LoginActivity.class));
         }
     };
 

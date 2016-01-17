@@ -424,4 +424,5 @@
     lorem ipsum lorem ipsum</string>
     <string name="title_activity_company_info">CompanyInfoActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_friends">FriendsActivity</string>
 </resources>

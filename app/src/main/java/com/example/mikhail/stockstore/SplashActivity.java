@@ -2,7 +2,6 @@ package com.example.mikhail.stockstore;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -37,8 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         }, SPLASH_DISPLAY_LENGTH);*/
 
         request = new AsyncRequestToServer(this, handler);
-        //request.setSwipeRefresh(swipe);
-        //request.setSpinnerMessage("Загрузка акций");
+
         request.execute(APIConstants.GET_ALL_STOCKS);
     }
 
@@ -46,9 +44,19 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onError(JSONObject response) {
             Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SplashActivity.this, StartActivity.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
+        }
+
+        @Override
+        public void onInternalServerError(JSONObject response) {
+            Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onUnknownRequestUri(JSONObject response) {
+            Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
         }
 
         @Override

@@ -1,24 +1,22 @@
 package com.example.mikhail.stockstore.Classes;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Parcel;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
+import com.example.mikhail.stockstore.FriendsActivity;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
 import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
-import com.example.mikhail.stockstore.StartActivity;
+import com.example.mikhail.stockstore.LoginActivity;
 import com.example.mikhail.stockstore.StocksActivity;
 import com.example.mikhail.stockstore.SubscribesActivity;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -26,16 +24,7 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -125,11 +114,12 @@ public class CommonFunctions {
                             }
                             case R.string.drawer_item_friends: {
                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                activity.startActivity(new Intent(activity.getBaseContext(), FriendsActivity.class));
                                 break;
                             }
                             case R.string.drawer_item_exit: {
                                 WorkWithServer.deleteToken();
-                                activity.startActivity(new Intent(activity.getBaseContext(), StartActivity.class));
+                                activity.startActivity(new Intent(activity.getBaseContext(), LoginActivity.class));
 
                             }
                         }
@@ -141,17 +131,50 @@ public class CommonFunctions {
         }
     }
 
-    // Добавление вкладок
-    public static void addTabs(final AppCompatActivity activity){
+    // Добавление вкладок на экран друзей
+    public static void addFriendsTabs(final AppCompatActivity activity){
         ViewPager pager;
-        ViewPagerAdapter adapter;
+        FriendsViewPagerAdapter adapter;
+        SlidingTabLayout tabs;
+        // Заголовки вкладок
+        CharSequence Titles[]={"Друзья","Новости"};
+        // Количество вкладок
+        int Numboftabs = 2;
+        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
+        adapter =  new FriendsViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
+
+        // Assigning ViewPager View and setting the adapter
+        pager = (ViewPager) activity.findViewById(R.id.pager);
+        pager.setAdapter(adapter);
+
+        // Assiging the Sliding Tab Layout View
+        tabs = (SlidingTabLayout) activity.findViewById(R.id.tabs);
+        tabs.setDistributeEvenly(false); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+
+        // Setting Custom Color for the Scroll bar indicator of the Tab View
+        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+            @Override
+            public int getIndicatorColor(int position) {
+                //return activity.getResources().getColor(R.color.tabsScrollColor);
+                return activity.getResources().getColor(R.color.default_app_white);
+            }
+        });
+
+        // Setting the ViewPager For the SlidingTabsLayout
+        tabs.setViewPager(pager);
+    }
+
+    // Добавление вкладок с акциями
+    public static void addStockTabs(final AppCompatActivity activity){
+        ViewPager pager;
+        StocksViewPagerAdapter adapter;
         SlidingTabLayout tabs;
         // Заголовки вкладок
         CharSequence Titles[]={"Лента","Компании","Категории"};
         // Количество вкладок
         int Numboftabs = 3;
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
+        adapter =  new StocksViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
 
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) activity.findViewById(R.id.pager);

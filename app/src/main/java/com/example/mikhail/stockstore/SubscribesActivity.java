@@ -15,7 +15,7 @@ public class SubscribesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_subscribes);
 
         CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
-        CommonFunctions.addTabs(this);
+        CommonFunctions.addStockTabs(this);
     }
 
     @Override
