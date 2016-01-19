@@ -54,4 +54,20 @@ public class ResponseInterface {
     public void onUserGetStocksByFilter(JSONObject response) {
 
     }
+
+    public void onUserGetAllFriends(JSONObject response) {
+
+    }
+
+    public void onUserAddFriend(JSONObject response) {
+
+    }
+
+    public void onUserDeleteFriend(JSONObject response) {
+
+    }
+
+    public void onUserGetFriendsFeed(JSONObject response) {
+
+    }
 }

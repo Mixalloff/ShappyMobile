@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +15,7 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.StockCardAdapter;
+import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -14,83 +14,22 @@ public class ServerResponseHandler extends ResponseInterface{
             case "Internal server error": { handler.onInternalServerError(response);break;}
             case "Unknown request url": { handler.onUnknownRequestUri(response);break;}
             case "error": { handler.onError(response);break;}
-
             case "register": { handler.onRegister(response); break;}
             case "token": { handler.onGetToken(response); break;}
-
             case "stock": { handler.onUserGetAllStocks(response); break;}
-
             case "companies": { handler.onUserGetAllCompanies(response); break; }
             case "subscribeStock": { handler.onUserAddStock(response); break; }
             case "userstocks": { handler.onUserGetFeed(response); break; }
-
-
-
-
             case "stocks": { handler.onUserGetStocksByCompany(response); break;}
+
+            case "allfriends": { handler.onUserGetAllFriends(response); break;}
+            case "addfriend": { handler.onUserAddFriend(response); break;}
+            case "deletefriend": { handler.onUserDeleteFriend(response); break;}
+            case "friendsfeed": { handler.onUserGetFriendsFeed(response); break;}
 
 
             default: {};
         }
     }
 
-    @Override
-    public void onInternalServerError(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUnknownRequestUri(JSONObject response) {
-
-    }
-
-    @Override
-    public void onError(JSONObject response) {
-
-    }
-
-    @Override
-    public void onRegister(JSONObject response) {
-
-    }
-
-    @Override
-    public void onGetToken(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetAllStocks(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetAllCompanies(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserAddStock(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetFeed(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetStocksByCompany(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetStocksByWord(JSONObject response) {
-
-    }
-
-    @Override
-    public void onUserGetStocksByFilter(JSONObject response) {
-
-    }
 }

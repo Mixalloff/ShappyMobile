@@ -1,43 +1,32 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextPaint;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
+import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Stock;
-import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StockInfoActivity;
-import com.example.mikhail.stockstore.StocksActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;

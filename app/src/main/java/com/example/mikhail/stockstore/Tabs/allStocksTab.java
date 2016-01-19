@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.StockCardAdapter;
+import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 

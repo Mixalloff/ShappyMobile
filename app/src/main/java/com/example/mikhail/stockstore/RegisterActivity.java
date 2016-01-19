@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithServer;
+import com.example.mikhail.stockstore.Classes.WorkWithToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onRegister(JSONObject response) {
             try {
-                WorkWithServer.saveToken(response.get("data").toString());
+                WorkWithToken.saveToken(response.get("data").toString());
                 Toast.makeText(getApplicationContext(), "Токен: " + response.get("data").toString(), Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();

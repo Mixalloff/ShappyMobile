@@ -19,7 +19,7 @@ import java.net.URL;
 /**
  * Created by mikhail on 06.12.15.
  */
-public class WorkWithServer {
+public class WorkWithToken {
 
     //public static String serverURL = GlobalVariables.server;
     private static SharedPreferences settings;
@@ -37,6 +37,7 @@ public class WorkWithServer {
     // Получение токена из ресурсов
     public static String getToken(Activity activity){
         settings = activity.getSharedPreferences("settings", 0);
+       // saveToken("e58dc32c33ee3d047236443080067af30af5ed5e644ea5f80ad1e866fdaab1f4");
         try {
                 return settings.getString("token", "");
             }catch(Exception e){
@@ -53,7 +54,7 @@ public class WorkWithServer {
             //e.commit();
             e.apply();
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 

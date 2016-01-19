@@ -1,36 +1,27 @@
 package com.example.mikhail.stockstore.AsyncClasses;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.StrictMode;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
-import android.view.View;
 
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithServer;
-import com.example.mikhail.stockstore.R;
+import com.example.mikhail.stockstore.Classes.WorkWithToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 /**
  * Created by mikhail on 19.12.15.
@@ -198,6 +189,15 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     case APIConstants.USER_GET_STOCKS_BY_FILTER: {
                         return userGetStocksByFilter();
                     }
+                    case APIConstants.USER_GET_ALL_FRIENDS: {
+                        return userGetAllFriends();
+                    }
+                    case APIConstants.USER_ADD_FRIEND: {
+                        return userAddFriend();
+                    }
+                    case APIConstants.USER_DELETE_FRIEND: {
+                        return userDeleteFriend();
+                    }
 
                     default: {
                     }
@@ -241,7 +241,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userRegister(){
 
         try {
-            String token = WorkWithServer.getToken(activity);
+            //String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER_ROUTE));
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,7 +254,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userAuthorize(){
 
         try {
-            String token = WorkWithServer.getToken(activity);
+           // String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendPostRequest(APIConstants.USER_AUTH_ROUTE));
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,7 +267,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject getAllStocks(){
         String result;
         try {
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             result = sendGetRequest(APIConstants.GET_ALL_STOCKS_ROUTE + "?token=" + token);
 
         } catch (Exception e) {
@@ -284,7 +284,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Получение всех категорий
     public JSONObject getAllCompanies(){
         try {
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
@@ -297,7 +297,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userAddStock(){
 
         try {
-            String token = WorkWithServer.getToken(activity);
+            //String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendPostRequest(APIConstants.USER_ADD_STOCK_ROUTE));
         } catch (Exception e) {
             e.printStackTrace();
@@ -308,7 +308,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Получение всех акций на стене пользователя
     public JSONObject userGetFeed(){
         try {
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
@@ -320,7 +320,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userGetStocksByCompany(){
         try {
           //  String companyId = urlParams;
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -334,7 +334,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userGetStocksByWord(){
         try {
            // String word = URLEncoder.encode(urlParams, "UTF-8");
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -347,7 +347,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     public JSONObject userGetStocksByFilter(){
         try {
-            String token = WorkWithServer.getToken(activity);
+            String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -357,4 +357,50 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             return null;
         }
     }
+
+    public JSONObject userGetAllFriends(){
+        try {
+            String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS_ROUTE +
+                    "?token=" + token +
+                    "&"+urlParams));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userAddFriend(){
+        try {
+           // String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND_ROUTE));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userDeleteFriend(){
+        try {
+            //String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND_ROUTE));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public JSONObject userGetFriendsFeed(){
+        try {
+            String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE +
+                    "?token=" + token +
+                    "&" + urlParams));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

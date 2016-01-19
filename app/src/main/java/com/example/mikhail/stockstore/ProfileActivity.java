@@ -8,22 +8,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
-import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.StockCardAdapter;
+import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;

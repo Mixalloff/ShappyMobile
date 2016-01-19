@@ -1,8 +1,7 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Adapters;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Entities.Person;
-import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StocksActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,9 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by mikhail on 18.01.16.

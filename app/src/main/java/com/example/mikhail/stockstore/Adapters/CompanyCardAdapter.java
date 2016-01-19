@@ -1,6 +1,8 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,32 +10,36 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Entities.Company;
+import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
- * Created by mikhail on 16.12.15.
+ * Created by mikhail on 15.12.15.
  */
-public class CategoryCardAdapter extends BaseAdapter {
-    List<Company> categories;
+public class CompanyCardAdapter extends BaseAdapter{
+    List<Company> companies;
     Context mContext;
 
-    public CategoryCardAdapter(List<Company> categories, Context mContext){
-        this.categories = categories;
+    public CompanyCardAdapter(List<Company> companies, Context mContext){
+        this.companies = companies;
         this.mContext = mContext;
     }
 
 
     @Override
     public int getCount() {
-        return categories.size();
+        return companies.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return categories.get(position);
+        return companies.get(position);
     }
 
     @Override
@@ -49,11 +55,11 @@ public class CategoryCardAdapter extends BaseAdapter {
             grid = new View(mContext);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
             grid = inflater.inflate(R.layout.company_card, parent, false);
-            if (categories != null) {
-                TextView categoryName = (TextView) grid.findViewById(R.id.category_name);
-                ImageView categoryLogo = (ImageView)grid.findViewById(R.id.category_logo);
-                CommonFunctions.setPhotoToImageView(categories.get(position).photo, categoryLogo);
-                categoryName.setText(categories.get(position).name);
+            if (companies != null) {
+                TextView companyName = (TextView) grid.findViewById(R.id.company_name);
+                ImageView companyLogo = (ImageView)grid.findViewById(R.id.company_logo);
+                CommonFunctions.setPhotoToImageView(companies.get(position).photo, companyLogo);
+                companyName.setText(companies.get(position).name);
             }
 
         } else {
@@ -63,3 +69,4 @@ public class CategoryCardAdapter extends BaseAdapter {
         return grid;
     }
 }
+

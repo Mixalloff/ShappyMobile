@@ -1,4 +1,4 @@
-package com.example.mikhail.stockstore.Classes;
+package com.example.mikhail.stockstore.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

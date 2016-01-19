@@ -2,13 +2,6 @@ package com.example.mikhail.stockstore.Classes;
 
 import android.app.Activity;
 
-import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
-
 /**
  * Created by mikhail on 06.12.15.
  */
@@ -33,7 +26,7 @@ public class APIRequestConstructor {
     }
 
     public static String userAddStockParameters(Activity activity, String stockId){
-        String token = WorkWithServer.getToken(activity);
+        String token = WorkWithToken.getToken(activity);
         return "token=" + token +
                "&id="+stockId;
     }

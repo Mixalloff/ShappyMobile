@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
-import com.example.mikhail.stockstore.Classes.CompanyCardAdapter;
+import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Company;

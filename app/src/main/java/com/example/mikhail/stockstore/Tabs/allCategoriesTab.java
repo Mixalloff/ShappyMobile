@@ -3,7 +3,6 @@ package com.example.mikhail.stockstore.Tabs;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
-import com.example.mikhail.stockstore.Classes.CategoryCardAdapter;
-import com.example.mikhail.stockstore.Classes.CompanyCardAdapter;
+import com.example.mikhail.stockstore.Adapters.CategoryCardAdapter;
+import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

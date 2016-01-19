@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.example.mikhail.stockstore.Adapters.FriendsViewPagerAdapter;
+import com.example.mikhail.stockstore.Adapters.StocksViewPagerAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.FriendsActivity;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
@@ -118,7 +120,7 @@ public class CommonFunctions {
                                 break;
                             }
                             case R.string.drawer_item_exit: {
-                                WorkWithServer.deleteToken();
+                                WorkWithToken.deleteToken();
                                 activity.startActivity(new Intent(activity.getBaseContext(), LoginActivity.class));
 
                             }

@@ -14,9 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
-import com.example.mikhail.stockstore.Classes.PersonCardAdapter;
+import com.example.mikhail.stockstore.Adapters.PersonCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
-import com.example.mikhail.stockstore.Classes.StockCardAdapter;
 import com.example.mikhail.stockstore.Entities.Person;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
@@ -44,12 +43,12 @@ public class allFriendsTab extends Fragment {
         setHasOptionsMenu(true);
 
         persons = new ArrayList<>();
-        initializeTestData();
+       // initializeTestData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.all_stocks_tab, container, false);
+        View v = inflater.inflate(R.layout.all_friends_tab, container, false);
 
         rv = (RecyclerView) v.findViewById(R.id.cards);
         initRecyclerView(container);
@@ -60,7 +59,7 @@ public class allFriendsTab extends Fragment {
 
         //initializeTestData(v);
 
-        try{
+       /* try{
             Intent intent = getActivity().getIntent();
             JSONObject stocksJson = new JSONObject(intent.getStringExtra("stocks"));
             handler.onUserGetAllStocks(stocksJson);
@@ -68,8 +67,10 @@ public class allFriendsTab extends Fragment {
             e.printStackTrace();
             request = new AsyncRequestToServer(getActivity(), handler);
             request.execute(APIConstants.GET_ALL_STOCKS);
-        }
+        }*/
 
+        request = new AsyncRequestToServer(getActivity(), handler);
+        request.execute(APIConstants.USER_GET_ALL_FRIENDS);
         return v;
 
     }
@@ -94,6 +95,25 @@ public class allFriendsTab extends Fragment {
 
     private ResponseInterface handler = new ResponseInterface() {
 
+        @Override
+        public void onUserGetAllFriends(JSONObject response) {
+           // super.onUserGetAllFriends(response);
+            try {
+                persons.clear();
+                // adapter.notifyItemRemoved(0);
+
+                JSONArray data = new JSONArray(response.get("data").toString());
+                int count = data.length() > countOfLoadingPersons ? countOfLoadingPersons : data.length();
+                for (int i = 0; i < count; i++){
+                    JSONObject person = new JSONObject(data.get(i).toString());
+                    persons.add(new Person(person));
+                    // adapter.notifyItemInserted(i);
+                }
+                adapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     };
 
     // Инициализация RecyclerView карточек

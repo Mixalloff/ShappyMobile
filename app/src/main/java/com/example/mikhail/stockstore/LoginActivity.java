@@ -14,7 +14,7 @@ import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithServer;
+import com.example.mikhail.stockstore.Classes.WorkWithToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +30,7 @@ public class LoginActivity extends ActionBarActivity {
         @Override
         public void onGetToken(JSONObject response) {
             try {
-                WorkWithServer.saveToken(response.get("data").toString());
+                WorkWithToken.saveToken(response.get("data").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -81,7 +81,7 @@ public class LoginActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        Toast.makeText(getApplicationContext(), WorkWithServer.getToken(this),
+        Toast.makeText(getApplicationContext(), WorkWithToken.getToken(this),
                 Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(LoginActivity.this, StocksActivity.class);
