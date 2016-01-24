@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 
 import org.json.JSONObject;
 
@@ -43,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         request.execute(APIConstants.GET_ALL_STOCKS);
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onError(JSONObject response) {
             Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();

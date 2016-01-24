@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Person;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StocksActivity;
@@ -76,9 +77,9 @@ public class PersonCardAdapter extends RecyclerView.Adapter<PersonCardAdapter.Pe
 
                 // holder.addStockBtn.setBackgroundResource(R.drawable.added);
 
-                ResponseInterface handler;
+                ServerResponseHandler handler;
 
-                handler = new ResponseInterface() {
+                handler = new ServerResponseHandler() {
                     @Override
                     public void onInternalServerError(JSONObject response) {
 

@@ -16,6 +16,7 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
 
@@ -132,7 +133,7 @@ public class allStocksTab extends Fragment {
   // String s = v.getResources().getString(R.string.big_text);
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllStocks(JSONObject response) {
             try {

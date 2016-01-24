@@ -15,6 +15,7 @@ import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Category;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
@@ -70,7 +71,7 @@ public class allCategoriesTab extends Fragment {
         categories.add(new Category("1","Продукты", products));
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllCategories(JSONObject response) {
             try {

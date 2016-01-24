@@ -15,6 +15,7 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
@@ -88,7 +89,7 @@ public class allCompaniesTab extends Fragment {
         companies.add(new Company("1","Adidas", adidas));
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllCompanies(JSONObject response) {
             try {

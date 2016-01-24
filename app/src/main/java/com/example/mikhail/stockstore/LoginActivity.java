@@ -20,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends ActionBarActivity {
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onError(JSONObject response) {
             Toast.makeText(getApplicationContext(), response.toString(),
@@ -73,9 +73,9 @@ public class LoginActivity extends ActionBarActivity {
         String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
 
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this);
+            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
             request.setParameters(APIRequestConstructor.authParameters(Login, Password));
-            ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_AUTH).get(), handler);
+            handler.CheckResponse(request.execute(APIConstants.USER_AUTH).get());
             //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
         } catch (Exception e) {
             e.printStackTrace();

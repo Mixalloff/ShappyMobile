@@ -15,6 +15,7 @@ import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 
@@ -46,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         request.execute(APIConstants.USER_GET_FEED);
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
 
         @Override
         public void onUserGetFeed(JSONObject response) {

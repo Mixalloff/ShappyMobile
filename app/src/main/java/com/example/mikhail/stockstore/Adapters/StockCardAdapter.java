@@ -18,6 +18,7 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
@@ -135,9 +136,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                // holder.addStockBtn.setBackgroundResource(R.drawable.added);
 
-                ResponseInterface handler;
+                ServerResponseHandler handler;
 
-                handler = new ResponseInterface() {
+                handler = new ServerResponseHandler() {
                     @Override
                     public void onInternalServerError(JSONObject response) {
 

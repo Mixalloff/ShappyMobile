@@ -20,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onRegister(JSONObject response) {
             try {
@@ -69,9 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
         String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
 
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this);
+            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
             request.setParameters(APIRequestConstructor.registerParameters(Name, Surname, Email, Phone, Password));
-            ServerResponseHandler.CheckResponse(request.execute(APIConstants.USER_REGISTER).get(), handler);
+            handler.CheckResponse(request.execute(APIConstants.USER_REGISTER).get());
             //ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
         } catch (Exception e) {
             e.printStackTrace();

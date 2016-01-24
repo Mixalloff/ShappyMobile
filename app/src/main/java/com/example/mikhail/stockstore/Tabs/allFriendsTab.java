@@ -16,6 +16,7 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Adapters.PersonCardAdapter;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Person;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
@@ -93,7 +94,7 @@ public class allFriendsTab extends Fragment {
         });
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
 
         @Override
         public void onUserGetAllFriends(JSONObject response) {

@@ -35,19 +35,19 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Активити в которой создан объект
     Activity activity;
     // Выполняющий действия обработчик ответа
-    private ResponseInterface handler;
+    private ServerResponseHandler handler = new ServerResponseHandler();
 
-    public void setHandler(ResponseInterface handler){ this.handler = handler; }
+    public void setHandler(ServerResponseHandler handler){ this.handler = handler; }
 
-    public AsyncRequestToServer(Activity activity){
+    /*public AsyncRequestToServer(Activity activity){
         this.activity = activity;
-    }
+    }*/
 
     public void setSwipeRefresh(SwipeRefreshLayout swipe){
         this.swipe = swipe;
     }
 
-    public AsyncRequestToServer(Activity activity, ResponseInterface handler){
+    public AsyncRequestToServer(Activity activity, ServerResponseHandler handler){
         this.activity = activity;
         this.handler = handler;
     }
@@ -232,7 +232,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         try {
             // Если есть обработчик, выполняем соответствующую функцию
             if (handler != null)
-                ServerResponseHandler.CheckResponse(result, handler);
+                handler.CheckResponse(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }

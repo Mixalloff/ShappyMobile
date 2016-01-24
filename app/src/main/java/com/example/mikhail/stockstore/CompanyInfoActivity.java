@@ -16,6 +16,7 @@ import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -88,7 +89,7 @@ public class CompanyInfoActivity extends AppCompatActivity {
         }
     }
 
-    private ResponseInterface handler = new ResponseInterface() {
+    private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetStocksByCompany(JSONObject response) {
             try {
