@@ -4,11 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.mikhail.stockstore.Tabs.FriendsNewsTab;
-import com.example.mikhail.stockstore.Tabs.allCategoriesTab;
-import com.example.mikhail.stockstore.Tabs.allCompaniesTab;
+import com.example.mikhail.stockstore.Tabs.friendsNewsTab;
 import com.example.mikhail.stockstore.Tabs.allFriendsTab;
-import com.example.mikhail.stockstore.Tabs.allStocksTab;
 
 /**
  * Created by mikhail on 09.12.15.
@@ -36,7 +33,7 @@ public class FriendsViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new allFriendsTab();
             }
             default: {
-                return new FriendsNewsTab();
+                return new friendsNewsTab();
             }
             // default: {return null;}
         }

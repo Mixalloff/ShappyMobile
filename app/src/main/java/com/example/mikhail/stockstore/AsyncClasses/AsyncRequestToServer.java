@@ -198,6 +198,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     case APIConstants.USER_DELETE_FRIEND: {
                         return userDeleteFriend();
                     }
+                    case APIConstants.USER_GET_FRIENDS_FEED: {
+                        return userGetFriendsFeed();
+                    }
 
                     default: {
                     }
@@ -395,8 +398,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         try {
             String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE +
-                    "?token=" + token +
-                    "&" + urlParams));
+                    "?token=" + token));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
