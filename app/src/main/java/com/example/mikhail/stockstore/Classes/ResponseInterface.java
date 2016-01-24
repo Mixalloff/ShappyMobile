@@ -35,6 +35,10 @@ public class ResponseInterface {
 
     }
 
+    public void onUserGetAllCategories(JSONObject response) {
+
+    }
+
     public void onUserAddStock(JSONObject response) {
 
     }

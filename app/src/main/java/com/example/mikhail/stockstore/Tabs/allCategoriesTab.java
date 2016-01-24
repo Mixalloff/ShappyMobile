@@ -12,9 +12,15 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.CategoryCardAdapter;
 import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
+import com.example.mikhail.stockstore.Entities.Category;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +30,7 @@ import java.util.List;
  */
 public class allCategoriesTab extends Fragment {
     CategoryCardAdapter adapter;
-    private List<Company> categories = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
     int countOfLoadingCategories = 10;
 
     @Override
@@ -32,7 +38,9 @@ public class allCategoriesTab extends Fragment {
         View v = inflater.inflate(R.layout.all_categories_tab, container, false);
 
         initGridView(container,v);
-        initializeTestData();
+        //initializeTestData();
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+        request.execute(APIConstants.GET_ALL_CATEGORIES);
 
         return v;
     }
@@ -49,7 +57,7 @@ public class allCategoriesTab extends Fragment {
     // Инициализация GridView
     public void initGridView(ViewGroup container,View v) {
         GridView gridview = (GridView) v.findViewById(R.id.category_gridView);
-        gridview.setAdapter(new CompanyCardAdapter(categories, this.getContext()));
+        gridview.setAdapter(new CategoryCardAdapter(categories, this.getContext()));
         gridview.setOnItemClickListener(gridviewOnItemClickListener);
     }
 
@@ -57,13 +65,29 @@ public class allCategoriesTab extends Fragment {
         String sport = "http://icon-icons.com/icons2/38/PNG/512/dumbbell_sport_5072.png";
         String shoes = "http://icon-icons.com/icons2/28/PNG/256/shoes_adidas_2734.png";
         String products = "http://icon-icons.com/icons2/37/PNG/128/bread_food_3206.png";
-        categories.add(new Company("1","Спорт", sport));
-        categories.add(new Company("1","Обувь", shoes));
-        categories.add(new Company("1","Продукты", products));
+        categories.add(new Category("1","Спорт", sport));
+        categories.add(new Category("1","Обувь", shoes));
+        categories.add(new Category("1","Продукты", products));
     }
 
     private ResponseInterface handler = new ResponseInterface() {
+        @Override
+        public void onUserGetAllCategories(JSONObject response) {
+            try {
+                // Обновляем список акций
+                categories.clear();
 
+                JSONArray data = new JSONArray(response.get("data").toString());
+                int count = data.length() > countOfLoadingCategories ? countOfLoadingCategories : data.length();
+                for (int i = 0; i < count; i++){
+                    JSONObject category = new JSONObject(data.get(i).toString());
+                    categories.add(new Category(category));
+                }
+                adapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     };
 }
 

@@ -26,7 +26,7 @@ public class APIConstants {
     public final static String USER_ADD_STOCK_ROUTE = "user/stocks/subscribe";
     public final static String USER_GET_FEED_ROUTE = "user/stocks/feed";
     public final static String GET_ALL_COMPANIES_ROUTE = "user/companies/all";
-    public final static String GET_ALL_CATEGORIES_ROUTE = "";
+    public final static String GET_ALL_CATEGORIES_ROUTE = "user/categories/all";
     public final static String USER_GET_STOCKS_BY_COMPANY_ROUTE = "user/stocks/filter/company";
     public final static String USER_GET_STOCKS_BY_WORDPATH_ROUTE = "user/stocks/filter/search";
     public final static String USER_GET_STOCKS_BY_FILTER_ROUTE = "user/stocks/filter";

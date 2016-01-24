@@ -98,8 +98,8 @@ public class allCompaniesTab extends Fragment {
                 JSONArray data = new JSONArray(response.get("data").toString());
                 int count = data.length() > countOfLoadingCompanies ? countOfLoadingCompanies : data.length();
                 for (int i = 0; i < count; i++){
-                    JSONObject stock = new JSONObject(data.get(i).toString());
-                    companies.add(new Company(stock));
+                    JSONObject company = new JSONObject(data.get(i).toString());
+                    companies.add(new Company(company));
                 }
                 adapter.notifyDataSetChanged();
             } catch (Exception e) {

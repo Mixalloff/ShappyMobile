@@ -18,6 +18,7 @@ public class ServerResponseHandler extends ResponseInterface{
             case "token": { handler.onGetToken(response); break;}
             case "stock": { handler.onUserGetAllStocks(response); break;}
             case "companies": { handler.onUserGetAllCompanies(response); break; }
+            case "categories": { handler.onUserGetAllCategories(response); break; }
             case "subscribeStock": { handler.onUserAddStock(response); break; }
             case "userstocks": { handler.onUserGetFeed(response); break; }
             case "stocks": { handler.onUserGetStocksByCompany(response); break;}

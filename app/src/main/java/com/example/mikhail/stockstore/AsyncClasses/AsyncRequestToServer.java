@@ -172,7 +172,11 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     case APIConstants.USER_REGISTER: {
                         return userRegister();
                     }
-                    //   case APIConstants.GET_ALL_CATEGORIES: { return getAllCategories; }
+
+                   case APIConstants.GET_ALL_CATEGORIES: {
+                       return userGetAllCategories();
+                   }
+
                     case APIConstants.USER_ADD_STOCK: {
                         return userAddStock();
                     }
@@ -284,11 +288,23 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         }
     }
 
-    // Получение всех категорий
+    // Получение всех компаний
     public JSONObject getAllCompanies(){
         try {
             String token = WorkWithToken.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?token=" + token));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Получение всех категорий
+    public JSONObject userGetAllCategories(){
+        try {
+            String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Entities.Category;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
 
@@ -18,10 +19,10 @@ import java.util.List;
  * Created by mikhail on 16.12.15.
  */
 public class CategoryCardAdapter extends BaseAdapter {
-    List<Company> categories;
+    List<Category> categories;
     Context mContext;
 
-    public CategoryCardAdapter(List<Company> categories, Context mContext){
+    public CategoryCardAdapter(List<Category> categories, Context mContext){
         this.categories = categories;
         this.mContext = mContext;
     }
@@ -49,7 +50,7 @@ public class CategoryCardAdapter extends BaseAdapter {
         if (convertView == null) {
             grid = new View(mContext);
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-            grid = inflater.inflate(R.layout.company_card, parent, false);
+            grid = inflater.inflate(R.layout.category_card, parent, false);
             if (categories != null) {
                 TextView categoryName = (TextView) grid.findViewById(R.id.category_name);
                 ImageView categoryLogo = (ImageView)grid.findViewById(R.id.category_logo);
