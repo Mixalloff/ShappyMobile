@@ -22,9 +22,23 @@ import org.json.JSONObject;
 public class LoginActivity extends ActionBarActivity {
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
-        public void onError(JSONObject response) {
-            Toast.makeText(getApplicationContext(), response.toString(),
-                    Toast.LENGTH_SHORT).show();
+        public void onError400(JSONObject response){
+            Toast.makeText(LoginActivity.this, "ошибка 400", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError403(JSONObject response){
+            Toast.makeText(LoginActivity.this, "ошибка 403", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError404(JSONObject response){
+            Toast.makeText(LoginActivity.this, "ошибка 404", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError500(JSONObject response){
+            Toast.makeText(LoginActivity.this, "ошибка 500", Toast.LENGTH_SHORT).show();
         }
 
         @Override

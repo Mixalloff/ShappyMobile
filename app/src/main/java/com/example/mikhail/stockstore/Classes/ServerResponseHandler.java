@@ -10,40 +10,110 @@ import org.json.JSONObject;
 public class ServerResponseHandler implements ResponseInterface{
 
     public void CheckResponse(JSONObject response) throws JSONException {
-        switch (response.get("type").toString()){
-            case "Internal server error": { this.onInternalServerError(response);break;}
-            case "Unknown request url": { this.onUnknownRequestUri(response);break;}
-            case "error": { this.onError(response);break;}
-            case "register": { this.onRegister(response); break;}
-            case "token": { this.onGetToken(response); break;}
-            case "stock": { this.onUserGetAllStocks(response); break;}
-            case "companies": { this.onUserGetAllCompanies(response); break; }
-            case "categories": { this.onUserGetAllCategories(response); break; }
-            case "subscribeStock": { this.onUserAddStock(response); break; }
-            case "userstocks": { this.onUserGetFeed(response); break; }
-            case "stocks": { this.onUserGetStocksByCompany(response); break;}
+        String responseType = "";
+        try {
+            responseType = response.get("type").toString();
+        }catch(Exception e) {
+           // this.DefaultFunc(response);
 
-            case "allfriends": { this.onUserGetAllFriends(response); break;}
-            case "addfriend": { this.onUserAddFriend(response); break;}
-            case "deletefriend": { this.onUserDeleteFriend(response); break;}
-            case "friendsfeed": { this.onUserGetFriendsFeed(response); break;}
-
-            default: {};
         }
+        switch (responseType) {
+            case "register": {
+                this.onRegister(response);
+                break;
+            }
+            case "token": {
+                this.onGetToken(response);
+                break;
+            }
+            case "stock": {
+                this.onUserGetAllStocks(response);
+                break;
+            }
+            case "companies": {
+                this.onUserGetAllCompanies(response);
+                break;
+            }
+            case "categories": {
+                this.onUserGetAllCategories(response);
+                break;
+            }
+            case "subscribeStock": {
+                this.onUserAddStock(response);
+                break;
+            }
+            case "userstocks": {
+                this.onUserGetFeed(response);
+                break;
+            }
+            case "stocks": {
+                this.onUserGetStocksByCompany(response);
+                break;
+            }
+
+            case "allfriends": {
+                this.onUserGetAllFriends(response);
+                break;
+            }
+            case "addfriend": {
+                this.onUserAddFriend(response);
+                break;
+            }
+            case "deletefriend": {
+                this.onUserDeleteFriend(response);
+                break;
+            }
+            case "friendsfeed": {
+                this.onUserGetFriendsFeed(response);
+                break;
+            }
+
+            case "400": {
+                this.onError400(response);
+                break;
+            }
+            case "403": {
+                this.onError403(response);
+                break;
+            }
+            case "404": {
+                this.onError404(response);
+                break;
+            }
+            case "500": {
+                this.onError500(response);
+                break;
+            }
+
+            default: {
+                this.DefaultFunc(response);
+            }
+        }
+
+    }
+
+    // Функция, выполняемая если ни один из известных тиов ответа не подошел
+    public void DefaultFunc(JSONObject response){
+
     }
 
     @Override
-    public void onInternalServerError(JSONObject response) {
+    public void onError400(JSONObject response) {
 
     }
 
     @Override
-    public void onUnknownRequestUri(JSONObject response) {
+    public void onError403(JSONObject response) {
 
     }
 
     @Override
-    public void onError(JSONObject response) {
+    public void onError404(JSONObject response) {
+
+    }
+
+    @Override
+    public void onError500(JSONObject response) {
 
     }
 

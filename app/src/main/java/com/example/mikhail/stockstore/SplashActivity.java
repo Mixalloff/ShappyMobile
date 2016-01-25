@@ -46,24 +46,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
-        public void onError(JSONObject response) {
-            Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            SplashActivity.this.startActivity(intent);
-            SplashActivity.this.finish();
-        }
-
-        @Override
-        public void onInternalServerError(JSONObject response) {
-            Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onUnknownRequestUri(JSONObject response) {
-            Toast.makeText(SplashActivity.this, "error", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
         public void onUserGetAllStocks(JSONObject response) {
             Toast.makeText(SplashActivity.this, "yes", Toast.LENGTH_SHORT).show();
             // Передача полученных акций в активити с акциями
@@ -71,6 +53,31 @@ public class SplashActivity extends AppCompatActivity {
             intent.putExtra("stocks", response.toString());
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
+        }
+
+        @Override
+        public void onError400(JSONObject response){
+            Toast.makeText(SplashActivity.this, "ошибка 400", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError403(JSONObject response){
+            Toast.makeText(SplashActivity.this, "ошибка 403", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError404(JSONObject response){
+            Toast.makeText(SplashActivity.this, "ошибка 404", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError500(JSONObject response){
+            Toast.makeText(SplashActivity.this, "ошибка 500", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void DefaultFunc(JSONObject response) {
+            Toast.makeText(SplashActivity.this, "ошибка при запросе", Toast.LENGTH_SHORT).show();
         }
 
     };

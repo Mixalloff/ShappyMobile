@@ -140,26 +140,23 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
                 handler = new ServerResponseHandler() {
                     @Override
-                    public void onInternalServerError(JSONObject response) {
-
+                    public void onError400(JSONObject response){
+                        Toast.makeText(v.getContext(), "ошибка 400", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onUnknownRequestUri(JSONObject response) {
-                        try {
-                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("data"), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onError403(JSONObject response){
+                        Toast.makeText(v.getContext(), "ошибка 403", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onError(JSONObject response) {
-                        try {
-                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("data"), Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onError404(JSONObject response){
+                        Toast.makeText(v.getContext(), "ошибка 404", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError500(JSONObject response){
+                        Toast.makeText(v.getContext(), "ошибка 500", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

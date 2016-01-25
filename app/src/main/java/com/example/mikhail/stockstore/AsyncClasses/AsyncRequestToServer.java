@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.example.mikhail.stockstore.Classes.APIConstants;
+import com.example.mikhail.stockstore.Classes.ErrorsWorker;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -18,9 +19,12 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -89,15 +93,17 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         BufferedReader rd;
         String line;
         String result = "";
+        int code = 0;
 
         try {
 
             //String encodedUrl = URLEncoder.encode(targetURL, "UTF-8");
-           // String utf8String= new String(targetURL.getBytes("Unicode"), "UTF-8");
+            // String utf8String= new String(targetURL.getBytes("Unicode"), "UTF-8");
 
             url = new URL(GlobalVariables.server + "/" + targetURL);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+            code = conn.getResponseCode();
 
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) {
@@ -106,15 +112,15 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             rd.close();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return ErrorsWorker.ErrorObject(code).toString();
         }
         return result;
-
     }
 
-    // Отправляет POST запрос
+        // Отправляет POST запрос
     private String sendPostRequest(String targetURL) {
         HttpURLConnection connection = null;
+        int code = 0;
 
         try{
             URL url = new URL(GlobalVariables.server + "/" + targetURL);
@@ -126,6 +132,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             connection.setRequestProperty("Content-Language", "en-US");
             connection.setUseCaches(false);
             connection.setDoOutput(true);
+            code = connection.getResponseCode();
 
             // Request
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
@@ -142,11 +149,10 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             }
             rd.close();
             return response.toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
-        }
-        finally {
+            return ErrorsWorker.ErrorObject(code).toString();
+        } finally {
             if(connection != null){
                 connection.disconnect();
             }

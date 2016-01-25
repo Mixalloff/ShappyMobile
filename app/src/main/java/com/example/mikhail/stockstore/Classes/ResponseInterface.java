@@ -7,37 +7,36 @@ import org.json.JSONObject;
  */
 // Интерфейс для обработки ответа сервера. Реализует все возможные ответы
 public interface ResponseInterface {
-    public void onInternalServerError(JSONObject response);
+    void onError400(JSONObject response);
+    void onError403(JSONObject response);
+    void onError404(JSONObject response);
+    void onError500(JSONObject response);
 
-    public void onUnknownRequestUri(JSONObject response);
+    void onRegister(JSONObject response);
 
-    public void onError(JSONObject response);
+    void onGetToken(JSONObject response);
 
-    public void onRegister(JSONObject response);
+    void onUserGetAllStocks(JSONObject response);
 
-    public void onGetToken(JSONObject response);
+    void onUserGetAllCompanies(JSONObject response);
 
-    public void onUserGetAllStocks(JSONObject response);
+    void onUserGetAllCategories(JSONObject response);
 
-    public void onUserGetAllCompanies(JSONObject response);
+    void onUserAddStock(JSONObject response);
 
-    public void onUserGetAllCategories(JSONObject response);
+    void onUserGetFeed(JSONObject response);
 
-    public void onUserAddStock(JSONObject response);
+    void onUserGetStocksByCompany(JSONObject response);
 
-    public void onUserGetFeed(JSONObject response);
+    void onUserGetStocksByWord(JSONObject response);
 
-    public void onUserGetStocksByCompany(JSONObject response);
+    void onUserGetStocksByFilter(JSONObject response);
 
-    public void onUserGetStocksByWord(JSONObject response);
+    void onUserGetAllFriends(JSONObject response);
 
-    public void onUserGetStocksByFilter(JSONObject response);
+    void onUserAddFriend(JSONObject response);
 
-    public void onUserGetAllFriends(JSONObject response);
+    void onUserDeleteFriend(JSONObject response);
 
-    public void onUserAddFriend(JSONObject response);
-
-    public void onUserDeleteFriend(JSONObject response);
-
-    public void onUserGetFriendsFeed(JSONObject response);
+    void onUserGetFriendsFeed(JSONObject response);
 }
