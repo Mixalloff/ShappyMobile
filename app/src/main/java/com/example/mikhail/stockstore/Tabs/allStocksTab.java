@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
@@ -33,7 +34,7 @@ public class allStocksTab extends Fragment {
     StockCardAdapter adapter;
     private List<Stock> stocks = new ArrayList<>();
     RecyclerView rv;
-    int countOfLoadingStocks = 5;
+    int countOfLoadingStocks = 15;
     AsyncRequestToServer request;
 
     @Override
@@ -152,6 +153,26 @@ public class allStocksTab extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        @Override
+        public void onError400(JSONObject response) {
+            Toast.makeText(getContext(), "400", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError403(JSONObject response) {
+            Toast.makeText(getContext(), "403", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError404(JSONObject response) {
+            Toast.makeText(getContext(), "404", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError500(JSONObject response) {
+            Toast.makeText(getContext(), "500", Toast.LENGTH_SHORT).show();
         }
     };
 

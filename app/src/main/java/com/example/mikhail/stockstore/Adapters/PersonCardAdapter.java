@@ -73,7 +73,7 @@ public class PersonCardAdapter extends RecyclerView.Adapter<PersonCardAdapter.Pe
             public void onClick(final View v) {
                 //Toast.makeText(v.getContext().getApplicationContext(), stocks.get(position).id, Toast.LENGTH_SHORT).show();
                 Activity host = (Activity) v.getContext();
-                // APIRequestConstructor.userAddStock(host, stocks.get(position).id);
+                // APIRequestConstructor.userSubscribeStock(host, stocks.get(position).id);
 
                 // holder.addStockBtn.setBackgroundResource(R.drawable.added);
 
@@ -100,15 +100,6 @@ public class PersonCardAdapter extends RecyclerView.Adapter<PersonCardAdapter.Pe
                         Toast.makeText(v.getContext(), "ошибка 500", Toast.LENGTH_SHORT).show();
                     }
 
-                   /* @Override
-                    public void onUserAddStock(JSONObject response) {
-                        try {
-                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("name") + " добавлена на стену", Toast.LENGTH_SHORT).show();
-                            changeButtonLabel(holder, stocks.get(position));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }*/
 
                 };
 
@@ -116,7 +107,7 @@ public class PersonCardAdapter extends RecyclerView.Adapter<PersonCardAdapter.Pe
                     Toast.makeText(v.getContext().getApplicationContext(), "Clicked!", Toast.LENGTH_SHORT).show();
                     /*AsyncRequestToServer request = new AsyncRequestToServer(host, handler);
                     request.setParameters(APIRequestConstructor.userAddStockParameters(host, persons.get(position).id));
-                    request.execute(APIConstants.USER_ADD_STOCK);*/
+                    request.execute(APIConstants.USER_SUBSCRIBE_STOCK);*/
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -39,7 +39,11 @@ public class ServerResponseHandler implements ResponseInterface{
                 break;
             }
             case "subscribeStock": {
-                this.onUserAddStock(response);
+                this.onUserSubscribeStock(response);
+                break;
+            }
+            case "unsubscribestock": {
+                this.onUserUnsubscribeStock(response);
                 break;
             }
             case "userstocks": {
@@ -143,7 +147,12 @@ public class ServerResponseHandler implements ResponseInterface{
     }
 
     @Override
-    public void onUserAddStock(JSONObject response) {
+    public void onUserSubscribeStock(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserUnsubscribeStock(JSONObject response) {
 
     }
 

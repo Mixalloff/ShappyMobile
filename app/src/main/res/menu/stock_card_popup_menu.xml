@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item
+        android:id="@+id/mark_as_read"
+        android:orderInCategory="10"
+        android:title="1 пункт"/>
+    <item
+        android:id="@+id/share_link"
+        android:orderInCategory="50"
+        android:title="2 пункт"/>
+    <item
+        android:id="@+id/show_comments"
+        android:orderInCategory="100"
+        android:title="3 пункт"/>-->
+</menu>

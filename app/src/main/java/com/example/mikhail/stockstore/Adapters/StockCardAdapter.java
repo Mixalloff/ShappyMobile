@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -17,7 +20,6 @@ import android.widget.Toast;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
-import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
 import com.example.mikhail.stockstore.Entities.Stock;
@@ -25,7 +27,6 @@ import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.StockInfoActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -58,8 +59,8 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
     @Override
     public StocksViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_card, parent, false);
-        StocksViewHolder pvh = new StocksViewHolder(v);
-        return pvh;
+       // StocksViewHolder pvh = new StocksViewHolder(v);
+        return new StocksViewHolder(v);
     }
 
     @Override
@@ -79,12 +80,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
 
        // CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
         ImageLoader.getInstance().displayImage(stocks.get(position).company.photo, holder.companyLogo);
-
-        //StocksViewHolder.isAdded = stocks.get(position).isAdded;
-        if (stocks.get(position).isAdded){
-            holder.addStockBtn.setBackgroundResource(R.drawable.added);
-           // holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
-        }
 
         changeColor(holder, stocks.get(position));
         // если расоложение recyclerView горизонтальное
@@ -127,102 +122,68 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             }
         });
 
-        holder.addStockBtn.setOnClickListener(new View.OnClickListener() {
+        holder.cardMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 //Toast.makeText(v.getContext().getApplicationContext(), stocks.get(position).id, Toast.LENGTH_SHORT).show();
                 Activity host = (Activity) v.getContext();
-                // APIRequestConstructor.userAddStock(host, stocks.get(position).id);
-
-               // holder.addStockBtn.setBackgroundResource(R.drawable.added);
-
-                ServerResponseHandler handler;
-
-                handler = new ServerResponseHandler() {
-                    @Override
-                    public void onError400(JSONObject response){
-                        Toast.makeText(v.getContext(), "ошибка 400", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError403(JSONObject response){
-                        Toast.makeText(v.getContext(), "ошибка 403", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError404(JSONObject response){
-                        Toast.makeText(v.getContext(), "ошибка 404", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError500(JSONObject response){
-                        Toast.makeText(v.getContext(), "ошибка 500", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onRegister(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onGetToken(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserGetAllStocks(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserGetAllCompanies(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserAddStock(JSONObject response) {
-                        try {
-                            Toast.makeText(v.getContext().getApplicationContext(), response.getString("name") + " добавлена на стену", Toast.LENGTH_SHORT).show();
-                            changeButtonLabel(holder, stocks.get(position));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onUserGetFeed(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserGetStocksByCompany(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserGetStocksByWord(JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onUserGetStocksByFilter(JSONObject response) {
-
-                    }
-                };
-
                 try {
-
-                    AsyncRequestToServer request = new AsyncRequestToServer(host, handler);
+                   /* AsyncRequestToServer request = new AsyncRequestToServer(host, handler);
                     request.setParameters(APIRequestConstructor.userAddStockParameters(host, stocks.get(position).id));
-                    request.execute(APIConstants.USER_ADD_STOCK);
+                    request.execute(APIConstants.USER_SUBSCRIBE_STOCK);*/
+                    AddMenuWithItems(holder, position);
 
-                    //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAddStock(host, stocks.get(position).id), handler);
+                    //ServerResponseHandler.CheckResponse(APIRequestConstructor.userSubscribeStock(host, stocks.get(position).id), handler);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             }
         });
+
+        handler = new ServerResponseHandler() {
+            @Override
+            public void onError400(JSONObject response){
+                Toast.makeText(holder.itemView.getContext(), "ошибка 400", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError403(JSONObject response){
+                Toast.makeText(holder.itemView.getContext(), "ошибка 403", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError404(JSONObject response){
+                Toast.makeText(holder.itemView.getContext(), "ошибка 404", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError500(JSONObject response){
+                Toast.makeText(holder.itemView.getContext(), "ошибка 500", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onUserSubscribeStock(JSONObject response) {
+                try {
+                    Toast.makeText(holder.itemView.getContext(), "добавлена на стену", Toast.LENGTH_SHORT).show();
+                    //changeButtonLabel(holder, stocks.get(position));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onUserUnsubscribeStock(JSONObject response) {
+                try {
+
+                    Toast.makeText(holder.itemView.getContext(), "удалена со стены", Toast.LENGTH_SHORT).show();
+                    //changeButtonLabel(holder, stocks.get(position));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        };
 
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
@@ -237,6 +198,46 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         });
     }
 
+    ServerResponseHandler handler;
+
+    // Добавление меню и пунктов меню
+    private void AddMenuWithItems(final StocksViewHolder holder, final int position){
+        final View v = holder.cardMenu;
+        PopupMenu popup = new PopupMenu(v.getContext(), v);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.stock_card_popup_menu, popup.getMenu());
+        if (stocks.get(position).isAdded){
+            popup.getMenu().add(0, 1, 1,"Отписаться");
+        }
+        else{
+            popup.getMenu().add(0, 1, 1,"Подписаться");
+        }
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case 1: {
+                        //действие
+                        AsyncRequestToServer request = new AsyncRequestToServer((Activity)v.getContext(), handler);
+                        request.setParameters(APIRequestConstructor.userAddStockParameters((Activity) v.getContext(), stocks.get(position).id));
+                        if (stocks.get(position).isAdded) {
+                            Toast.makeText(v.getContext(),"Удаляется", Toast.LENGTH_SHORT).show();
+                            request.execute(APIConstants.USER_UNSUBSCRIBE_STOCK);
+                        } else {
+                            Toast.makeText(v.getContext(),"Добавляется", Toast.LENGTH_SHORT).show();
+                            request.execute(APIConstants.USER_SUBSCRIBE_STOCK);
+                        }
+                        stocks.get(position).isAdded = !stocks.get(position).isAdded;
+                        changeColor(holder, stocks.get(position));
+                        return true;
+                    }
+                    default:
+                        return false;
+                }
+            }
+        });
+        popup.show();
+    }
+
     private void changeColor(StocksViewHolder holder, Stock stock){
         if (stock.isAdded){
           holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
@@ -246,14 +247,14 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         }
     }
 
-    private void changeButtonLabel(StocksViewHolder holder, Stock stock){
+   /* private void changeButtonLabel(StocksViewHolder holder, Stock stock){
         if (stock.isAdded){
-            holder.addStockBtn.setBackgroundResource(R.drawable.added);
+            holder.cardMenu.setBackgroundResource(R.drawable.added);
         }
         else{
-            holder.addStockBtn.setBackgroundResource(R.drawable.add_btn);
+            holder.cardMenu.setBackgroundResource(R.drawable.add_btn);
         }
-    }
+    }*/
 
     @Override
     public int getItemCount() {
@@ -272,7 +273,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         public boolean isAdded;
         public RelativeLayout cardLayout;
 
-        public ImageButton addStockBtn;
+        public ImageButton cardMenu;
 
         StocksViewHolder(final View itemView) {
             super(itemView);
@@ -286,7 +287,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             companyLogo = (ImageView)itemView.findViewById(R.id.company_logo);
             stockDate = (TextView)itemView.findViewById(R.id.stock_date);
 
-            addStockBtn = (ImageButton)itemView.findViewById(R.id.add_stock_btn);
+            cardMenu = (ImageButton)itemView.findViewById(R.id.card_menu);
 
             cardLayout = (RelativeLayout)itemView.findViewById(R.id.card_layout);
 

@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ErrorsWorker;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
-import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Classes.WorkWithToken;
 
@@ -23,8 +22,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 /**
@@ -125,14 +122,15 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         try{
             URL url = new URL(GlobalVariables.server + "/" + targetURL);
 
+
             connection = (HttpURLConnection)url.openConnection();
+           // code = connection.getResponseCode();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", Integer.toString(urlParams.getBytes().length));
             connection.setRequestProperty("Content-Language", "en-US");
             connection.setUseCaches(false);
             connection.setDoOutput(true);
-            code = connection.getResponseCode();
 
             // Request
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
@@ -151,7 +149,12 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return ErrorsWorker.ErrorObject(code).toString();
+            try {
+                return ErrorsWorker.ErrorObject(connection.getResponseCode()).toString();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                return ErrorsWorker.ErrorObject(code).toString();
+            }
         } finally {
             if(connection != null){
                 connection.disconnect();
@@ -183,9 +186,13 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                        return userGetAllCategories();
                    }
 
-                    case APIConstants.USER_ADD_STOCK: {
-                        return userAddStock();
+                    case APIConstants.USER_SUBSCRIBE_STOCK: {
+                        return userSubscribeStock();
                     }
+                    case APIConstants.USER_UNSUBSCRIBE_STOCK: {
+                        return userUnsubscribeStock();
+                    }
+
                     case APIConstants.USER_GET_FEED: {
                         return userGetFeed();
                     }
@@ -319,11 +326,22 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     }
 
     // Подписка на акцию с id = stockId
-    public JSONObject userAddStock(){
+    public JSONObject userSubscribeStock(){
 
         try {
             //String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_STOCK_ROUTE));
+            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK_ROUTE));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Отписка от акции
+    public JSONObject userUnsubscribeStock(){
+        try {
+            //String token = WorkWithToken.getToken(activity);
+            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK_ROUTE));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

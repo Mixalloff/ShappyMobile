@@ -94,7 +94,7 @@ public class APIRequestConstructor {
     }
 
     // Подписка на акцию с id = stockId
-    public static JSONObject userAddStock(Activity activity, String stockId){
+    public static JSONObject userSubscribeStock(Activity activity, String stockId){
         String token = WorkWithServer.getToken(activity);
         AsyncRequestToServer request = new AsyncRequestToServer();
         request.setParameters(POST,

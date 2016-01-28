@@ -22,7 +22,9 @@ public interface ResponseInterface {
 
     void onUserGetAllCategories(JSONObject response);
 
-    void onUserAddStock(JSONObject response);
+    void onUserSubscribeStock(JSONObject response);
+
+    void onUserUnsubscribeStock(JSONObject response);
 
     void onUserGetFeed(JSONObject response);
 
