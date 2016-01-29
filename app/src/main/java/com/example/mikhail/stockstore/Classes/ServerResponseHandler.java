@@ -22,8 +22,8 @@ public class ServerResponseHandler implements ResponseInterface{
                 this.onRegister(response);
                 break;
             }
-            case "token": {
-                this.onGetToken(response);
+            case "userinfo": {
+                this.onAuthorize(response);
                 break;
             }
             case "stock": {
@@ -127,7 +127,7 @@ public class ServerResponseHandler implements ResponseInterface{
     }
 
     @Override
-    public void onGetToken(JSONObject response) {
+    public void onAuthorize(JSONObject response) {
 
     }
 

@@ -58,29 +58,41 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onError400(JSONObject response){
             Toast.makeText(SplashActivity.this, "ошибка 400", Toast.LENGTH_SHORT).show();
+            OpenLoginActivity();
         }
 
         @Override
         public void onError403(JSONObject response){
             Toast.makeText(SplashActivity.this, "ошибка 403", Toast.LENGTH_SHORT).show();
+            OpenLoginActivity();
         }
 
         @Override
         public void onError404(JSONObject response){
             Toast.makeText(SplashActivity.this, "ошибка 404", Toast.LENGTH_SHORT).show();
+            OpenLoginActivity();
         }
 
         @Override
         public void onError500(JSONObject response){
             Toast.makeText(SplashActivity.this, "ошибка 500", Toast.LENGTH_SHORT).show();
+            OpenLoginActivity();
         }
 
         @Override
         public void DefaultFunc(JSONObject response) {
             Toast.makeText(SplashActivity.this, "ошибка при запросе", Toast.LENGTH_SHORT).show();
+            OpenLoginActivity();
         }
 
     };
+
+    // Открытие активити авторизации
+    private void OpenLoginActivity(){
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        SplashActivity.this.startActivity(intent);
+        SplashActivity.this.finish();
+    }
 
         private void initFonts(){
         String custom_font = "fonts/berlin-sans-fb-demi-bold.ttf";

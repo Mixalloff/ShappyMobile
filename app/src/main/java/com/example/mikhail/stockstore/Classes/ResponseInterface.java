@@ -14,7 +14,7 @@ public interface ResponseInterface {
 
     void onRegister(JSONObject response);
 
-    void onGetToken(JSONObject response);
+    void onAuthorize(JSONObject response);
 
     void onUserGetAllStocks(JSONObject response);
 

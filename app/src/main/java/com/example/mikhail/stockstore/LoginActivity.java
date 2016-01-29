@@ -42,9 +42,15 @@ public class LoginActivity extends ActionBarActivity {
         }
 
         @Override
-        public void onGetToken(JSONObject response) {
+        public void onAuthorize(JSONObject response) {
             try {
-                WorkWithToken.saveToken(response.get("data").toString());
+                JSONObject data = new JSONObject(response.get("data").toString());
+                WorkWithToken.saveToken(data.get("token").toString());
+
+                Intent intent = new Intent(LoginActivity.this, StocksActivity.class);
+                startActivity(intent);
+                LoginActivity.this.finish();
+                //WorkWithToken.saveToken(response.get("data").toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -97,10 +103,6 @@ public class LoginActivity extends ActionBarActivity {
 
         Toast.makeText(getApplicationContext(), WorkWithToken.getToken(this),
                 Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(LoginActivity.this, StocksActivity.class);
-        startActivity(intent);
-        LoginActivity.this.finish();
     }
 
     public void OnRegisterBtnClick(View view) {
