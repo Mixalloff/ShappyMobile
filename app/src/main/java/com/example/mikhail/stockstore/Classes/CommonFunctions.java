@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.FriendsViewPagerAdapter;
 import com.example.mikhail.stockstore.Adapters.StocksViewPagerAdapter;
@@ -21,11 +23,20 @@ import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.LoginActivity;
 import com.example.mikhail.stockstore.StocksActivity;
 import com.example.mikhail.stockstore.SubscribesActivity;
-import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.holder.StringHolder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -72,62 +83,140 @@ public class CommonFunctions {
        // activity.setSupportActionBar(toolbar);
 
       //  toolbar.setBackgroundColor(0xFF72BB53);//"#72bb53"
+        final String PROFILE = "Профиль";
+        final String FRIENDS = "Друзья";
+        final String STOCKS = "Акции";
+        final String SUBSCRIPTIONS = "Подписки";
+        final String SETTINGS = "Настройки";
+        final String EXIT = "Выход";
+
         try {
             activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            Drawer drawer = new Drawer();
-            drawer
+
+            // Добавление ФИО пользователя в navigationView
+            // TextView userFio = (TextView) activity.findViewById(R.id.person_fio);
+            //userFio.setText(WorkWithResources.getCurrentUserFIO());
+
+            // Create the AccountHeader
+            AccountHeader headerResult = new AccountHeaderBuilder()
+                    .withActivity(activity)
+                    .withHeaderBackground(R.drawable.header)
+                    .addProfiles(
+                            new ProfileDrawerItem().withName(WorkWithResources.getCurrentUserFIO()).withEmail("mikhail.mikhalev37@gmail.com").withIcon(activity.getResources().getDrawable(R.drawable.default_photo))
+                    )
+                    .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                        @Override
+                        public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                            return false;
+                        }
+                    })
+                    .build();
+
+            Drawer drawer = new DrawerBuilder()
                     .withActivity(activity)
                     .withToolbar(toolbar)
+                    .withAccountHeader(headerResult)
                     .withActionBarDrawerToggle(true)
                     .withHeader(R.layout.drawer_header)
                     .addDrawerItems(
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_profile).withIcon(FontAwesome.Icon.faw_user).withName(R.string.drawer_item_profile),
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(1).withName(R.string.drawer_item_friends),
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(2).withName(R.string.drawer_item_stocks),
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3).withName(R.string.drawer_item_subscriptions),
+                            new PrimaryDrawerItem().withName(PROFILE).withIcon(FontAwesome.Icon.faw_user).withIdentifier(R.string.drawer_item_profile),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_friends).withIcon(FontAwesome.Icon.faw_users).withBadge("3").withIdentifier(R.string.drawer_item_friends),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_stocks).withIcon(FontAwesome.Icon.faw_rss).withBadge("16").withIdentifier(R.string.drawer_item_stocks),
+                            // new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(FontAwesome.Icon.faw_eye).withBadge("6").withIdentifier(3).withName(R.string.drawer_item_subscriptions),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_subscriptions).withIcon(GoogleMaterial.Icon.gmd_loyalty).withBadge("6").withIdentifier(R.string.drawer_item_subscriptions),
 
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withName(R.string.drawer_item_settings),
-                            new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withName(R.string.drawer_item_exit)
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(R.string.drawer_item_settings),
+                            new PrimaryDrawerItem().withName(R.string.drawer_item_exit).withIcon(FontAwesome.Icon.faw_sign_out).withIdentifier(R.string.drawer_item_exit)
 
                     )
+                    .withOnDrawerItemClickListener(
+                            new Drawer.OnDrawerItemClickListener() {
+                                @Override
+                                public boolean onItemClick(View view, int i, IDrawerItem iDrawerItem) {
+                                    // Toast.makeText(activity.getApplicationContext(), i+"", Toast.LENGTH_SHORT).show();
+                                    if (iDrawerItem instanceof Nameable) {
+                                        switch (iDrawerItem.getIdentifier()) {
+                                            case R.string.drawer_item_profile: {
+                                                activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
+                                                break;
+                                            }
+                                            case R.string.drawer_item_friends: {
+                                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                                activity.startActivity(new Intent(activity.getBaseContext(), FriendsActivity.class));
+                                                break;
+                                            }
+                                            case R.string.drawer_item_stocks: {
+                                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                                activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
+                                                break;
+                                            }
+                                            case R.string.drawer_item_subscriptions: {
+                                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                                activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
+                                                break;
+                                            }
+                                            case R.string.drawer_item_settings: {
+                                                //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                                break;
+                                            }
+                                            case R.string.drawer_item_exit: {
+                                                WorkWithResources.deleteToken(activity);
+                                                activity.startActivity(new Intent(activity.getBaseContext(), LoginActivity.class));
+                                            }
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
+                            // return true;
+                            //  }
+                            // return false;
+                    )
                     .build();
-            drawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+
+            /*drawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l, IDrawerItem iDrawerItem) {
+                public boolean onItemClick(View view, int i, IDrawerItem iDrawerItem) {
                     if (iDrawerItem instanceof Nameable) {
-                        switch (((Nameable) iDrawerItem).getNameRes()) {
-                            case R.string.drawer_item_profile: {
+                        switch (((Nameable) iDrawerItem).getName().toString()) {
+                            case PROFILE: {
                                 activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
                                 break;
                             }
-                            case R.string.drawer_item_stocks: {
+                            case STOCKS: {
                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                 activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
                                 break;
                             }
-                            case R.string.drawer_item_subscriptions: {
+                            case SUBSCRIPTIONS: {
                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                 activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
                                 break;
                             }
-                            case R.string.drawer_item_settings: {
+                            case SETTINGS: {
                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                 break;
                             }
-                            case R.string.drawer_item_friends: {
+                            case FRIENDS: {
                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                 activity.startActivity(new Intent(activity.getBaseContext(), FriendsActivity.class));
                                 break;
                             }
-                            case R.string.drawer_item_exit: {
-                                WorkWithToken.deleteToken();
+                            case EXIT: {
+                                WorkWithResources.deleteToken(activity);
                                 activity.startActivity(new Intent(activity.getBaseContext(), LoginActivity.class));
-
                             }
                         }
+                        return true;
                     }
+                    return false;
                 }
-            });
+
+                // Добавление ФИО пользователя в navigationView
+                // TextView userFio = (TextView) activity.findViewById(R.id.person_fio);
+                //userFio.setText(WorkWithResources.getCurrentUserFIO());
+
+            });*/
         }catch(Exception e){
             e.printStackTrace();
         }

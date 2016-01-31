@@ -18,6 +18,7 @@ import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -69,13 +70,18 @@ public class ProfileActivity extends AppCompatActivity {
     };
 
     public void setLogos(){
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont-4.3.0.ttf");
+        try {
+           /* Typeface font = Typeface.createFromAsset(getAssets(), "fonts/fontawesome-webfont-4.3.0.ttf");
 
-        TextView email = (TextView) findViewById(R.id.email_logo);
-        email.setTypeface(font);
+            TextView email = (TextView) findViewById(R.id.email_logo);
+            email.setTypeface(font);
 
-        TextView phone = (TextView) findViewById(R.id.phone_logo);
-        phone.setTypeface(font);
+
+            TextView phone = (TextView) findViewById(R.id.phone_logo);
+            phone.setTypeface(font);*/
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     // Инициализация RecyclerView карточек

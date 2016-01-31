@@ -12,9 +12,8 @@ import android.widget.Toast;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
-import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithToken;
+import com.example.mikhail.stockstore.Classes.WorkWithResources;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +44,8 @@ public class LoginActivity extends ActionBarActivity {
         public void onAuthorize(JSONObject response) {
             try {
                 JSONObject data = new JSONObject(response.get("data").toString());
-                WorkWithToken.saveToken(data.get("token").toString());
+                WorkWithResources.saveToken(data.get("token").toString());
+                WorkWithResources.saveUserInfo(data.get("surname").toString(), data.get("name").toString());
 
                 Intent intent = new Intent(LoginActivity.this, StocksActivity.class);
                 startActivity(intent);
@@ -101,7 +101,7 @@ public class LoginActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        Toast.makeText(getApplicationContext(), WorkWithToken.getToken(this),
+        Toast.makeText(getApplicationContext(), WorkWithResources.getToken(this),
                 Toast.LENGTH_SHORT).show();
     }
 

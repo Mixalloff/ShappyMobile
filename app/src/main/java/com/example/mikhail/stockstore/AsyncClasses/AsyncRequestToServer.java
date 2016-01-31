@@ -11,7 +11,7 @@ import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.ErrorsWorker;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithToken;
+import com.example.mikhail.stockstore.Classes.WorkWithResources;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -287,7 +287,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject getAllStocks(){
         String result;
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             result = sendGetRequest(APIConstants.GET_ALL_STOCKS_ROUTE + "?token=" + token);
 
         } catch (Exception e) {
@@ -304,7 +304,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Получение всех компаний
     public JSONObject getAllCompanies(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
@@ -316,7 +316,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Получение всех категорий
     public JSONObject userGetAllCategories(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
@@ -351,7 +351,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Получение всех акций на стене пользователя
     public JSONObject userGetFeed(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?token=" + token));
 
         } catch (Exception e) {
@@ -363,7 +363,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userGetStocksByCompany(){
         try {
           //  String companyId = urlParams;
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -377,7 +377,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     public JSONObject userGetStocksByWord(){
         try {
            // String word = URLEncoder.encode(urlParams, "UTF-8");
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -390,7 +390,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     public JSONObject userGetStocksByFilter(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -403,7 +403,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     public JSONObject userGetAllFriends(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS_ROUTE +
                     "?token=" + token +
                     "&"+urlParams));
@@ -436,7 +436,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     public JSONObject userGetFriendsFeed(){
         try {
-            String token = WorkWithToken.getToken(activity);
+            String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE +
                     "?token=" + token));
         } catch (Exception e) {

@@ -12,9 +12,8 @@ import android.widget.Toast;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
-import com.example.mikhail.stockstore.Classes.ResponseInterface;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Classes.WorkWithToken;
+import com.example.mikhail.stockstore.Classes.WorkWithResources;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         public void onRegister(JSONObject response) {
             try {
-                WorkWithToken.saveToken(response.get("data").toString());
+                WorkWithResources.saveToken(response.get("data").toString());
                 Toast.makeText(getApplicationContext(), "Токен: " + response.get("data").toString(), Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();

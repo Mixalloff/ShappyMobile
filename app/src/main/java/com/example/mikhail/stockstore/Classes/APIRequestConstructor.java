@@ -26,7 +26,7 @@ public class APIRequestConstructor {
     }
 
     public static String userAddStockParameters(Activity activity, String stockId){
-        String token = WorkWithToken.getToken(activity);
+        String token = WorkWithResources.getToken(activity);
         return "token=" + token +
                "&id="+stockId;
     }

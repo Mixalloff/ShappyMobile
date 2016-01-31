@@ -205,7 +205,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         final View v = holder.cardMenu;
         PopupMenu popup = new PopupMenu(v.getContext(), v);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.stock_card_popup_menu, popup.getMenu());
+        inflater.inflate(R.menu.empty_popup_menu, popup.getMenu());
         if (stocks.get(position).isAdded){
             popup.getMenu().add(0, 1, 1,"Отписаться");
         }

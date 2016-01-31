@@ -95,11 +95,15 @@ public class SplashActivity extends AppCompatActivity {
     }
 
         private void initFonts(){
-        String custom_font = "fonts/berlin-sans-fb-demi-bold.ttf";
-        Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
+        try {
+            String custom_font = "fonts/berlin-sans-fb-demi-bold.ttf";
+            Typeface CF = Typeface.createFromAsset(getAssets(), custom_font);
 
-        //((TextView) findViewById(R.id.projNameTextView)).setTypeface(CF);
-        ((TextView) findViewById(R.id.sloganTextView)).setTypeface(CF);
+            //((TextView) findViewById(R.id.projNameTextView)).setTypeface(CF);
+            ((TextView) findViewById(R.id.sloganTextView)).setTypeface(CF);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
