@@ -43,8 +43,8 @@
                 android:layout_below="@+id/company_name"
                 android:layout_toRightOf="@+id/company_logo"
                 style="@style/darkText"
-                android:layout_toLeftOf="@+id/add_stock_btn"
-                android:layout_toStartOf="@+id/add_stock_btn" />
+                android:layout_toLeftOf="@+id/card_menu"
+                android:layout_toStartOf="@+id/card_menu" />
 
             <ImageView
                 android:layout_width="fill_parent"

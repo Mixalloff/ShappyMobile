@@ -11,7 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.APIConstants;
 import com.example.mikhail.stockstore.Adapters.PersonCardAdapter;
@@ -32,9 +34,11 @@ import java.util.List;
  */
 public class allFriendsTab extends Fragment {
 
-    List<Person> persons= new ArrayList<>();
-    PersonCardAdapter adapter;
-    RecyclerView rv;
+    ArrayList<Person> persons= new ArrayList<>();
+    //PersonCardAdapter adapter;
+    //RecyclerView rv;
+    HorizontalListAdapter adapter;
+    ListView lv;
     int countOfLoadingPersons = 5;
     AsyncRequestToServer request;
 
@@ -51,7 +55,8 @@ public class allFriendsTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_friends_tab, container, false);
 
-        rv = (RecyclerView) v.findViewById(R.id.cards);
+        //rv = (RecyclerView) v.findViewById(R.id.cards);
+        lv = (ListView) v.findViewById(R.id.friends_list);
         initRecyclerView(container);
         initSwipe(v);
 
@@ -123,9 +128,14 @@ public class allFriendsTab extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
-        rv.setLayoutManager(llm);
-        adapter = new PersonCardAdapter(persons);
-        rv.setAdapter(adapter);
+        //rv.setLayoutManager(llm);
+        /*adapter = new PersonCardAdapter(persons);
+        rv.setAdapter(adapter);*/
+
+        adapter = new HorizontalListAdapter(this.getContext(), persons);
+        // настраиваем список
+       // ListView friendsList = (ListView) this.getActivity().findViewById(R.id.friends_list);
+        lv.setAdapter(adapter);
     }
 
     public void initializeTestData(){
