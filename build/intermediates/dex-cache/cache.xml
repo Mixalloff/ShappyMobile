@@ -2,81 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jar="/home/mikhail/IdeaProjects/StockStore/app/libs/android-core-3.2.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-8a9ff7c760836022490c5a92f63b4a5c3712f9fb.jar" />
+        sha1="c1de4bba95fac060cc96a3af39ef6ffd17e18157">
+        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/android-core-3.2.1-aba5cc4479ec9d9ead52f4435cb210e6867980d4.jar" />
     </item>
     <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/classes.jar"
+        jar="/home/mikhail/IdeaProjects/StockStore/app/libs/core-3.2.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-f59edea043500f106fd2950f1b19eacbaec25d9e.jar" />
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/core-3.2.1-37e7fa214b664e08721f1d9feb6fe47a4c0cd989.jar" />
     </item>
     <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
+        jar="/home/mikhail/IdeaProjects/StockStore/app/libs/android-integration-3.2.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-5551abc0fdac1741256dfcc724adcd42728db78e.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.1/support-annotations-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.1-370a7343e195c078dcb1870134b4fa50e531993b.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.1/jars/libs/internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.1-89c4963295c9707554f780d7b42f088ce98ebc4f.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/google-material-typeface/2.1.0.1.original/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e0cf0253b06ae679e60476827c56d54a53f2e390">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-e7ad0f71ae0be192e03f0ae3cefca214bfebbc1e.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/fontawesome-typeface/4.5.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="9ec06b192478fcc1acd79f399926c48444c02f86">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-aed332f5c5e015e011022ee416b4f67ae3b2eeb7.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/materialdrawer/4.6.4/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="25c8422fe5a0acee6cee4f7e52449c2802f6ca19">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-9d71c8893b6bf5586ad492cc7445bf7e1c897867.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/materialize/0.5.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="25e8af11fff99ad02250f52f2436e25f60cc1bbe">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-ded65620dd4ddc2d3544f92b97d181cb5d801c9b.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/material-design-iconic-typeface/2.2.0.1/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="27bd073c1d188457050a9169e7dfe03ea0271dbc">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-5a26f1ea4a028593510861797a123a9ca6abf2d4.jar" />
-    </item>
-    <item
-        jar="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/exploded-aar/com.mikepenz/iconics-core/2.5.5/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="07b79fe6ed098c0e1fdb0bf333d0c523c9867f06">
-        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/classes-5f690ad313395d7527b36cf29081fc34c365a58d.jar" />
+        sha1="87a3d7da33a6c633fb1ff30023dbf0d05e8ea74c">
+        <dex dex="/home/mikhail/IdeaProjects/StockStore/app/build/intermediates/pre-dexed/debug/android-integration-3.2.1-2189728d50e20ef87a45ba18bba7f890e6099478.jar" />
     </item>
 
 </items>

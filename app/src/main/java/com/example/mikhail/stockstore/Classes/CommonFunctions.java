@@ -17,6 +17,7 @@ import com.example.mikhail.stockstore.Adapters.FriendsViewPagerAdapter;
 import com.example.mikhail.stockstore.Adapters.StocksViewPagerAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.FriendsActivity;
+import com.example.mikhail.stockstore.GeneratedCodeActivity;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
 import com.example.mikhail.stockstore.ProfileActivity;
 import com.example.mikhail.stockstore.R;
@@ -157,6 +158,7 @@ public class CommonFunctions {
                                             }
                                             case R.string.drawer_item_settings: {
                                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
+                                                activity.startActivity(new Intent(activity.getBaseContext(), GeneratedCodeActivity.class));
                                                 break;
                                             }
                                             case R.string.drawer_item_exit: {
