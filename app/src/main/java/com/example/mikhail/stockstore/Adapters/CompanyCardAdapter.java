@@ -14,6 +14,7 @@ import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -58,7 +59,8 @@ public class CompanyCardAdapter extends BaseAdapter{
             if (companies != null) {
                 TextView companyName = (TextView) grid.findViewById(R.id.company_name);
                 ImageView companyLogo = (ImageView)grid.findViewById(R.id.company_logo);
-                CommonFunctions.setPhotoToImageView(companies.get(position).photo, companyLogo);
+                ImageLoader.getInstance().displayImage(companies.get(position).photo, companyLogo);
+               // CommonFunctions.setPhotoToImageView(companies.get(position).photo, companyLogo);
                 companyName.setText(companies.get(position).name);
             }
 

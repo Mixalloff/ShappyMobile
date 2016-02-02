@@ -12,6 +12,7 @@ import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Entities.Category;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -54,7 +55,8 @@ public class CategoryCardAdapter extends BaseAdapter {
             if (categories != null) {
                 TextView categoryName = (TextView) grid.findViewById(R.id.category_name);
                 ImageView categoryLogo = (ImageView)grid.findViewById(R.id.category_logo);
-                CommonFunctions.setPhotoToImageView(categories.get(position).photo, categoryLogo);
+                ImageLoader.getInstance().displayImage(categories.get(position).photo, categoryLogo);
+                //CommonFunctions.setPhotoToImageView(categories.get(position).photo, categoryLogo);
                 categoryName.setText(categories.get(position).name);
             }
 

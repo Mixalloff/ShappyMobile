@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.FriendsViewPagerAdapter;
 import com.example.mikhail.stockstore.Adapters.StocksViewPagerAdapter;
-import com.example.mikhail.stockstore.AsyncClasses.AsyncGetPhoto;
 import com.example.mikhail.stockstore.FriendsActivity;
 import com.example.mikhail.stockstore.GeneratedCodeActivity;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
@@ -36,6 +35,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
 
@@ -48,23 +48,6 @@ import java.util.Date;
  * Created by mikhail on 09.12.15.
  */
 public class CommonFunctions {
-
-    // Загрузка картинки по URL в заданное ImageView
-    public static void setPhotoToImageView(String photoURL, ImageView imageView) {
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
-
-        AsyncGetPhoto loader = new AsyncGetPhoto();
-
-        URL newurl = null;
-        try {
-            newurl = new URL(photoURL);
-            Bitmap mIcon_val = loader.execute(photoURL).get(); //BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
-            imageView.setImageBitmap(mIcon_val);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public static Bitmap getPhoto(int resId, Resources resources){
         Bitmap photo = BitmapFactory.decodeResource(resources, resId);
