@@ -59,12 +59,13 @@ public class StocksActivity extends ActionBarActivity  implements SearchView.OnQ
     @Override
     public boolean onQueryTextSubmit(String query) {
         Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
         return false;
     }
 }

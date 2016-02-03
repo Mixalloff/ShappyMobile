@@ -72,6 +72,11 @@ public class ServerResponseHandler implements ResponseInterface{
                 break;
             }
 
+            case "friendsfilter": {
+                this.onUserGetFriendsFilter(response);
+                break;
+            }
+
             case "400": {
                 this.onError400(response);
                 break;
@@ -193,6 +198,11 @@ public class ServerResponseHandler implements ResponseInterface{
 
     @Override
     public void onUserGetFriendsFeed(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetFriendsFilter(JSONObject response) {
 
     }
 }

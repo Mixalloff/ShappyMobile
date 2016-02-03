@@ -58,6 +58,10 @@
             android:name=".GeneratedCodeActivity"
             android:label="@string/title_activity_generated_code" >
         </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
 
 </manifest>

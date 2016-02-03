@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -59,10 +62,6 @@ public class allStocksTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_stocks_tab, container, false);
 
-        // Подгружаем токен, если есть
-      // String token = WorkWithServer.getToken(getActivity());
-
-
         rv = (RecyclerView) v.findViewById(R.id.cards);
         initRecyclerView(container);
         initSwipe(v);
@@ -97,16 +96,6 @@ public class allStocksTab extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                /*new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        request = new AsyncRequestToServer(getActivity(), handler);
-                        request.setSwipeRefresh(swipe);
-                        request.setSpinnerMessage("Загрузка акций");
-                        request.execute(APIConstants.GET_ALL_STOCKS);
-                    }
-                },0);*/
-
                 request = new AsyncRequestToServer(getActivity(), handler);
                 request.setSwipeRefresh(swipe);
                 request.execute(APIConstants.GET_ALL_STOCKS);

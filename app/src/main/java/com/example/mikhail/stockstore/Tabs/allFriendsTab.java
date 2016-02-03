@@ -56,14 +56,16 @@ public class allFriendsTab extends Fragment {
         View v = inflater.inflate(R.layout.all_friends_tab, container, false);
 
         //rv = (RecyclerView) v.findViewById(R.id.cards);
+
         lv = (ListView) v.findViewById(R.id.friends_list);
-        initRecyclerView(container);
+       // lv = new ListView(v.getContext());
+        initListView(container);
         initSwipe(v);
 
         //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         //rv.setItemAnimator(itemAnimator);
 
-        //initializeTestData(v);
+       // initializeTestData();
 
        /* try{
             Intent intent = getActivity().getIntent();
@@ -77,6 +79,8 @@ public class allFriendsTab extends Fragment {
 
         request = new AsyncRequestToServer(getActivity(), handler);
         request.execute(APIConstants.USER_GET_ALL_FRIENDS);
+        //request.setParameters("FIO=x");
+       // request.execute(APIConstants.USER_GET_FRIENDS_FILTER);
         return v;
 
     }
@@ -120,10 +124,29 @@ public class allFriendsTab extends Fragment {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void onUserGetFriendsFilter(JSONObject response) {
+            try {
+                persons.clear();
+                // adapter.notifyItemRemoved(0);
+
+                JSONArray data = new JSONArray(response.get("data").toString());
+                int count = data.length() > countOfLoadingPersons ? countOfLoadingPersons : data.length();
+                for (int i = 0; i < count; i++){
+                    JSONObject person = new JSONObject(data.get(i).toString());
+                    persons.add(new Person(person));
+                    // adapter.notifyItemInserted(i);
+                }
+                adapter.notifyDataSetChanged();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     };
 
     // Инициализация RecyclerView карточек
-    public void initRecyclerView(ViewGroup container){
+    public void initListView(ViewGroup container){
         Context context = this.getActivity();
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);

@@ -41,4 +41,6 @@ public interface ResponseInterface {
     void onUserDeleteFriend(JSONObject response);
 
     void onUserGetFriendsFeed(JSONObject response);
+
+    void onUserGetFriendsFilter(JSONObject response);
 }

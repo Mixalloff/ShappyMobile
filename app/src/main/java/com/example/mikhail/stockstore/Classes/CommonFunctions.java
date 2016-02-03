@@ -100,6 +100,7 @@ public class CommonFunctions {
                     .withActivity(activity)
                     .withToolbar(toolbar)
                     .withAccountHeader(headerResult)
+                    .withSelectedItem(-1)
                     .withActionBarDrawerToggle(true)
                     .withHeader(R.layout.drawer_header)
                     .addDrawerItems(

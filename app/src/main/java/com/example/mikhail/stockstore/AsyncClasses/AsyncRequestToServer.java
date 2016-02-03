@@ -218,6 +218,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     case APIConstants.USER_GET_FRIENDS_FEED: {
                         return userGetFriendsFeed();
                     }
+                    case APIConstants.USER_GET_FRIENDS_FILTER: {
+                        return userGetFilteredFriend();
+                    }
 
                     default: {
                     }
@@ -354,6 +357,21 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?token=" + token));
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Получение пользователей по условию
+    public JSONObject userGetFilteredFriend(){
+        try {
+            String token = WorkWithResources.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER_ROUTE +
+                    "?token=" + token + "&" + urlParams ));
+                    /*"&FIO=" + fio +
+                    "&mail=" + mail +
+                    "&phone=" + phone*/
         } catch (Exception e) {
             e.printStackTrace();
             return null;
