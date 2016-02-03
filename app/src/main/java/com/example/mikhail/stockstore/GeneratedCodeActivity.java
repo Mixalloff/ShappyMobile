@@ -1,5 +1,6 @@
 package com.example.mikhail.stockstore;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.Entities.Stock;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -23,13 +25,18 @@ public class GeneratedCodeActivity extends AppCompatActivity {
     int QRWidth = 300;
     int QRHeight = 300;
     TextView textCode;
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_code);
 
+        code = getIntent().getStringExtra("code");
+
         textCode = (TextView)findViewById(R.id.text_code);
+        textCode.setText(code);
+
         codeImage = (ImageView) findViewById(R.id.qr_code_place);
         codeImage.setImageBitmap(GenerateQRCode(textCode.getText().toString()));
     }
@@ -81,12 +88,5 @@ public class GeneratedCodeActivity extends AppCompatActivity {
             }
         }
         return bmp;
-    }
-
-    public void onClickBtn(View view) {
-        EditText text = (EditText) findViewById(R.id.editText);
-        textCode.setText(text.getText());
-        codeImage.setImageBitmap(GenerateQRCode(text.getText().toString()));
-        text.setText("");
     }
 }

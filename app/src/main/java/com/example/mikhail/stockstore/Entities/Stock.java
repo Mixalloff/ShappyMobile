@@ -39,6 +39,8 @@ public class Stock implements Parcelable{
 
     public boolean isAdded;
 
+    public String code = "";
+
 
     public Stock(String id, String name, String description, String photo, Company company, boolean isAdded){
         this.id = id;
@@ -78,6 +80,8 @@ public class Stock implements Parcelable{
             this.company = new Company(stockObj.get("company").toString());
 
             this.isAdded = stockObj.has("subscribed") && (boolean) stockObj.get("subscribed");
+
+            this.code =  stockObj.has("code") ? stockObj.getString("code") : "";
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -99,6 +103,8 @@ public class Stock implements Parcelable{
             dest.writeByte((byte) (this.isAdded ? 1 : 0));
             dest.writeParcelable(this.company, flags);
             dest.writeString(this.photo);
+
+            dest.writeString(this.code);
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -113,6 +119,8 @@ public class Stock implements Parcelable{
         this.isAdded = source.readByte() != 0;
         this.company = source.readParcelable(Company.class.getClassLoader());
         this.photo = source.readString();
+
+        this.code = source.readString();
     }
 
 

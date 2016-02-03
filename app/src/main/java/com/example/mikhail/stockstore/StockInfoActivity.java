@@ -2,10 +2,12 @@ package com.example.mikhail.stockstore;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,10 +30,24 @@ public class StockInfoActivity extends AppCompatActivity {
     private void setInterfaceElements(){
         try {
             Intent intent = getIntent();
-            Stock stock = intent.getParcelableExtra("stock");
+            final Stock stock = intent.getParcelableExtra("stock");
             ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
             TextView stockName = (TextView) findViewById(R.id.stockName);
             TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
+
+            FloatingActionButton getCodeBtn = (FloatingActionButton)findViewById(R.id.get_code_btn);
+            if(!stock.code.equals("")) {
+                getCodeBtn.setVisibility(View.VISIBLE);
+
+                getCodeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(StockInfoActivity.this, GeneratedCodeActivity.class);
+                        intent.putExtra("code", stock.code);
+                        startActivity(intent);
+                    }
+                });
+            }
 
             stockName.setText(stock.name);
             stockDescription.setText(stock.description);

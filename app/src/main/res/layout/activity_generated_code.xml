@@ -13,29 +13,6 @@
         android:layout_below="@+id/text_code"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/qr_code_place"
-        android:layout_alignLeft="@+id/qr_code_place"
-        android:layout_alignStart="@+id/qr_code_place"
-        android:layout_alignRight="@+id/qr_code_place"
-        android:layout_alignEnd="@+id/qr_code_place"
-        android:textColor="#000" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:onClick="onClickBtn" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
