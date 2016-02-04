@@ -33,9 +33,10 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/search_friends_btn"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/added"
+        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
         android:clickable="true"
         app:layout_anchor="@id/stock.appbar"
         app:layout_anchorGravity="bottom|right|end"

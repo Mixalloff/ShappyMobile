@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Person;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.R;
+import com.example.mikhail.stockstore.SearchActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +43,7 @@ public class allFriendsTab extends Fragment {
     ListView lv;
     int countOfLoadingPersons = 5;
     AsyncRequestToServer request;
+    FloatingActionButton friendSearchsBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,28 +61,20 @@ public class allFriendsTab extends Fragment {
         //rv = (RecyclerView) v.findViewById(R.id.cards);
 
         lv = (ListView) v.findViewById(R.id.friends_list);
-       // lv = new ListView(v.getContext());
         initListView(container);
         initSwipe(v);
 
-        //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        //rv.setItemAnimator(itemAnimator);
-
-       // initializeTestData();
-
-       /* try{
-            Intent intent = getActivity().getIntent();
-            JSONObject stocksJson = new JSONObject(intent.getStringExtra("stocks"));
-            handler.onUserGetAllStocks(stocksJson);
-        }catch(Exception e){
-            e.printStackTrace();
-            request = new AsyncRequestToServer(getActivity(), handler);
-            request.execute(APIConstants.GET_ALL_STOCKS);
-        }*/
+        friendSearchsBtn = (FloatingActionButton)v.findViewById(R.id.search_friends_btn);
+        friendSearchsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), SearchActivity.class));
+            }
+        });
 
         request = new AsyncRequestToServer(getActivity(), handler);
         request.execute(APIConstants.USER_GET_ALL_FRIENDS);
-        //request.setParameters("FIO=x");
+        //request.setParameters("");
        // request.execute(APIConstants.USER_GET_FRIENDS_FILTER);
         return v;
 

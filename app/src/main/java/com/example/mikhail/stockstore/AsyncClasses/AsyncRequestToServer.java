@@ -254,6 +254,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         }
 
         if (swipe != null) { swipe.setRefreshing(false); }
+
         //showNotification("Downloaded " + result + " bytes");
     }
 
