@@ -91,9 +91,9 @@ public class allFriendsTab extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-              //  request = new AsyncRequestToServer(getActivity(), handler);
+                request = new AsyncRequestToServer(getActivity(), handler);
                 request.setSwipeRefresh(swipe);
-                request.execute(APIConstants.GET_ALL_STOCKS);
+                request.execute(APIConstants.USER_GET_ALL_FRIENDS);
             }
         });
     }

@@ -128,9 +128,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 //Toast.makeText(v.getContext().getApplicationContext(), stocks.get(position).id, Toast.LENGTH_SHORT).show();
                 Activity host = (Activity) v.getContext();
                 try {
-                   /* AsyncRequestToServer request = new AsyncRequestToServer(host, handler);
-                    request.setParameters(APIRequestConstructor.userAddStockParameters(host, stocks.get(position).id));
-                    request.execute(APIConstants.USER_SUBSCRIBE_STOCK);*/
+
                     AddMenuWithItems(holder, position);
 
                     //ServerResponseHandler.CheckResponse(APIRequestConstructor.userSubscribeStock(host, stocks.get(position).id), handler);
@@ -165,8 +163,10 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             @Override
             public void onUserSubscribeStock(JSONObject response) {
                 try {
+                    stocks.get(position).isAdded = true;
+                    stocks.get(position).code = response.has("code") ? response.getString("code") : stocks.get(position).code;
+                    changeColor(holder, stocks.get(position));
                     Toast.makeText(holder.itemView.getContext(), "добавлена на стену", Toast.LENGTH_SHORT).show();
-                    //changeButtonLabel(holder, stocks.get(position));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -175,9 +175,10 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             @Override
             public void onUserUnsubscribeStock(JSONObject response) {
                 try {
-
+                    stocks.get(position).isAdded = false;
+                    stocks.get(position).code = "";
+                    changeColor(holder, stocks.get(position));
                     Toast.makeText(holder.itemView.getContext(), "удалена со стены", Toast.LENGTH_SHORT).show();
-                    //changeButtonLabel(holder, stocks.get(position));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -227,7 +228,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                             request.execute(APIConstants.USER_SUBSCRIBE_STOCK);
                         }
                         stocks.get(position).isAdded = !stocks.get(position).isAdded;
-                        changeColor(holder, stocks.get(position));
                         return true;
                     }
                     default:
@@ -246,15 +246,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.card_color));
         }
     }
-
-   /* private void changeButtonLabel(StocksViewHolder holder, Stock stock){
-        if (stock.isAdded){
-            holder.cardMenu.setBackgroundResource(R.drawable.added);
-        }
-        else{
-            holder.cardMenu.setBackgroundResource(R.drawable.add_btn);
-        }
-    }*/
 
     @Override
     public int getItemCount() {
