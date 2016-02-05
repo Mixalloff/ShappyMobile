@@ -11,15 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
-import com.example.mikhail.stockstore.Classes.APIConstants;
+import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Person;
 
 import org.json.JSONArray;
@@ -43,9 +43,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        toolbar = CommonFunctions.setToolbar(this, R.id.include);
-        toolbar.setNavigationIcon(com.mikepenz.materialdrawer.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        final Activity self = this;
+        toolbar = CommonFunctions.setToolbar(this, R.id.include, CommonConstants.TOOLBAR_NAV_BACK);
+       // toolbar.setNavigationIcon(com.mikepenz.materialdrawer.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
         search_list_friends = new ArrayList<>();
       //  View v = inflater.inflate(R.layout.all_friends_tab, container, false);

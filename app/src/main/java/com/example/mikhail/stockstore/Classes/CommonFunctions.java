@@ -1,5 +1,6 @@
 package com.example.mikhail.stockstore.Classes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.FriendsViewPagerAdapter;
 import com.example.mikhail.stockstore.Adapters.StocksViewPagerAdapter;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.FriendsActivity;
 import com.example.mikhail.stockstore.GeneratedCodeActivity;
 import com.example.mikhail.stockstore.Modules.SlidingTabLayout;
@@ -44,6 +46,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.security.auth.callback.CallbackHandler;
+
 /**
  * Created by mikhail on 09.12.15.
  */
@@ -54,9 +58,68 @@ public class CommonFunctions {
         return photo;
     }
 
+    private static View.OnClickListener StandartActionToolbarNav(final Activity activity, String typeNavBtn){
+        switch (typeNavBtn){
+            case CommonConstants.TOOLBAR_NAV_CLOSE:
+            {
+                return new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activity.finish();
+                    }
+                };
+            }
+            case CommonConstants.TOOLBAR_NAV_BACK:
+            {
+                return new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activity.onBackPressed();
+                    }
+                };
+            }
+            default:
+            {
+                return null;
+            }
+        }
+    }
+
     public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar){
         Toolbar toolbar = (Toolbar) activity.findViewById(resourseToolbar);
         activity.setSupportActionBar(toolbar);
+        return toolbar;
+    }
+
+    public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar, String typeNavBtn)
+    {
+        Toolbar toolbar = CommonFunctions.setToolbar(activity, resourseToolbar);
+        int resourseId;
+        switch (typeNavBtn){
+            case CommonConstants.TOOLBAR_NAV_BACK:
+            {
+                resourseId = R.drawable.abc_ic_ab_back_mtrl_am_alpha;
+                break;
+            }
+            case CommonConstants.TOOLBAR_NAV_CLOSE:
+            {
+                resourseId = R.drawable.abc_ic_clear_mtrl_alpha;
+                break;
+            }
+            default:
+            {
+                return toolbar;
+            }
+        }
+        toolbar.setNavigationIcon(resourseId);
+        toolbar.setNavigationOnClickListener(StandartActionToolbarNav(activity, typeNavBtn));
+        return toolbar;
+    }
+
+    // Установка иконки навигации на тулбаре и определение действия при нажатии
+    public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar, String typeNavBtn, View.OnClickListener onNavBtnClicked){
+        Toolbar toolbar = setToolbar(activity, resourseToolbar, typeNavBtn);
+        toolbar.setNavigationOnClickListener(onNavBtnClicked);
         return toolbar;
     }
 
@@ -123,30 +186,36 @@ public class CommonFunctions {
                                         switch (iDrawerItem.getIdentifier()) {
                                             case R.string.drawer_item_profile: {
                                                 activity.startActivity(new Intent(activity.getBaseContext(), ProfileActivity.class));
+                                                activity.finish();
                                                 break;
                                             }
                                             case R.string.drawer_item_friends: {
                                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                                 activity.startActivity(new Intent(activity.getBaseContext(), FriendsActivity.class));
+                                                activity.finish();
                                                 break;
                                             }
                                             case R.string.drawer_item_stocks: {
                                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                                 activity.startActivity(new Intent(activity.getBaseContext(), StocksActivity.class));
+                                                activity.finish();
                                                 break;
                                             }
                                             case R.string.drawer_item_subscriptions: {
                                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                                 activity.startActivity(new Intent(activity.getBaseContext(), SubscribesActivity.class));
+                                                activity.finish();
                                                 break;
                                             }
                                             case R.string.drawer_item_settings: {
                                                 //Toast.makeText(activity.getApplicationContext(), ((Nameable) iDrawerItem).getName(), Toast.LENGTH_SHORT).show();
                                                 activity.startActivity(new Intent(activity.getBaseContext(), GeneratedCodeActivity.class));
+                                                activity.finish();
                                                 break;
                                             }
                                             case R.string.drawer_item_exit: {
                                                 WorkWithResources.deleteToken(activity);
+                                                activity.finish();
                                                 activity.startActivity(new Intent(activity.getBaseContext(), LoginActivity.class));
                                             }
                                         }
