@@ -57,7 +57,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/add_friend_btn"
-                android:background="@drawable/add_btn"
+                android:background="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />

@@ -2,6 +2,7 @@ package com.example.mikhail.stockstore;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,7 +38,8 @@ public class StockInfoActivity extends AppCompatActivity {
 
             FloatingActionButton getCodeBtn = (FloatingActionButton)findViewById(R.id.get_code_btn);
             if(!stock.code.equals("")) {
-                getCodeBtn.setVisibility(View.VISIBLE);
+               // getCodeBtn.setVisibility(View.VISIBLE);
+
 
                 getCodeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -47,6 +49,9 @@ public class StockInfoActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+            }
+            else{
+                ((CoordinatorLayout)findViewById(R.id.coordinator)).removeView(getCodeBtn);
             }
 
             stockName.setText(stock.name);
