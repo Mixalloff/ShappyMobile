@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -23,7 +24,8 @@ public class StockInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_info);
 
-        CommonFunctions.addNavigationView(this, CommonFunctions.setToolbar(this, R.id.toolbar));
+        //CommonFunctions.addNavigationView(this, CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE));
+        CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE);
         setInterfaceElements();
     }
 

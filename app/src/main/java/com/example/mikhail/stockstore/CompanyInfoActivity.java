@@ -16,6 +16,7 @@ import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -43,7 +44,9 @@ public class CompanyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_company_info);
 
 
-        CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
+        //CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE));
+        CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE);
+
         rv = (RecyclerView)findViewById(R.id.cards);
         initRecyclerView();
 

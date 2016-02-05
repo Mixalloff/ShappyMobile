@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -31,6 +33,8 @@ public class GeneratedCodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generated_code);
+
+        CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE);
 
         code = getIntent().getStringExtra("code");
 
