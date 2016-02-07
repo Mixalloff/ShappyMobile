@@ -62,6 +62,10 @@
             android:name=".SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
+        <activity
+            android:name=".GlobalSearchActivity"
+            android:label="@string/title_activity_global_search" >
+        </activity>
     </application>
 
 </manifest>

@@ -8,4 +8,10 @@ public class CommonConstants {
     public static final String TOOLBAR_NAV_HAMBURGER = "hamburger";
     public static final String TOOLBAR_NAV_BACK = "back";
     public static final String TOOLBAR_NAV_CLOSE = "close";
+
+    // Константы типов блоков поиска
+    public static final String SEARCH_BLOCK_TYPE_STOCKS = "stocks";
+    public static final String SEARCH_BLOCK_TYPE_COMPANIES = "companies";
+    public static final String SEARCH_BLOCK_TYPE_CATEGORIES = "categories";
+
 }

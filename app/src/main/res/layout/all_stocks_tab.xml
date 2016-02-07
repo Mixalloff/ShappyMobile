@@ -28,12 +28,13 @@
     <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/added"
+        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
         android:clickable="true"
         app:layout_anchor="@id/stock.appbar"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:id="@+id/floating_btn"/>
 
 </RelativeLayout>

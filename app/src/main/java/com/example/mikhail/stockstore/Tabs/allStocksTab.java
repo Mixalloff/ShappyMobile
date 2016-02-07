@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +21,7 @@ import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.example.mikhail.stockstore.GlobalSearchActivity;
 import com.example.mikhail.stockstore.R;
 
 import org.json.JSONArray;
@@ -62,6 +66,14 @@ public class allStocksTab extends Fragment {
         initRecyclerView(container);
         initSwipe(v);
 
+        FloatingActionButton flBtn = (FloatingActionButton) v.findViewById(R.id.floating_btn);
+        flBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Pushed button", Snackbar.LENGTH_SHORT).show();
+                startActivity(new Intent(v.getContext(), GlobalSearchActivity.class));
+            }
+        });
         //RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
         //rv.setItemAnimator(itemAnimator);
 
@@ -109,6 +121,7 @@ public class allStocksTab extends Fragment {
         rv.setLayoutManager(llm);
         adapter = new StockCardAdapter(stocks);
         rv.setAdapter(adapter);
+        rv.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void initializeTestData(View v) {
