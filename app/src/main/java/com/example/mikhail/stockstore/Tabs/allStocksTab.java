@@ -21,7 +21,7 @@ import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Stock;
-import com.example.mikhail.stockstore.GlobalSearchActivity;
+import com.example.mikhail.stockstore.Search.GlobalSearchActivity;
 import com.example.mikhail.stockstore.R;
 
 import org.json.JSONArray;

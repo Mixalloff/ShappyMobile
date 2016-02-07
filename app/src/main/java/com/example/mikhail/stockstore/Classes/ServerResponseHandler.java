@@ -50,6 +50,10 @@ public class ServerResponseHandler implements ResponseInterface{
                 this.onUserGetFeed(response);
                 break;
             }
+            case "stockinfo": {
+                this.onUserGetStocksInfo(response);
+                break;
+            }
             case "stocks": {
                 this.onUserGetStocksByCompany(response);
                 this.onUserGetStocksByFilter(response);
@@ -204,6 +208,11 @@ public class ServerResponseHandler implements ResponseInterface{
 
     @Override
     public void onUserGetFriendsFilter(JSONObject response) {
+
+    }
+
+    @Override
+    public void onUserGetStocksInfo(JSONObject response) {
 
     }
 }

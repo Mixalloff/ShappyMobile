@@ -59,11 +59,11 @@
             android:label="@string/title_activity_generated_code" >
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".Search.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
         <activity
-            android:name=".GlobalSearchActivity"
+            android:name=".Search.GlobalSearchActivity"
             android:label="@string/title_activity_global_search" >
         </activity>
     </application>

@@ -197,6 +197,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                         return userGetFeed();
                     }
 
+                    case APIConstants.USER_GET_STOCKS_INFO: {
+                        return userGetStocksInfo();
+                    }
                     case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
                         return userGetStocksByCompany();
                     }
@@ -379,9 +382,20 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         }
     }
 
+    public JSONObject userGetStocksInfo(){
+        try {
+            String token = WorkWithResources.getToken(activity);
+            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO_ROUTE +
+                    "?token=" + token +
+                    "&"+urlParams));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public JSONObject userGetStocksByCompany(){
         try {
-          //  String companyId = urlParams;
             String token = WorkWithResources.getToken(activity);
             return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE +
                     "?token=" + token +

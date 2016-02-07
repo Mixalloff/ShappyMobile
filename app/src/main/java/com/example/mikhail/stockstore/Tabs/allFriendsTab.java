@@ -18,9 +18,8 @@ import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Person;
-import com.example.mikhail.stockstore.GlobalSearchActivity;
 import com.example.mikhail.stockstore.R;
-import com.example.mikhail.stockstore.SearchActivity;
+import com.example.mikhail.stockstore.Search.SearchActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -43,4 +43,7 @@ public interface ResponseInterface {
     void onUserGetFriendsFeed(JSONObject response);
 
     void onUserGetFriendsFilter(JSONObject response);
+
+    void onUserGetStocksInfo(JSONObject response);
+
 }

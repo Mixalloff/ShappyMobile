@@ -1,4 +1,4 @@
-package com.example.mikhail.stockstore;
+package com.example.mikhail.stockstore.Search;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +21,7 @@ import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Person;
+import com.example.mikhail.stockstore.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

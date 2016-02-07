@@ -13,6 +13,7 @@ public class APIConstants {
     public final static String GET_ALL_STOCKS = "getallstocks";
     public final static String GET_ALL_COMPANIES = "getallcompanies";
     public final static String GET_ALL_CATEGORIES = "getallcategories";
+    public final static String USER_GET_STOCKS_INFO = "getstocksinfo";
     public final static String USER_GET_STOCKS_BY_COMPANY = "getstocksbycompany";
     public final static String USER_GET_STOCKS_BY_WORDPATH = "getstocksbyword";
     public final static String USER_GET_STOCKS_BY_FILTER = "getStocksByFilter";
@@ -31,6 +32,7 @@ public class APIConstants {
     public final static String USER_GET_FEED_ROUTE = "user/stocks/feed";
     public final static String GET_ALL_COMPANIES_ROUTE = "user/companies/all";
     public final static String GET_ALL_CATEGORIES_ROUTE = "user/categories/all";
+    public final static String USER_GET_STOCKS_INFO_ROUTE = "user/stocks/info";
     public final static String USER_GET_STOCKS_BY_COMPANY_ROUTE = "user/stocks/filter/company";
     public final static String USER_GET_STOCKS_BY_WORDPATH_ROUTE = "user/stocks/filter/search";
     public final static String USER_GET_STOCKS_BY_FILTER_ROUTE = "user/stocks/filter";

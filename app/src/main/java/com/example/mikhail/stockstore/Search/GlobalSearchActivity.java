@@ -1,4 +1,4 @@
-package com.example.mikhail.stockstore;
+package com.example.mikhail.stockstore.Search;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -19,6 +19,8 @@ import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Stock;
+import com.example.mikhail.stockstore.MiniCardFragment;
+import com.example.mikhail.stockstore.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

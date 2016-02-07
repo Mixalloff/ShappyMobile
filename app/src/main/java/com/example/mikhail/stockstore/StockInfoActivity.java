@@ -12,12 +12,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
+import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class StockInfoActivity extends AppCompatActivity {
+
+    Stock stock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +32,21 @@ public class StockInfoActivity extends AppCompatActivity {
         //CommonFunctions.addNavigationView(this, CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE));
         CommonFunctions.setToolbar(this, R.id.toolbar, CommonConstants.TOOLBAR_NAV_CLOSE);
         setInterfaceElements();
+
+        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+        request.setParameters("id=" + stock.id);
+        request.execute(APIConstants.USER_GET_STOCKS_INFO);
     }
+
+    ServerResponseHandler handler = new ServerResponseHandler(){
+        
+    } ;
 
     // Задает значения элементам интерфейса (изображения, текст..)
     private void setInterfaceElements(){
         try {
             Intent intent = getIntent();
-            final Stock stock = intent.getParcelableExtra("stock");
+            stock = intent.getParcelableExtra("stock");
             ImageView stockPhoto = (ImageView) findViewById(R.id.stockPhoto);
             TextView stockName = (TextView) findViewById(R.id.stockName);
             TextView stockDescription = (TextView) findViewById(R.id.stockDescription);
