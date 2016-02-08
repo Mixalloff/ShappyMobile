@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -81,7 +82,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
        // CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
         ImageLoader.getInstance().displayImage(stocks.get(position).company.photo, holder.companyLogo);
 
-        changeColor(holder, stocks.get(position));
+        setColor(holder, stocks.get(position));
         // если расоложение recyclerView горизонтальное
         if (!this.isVertical){
 
@@ -163,9 +164,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             @Override
             public void onUserSubscribeStock(JSONObject response) {
                 try {
-                    stocks.get(position).isAdded = true;
-                    stocks.get(position).code = response.has("code") ? response.getString("code") : stocks.get(position).code;
-                    changeColor(holder, stocks.get(position));
+                   // stocks.get(position).isAdded = true;
+                   // stocks.get(position).code = response.has("code") ? response.getString("code") : stocks.get(position).code;
+                   // setColor(holder, stocks.get(position));
                     Toast.makeText(holder.itemView.getContext(), "добавлена на стену", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -175,9 +176,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             @Override
             public void onUserUnsubscribeStock(JSONObject response) {
                 try {
-                    stocks.get(position).isAdded = false;
-                    stocks.get(position).code = "";
-                    changeColor(holder, stocks.get(position));
+                    //stocks.get(position).isAdded = false;
+                   // stocks.get(position).code = "";
+                   // setColor(holder, stocks.get(position));
                     Toast.makeText(holder.itemView.getContext(), "удалена со стены", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -187,14 +188,13 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         };
 
         holder.cv.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                Toast.makeText(v.getContext().getApplicationContext(), "Clicked!", Toast.LENGTH_SHORT).show();
-
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), StockInfoActivity.class);
                 intent.putExtra("stock", (Parcelable) stocks.get(position));
                 holder.itemView.getContext().startActivity(intent);
 
-               // holder.itemView.getContext().startActivity(intent.putExtras(b));
+                // holder.itemView.getContext().startActivity(intent.putExtras(b));
             }
         });
     }
@@ -206,6 +206,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         final View v = holder.cardMenu;
         PopupMenu popup = new PopupMenu(v.getContext(), v);
         MenuInflater inflater = popup.getMenuInflater();
+        // Добавление пунктов в пустое меню
         inflater.inflate(R.menu.empty_popup_menu, popup.getMenu());
         if (stocks.get(position).isAdded){
             popup.getMenu().add(0, 1, 1,"Отписаться");
@@ -218,7 +219,18 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 switch (item.getItemId()) {
                     case 1: {
                         //действие
-                        AsyncRequestToServer request = new AsyncRequestToServer((Activity)v.getContext(), handler);
+                        AsyncRequestToServer request = new AsyncRequestToServer((Activity) v.getContext(), handler, new OnTaskCompleted() {
+                            @Override
+                            public void onTaskCompleted(JSONObject response) {
+                                try {
+                                    stocks.get(position).isAdded = !stocks.get(position).isAdded;
+                                    stocks.get(position).code = response.has("code") ? response.getString("code") : "";
+                                    setColor(holder, stocks.get(position));
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                         request.setParameters(APIRequestConstructor.userAddStockParameters((Activity) v.getContext(), stocks.get(position).id));
                         if (stocks.get(position).isAdded) {
                             Toast.makeText(v.getContext(),"Удаляется", Toast.LENGTH_SHORT).show();
@@ -227,7 +239,6 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                             Toast.makeText(v.getContext(),"Добавляется", Toast.LENGTH_SHORT).show();
                             request.execute(APIConstants.USER_SUBSCRIBE_STOCK);
                         }
-                        stocks.get(position).isAdded = !stocks.get(position).isAdded;
                         return true;
                     }
                     default:
@@ -238,7 +249,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         popup.show();
     }
 
-    private void changeColor(StocksViewHolder holder, Stock stock){
+    private void setColor(StocksViewHolder holder, Stock stock){
         if (stock.isAdded){
           holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
         }

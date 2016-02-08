@@ -46,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllStocks(JSONObject response) {
-            Toast.makeText(SplashActivity.this, "yes", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SplashActivity.this, "yes", Toast.LENGTH_SHORT).show();
             // Передача полученных акций в активити с акциями
             Intent intent = new Intent(SplashActivity.this, StocksActivity.class);
             intent.putExtra("stocks", response.toString());

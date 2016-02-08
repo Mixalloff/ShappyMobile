@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         public void onRegister(JSONObject response) {
             try {
                 WorkWithResources.saveToken(response.get("data").toString());
-                Toast.makeText(getApplicationContext(), "Токен: " + response.get("data").toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Токен: " + response.get("data").toString(), Toast.LENGTH_SHORT).show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

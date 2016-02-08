@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -17,14 +18,18 @@ import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 import com.example.mikhail.stockstore.Entities.Person;
+import com.example.mikhail.stockstore.MiniCardFragment;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.Search.SearchActivity;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mikhail on 17.01.16.
@@ -152,8 +157,8 @@ public class allFriendsTab extends Fragment {
     }
 
     public void initializeTestData(){
-        persons.add(new Person("Ivan", "Ivanov", "asds", "sadsada"));
-        persons.add(new Person("Petr", "Petrov", "asds", "sadsada"));
-        persons.add(new Person("Mikhail", "Mikhalev", "asds", "sadsada"));
+        persons.add(new Person("Ivan", "Ivanov", "asds", "sadsada", true));
+        persons.add(new Person("Petr", "Petrov", "asds", "sadsada", true));
+        persons.add(new Person("Mikhail", "Mikhalev", "asds", "sadsada", true));
     }
 }

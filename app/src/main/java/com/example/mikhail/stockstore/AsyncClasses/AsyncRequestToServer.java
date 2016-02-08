@@ -31,6 +31,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 {
     SwipeRefreshLayout swipe = null;
 
+    // Callback
+    private OnTaskCompleted callback;
+
     // Параметры запроса
     private static String urlParams = "";
     // Активити в которой создан объект
@@ -49,8 +52,13 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     }
 
     public AsyncRequestToServer(Activity activity, ServerResponseHandler handler){
+        this(activity, handler, null);
+    }
+
+    public AsyncRequestToServer(Activity activity, ServerResponseHandler handler, OnTaskCompleted callback){
         this.activity = activity;
         this.handler = handler;
+        this.callback = callback;
     }
 
     public void setParameters(String urlParams){
@@ -258,10 +266,13 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
         if (swipe != null) { swipe.setRefreshing(false); }
 
+        // Вызов колбэка
+        if(callback != null) {
+            callback.onTaskCompleted(result);
+        }
+
         //showNotification("Downloaded " + result + " bytes");
     }
-
-
 
     // Метод отравки запроса на регистрацию пользователя
     // Возвращает JSON объект с ответом сервера

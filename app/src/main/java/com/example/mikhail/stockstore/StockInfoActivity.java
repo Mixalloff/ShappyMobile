@@ -39,7 +39,7 @@ public class StockInfoActivity extends AppCompatActivity {
     }
 
     ServerResponseHandler handler = new ServerResponseHandler(){
-        
+
     } ;
 
     // Задает значения элементам интерфейса (изображения, текст..)

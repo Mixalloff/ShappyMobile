@@ -63,7 +63,7 @@ public class PersonCardAdapter extends RecyclerView.Adapter<PersonCardAdapter.Pe
         ImageLoader.getInstance().displayImage(persons.get(position).photo, holder.personPhoto);
 
         //PersonViewHolder.isAdded = stocks.get(position).isAdded;
-        if (persons.get(position).isAdded){
+        if (persons.get(position).isFriend){
             holder.addPersonBtn.setBackgroundResource(R.drawable.added);
             // holder.cv.setCardBackgroundColor(holder.cardLayout.getContext().getResources().getColor(R.color.default_app_green));
         }

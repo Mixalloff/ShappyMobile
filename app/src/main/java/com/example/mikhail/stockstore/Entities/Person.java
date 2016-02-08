@@ -19,14 +19,16 @@ public class Person implements Parcelable {
     public String surname;
     public String photo;
     public String id;
+    public boolean isFriend;
 
-    public boolean isAdded;
+    //public boolean isAdded;
 
-    public Person(String name, String surname, String photo, String id){
+    public Person(String name, String surname, String photo, String id, boolean isFriend){
         this.name = name;
         this.surname = surname;
         this.photo = photo;
         this.id = id;
+        this.isFriend = isFriend;
     }
 
     public Person(JSONObject personObj){
@@ -39,7 +41,8 @@ public class Person implements Parcelable {
             this.surname = personObj.has("surname") ? personObj.getString("surname") : defaultSurname;
             this.photo = personObj.has("logo") ? GlobalVariables.server + personObj.getString("logo") : null;
 
-            this.isAdded = personObj.has("subscribed") && (boolean) personObj.get("subscribed");
+            //this.isAdded = personObj.has("subscribed") && (boolean) personObj.get("subscribed");
+            this.isFriend = personObj.has("isFriend") && (boolean) personObj.get("isFriend");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -50,6 +53,7 @@ public class Person implements Parcelable {
         surname = in.readString();
         photo = in.readString();
         id = in.readString();
+        isFriend = in.readByte() != 0;
     }
 
     public static final Creator<Person> CREATOR = new Creator<Person>() {
@@ -75,5 +79,6 @@ public class Person implements Parcelable {
         dest.writeString(surname);
         dest.writeString(photo);
         dest.writeString(id);
+        dest.writeByte((byte) (this.isFriend ? 1 : 0));
     }
 }
