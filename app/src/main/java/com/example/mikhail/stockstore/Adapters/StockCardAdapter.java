@@ -224,7 +224,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                             public void onTaskCompleted(JSONObject response) {
                                 try {
                                     stocks.get(position).isAdded = !stocks.get(position).isAdded;
-                                    stocks.get(position).code = response.has("code") ? response.getString("code") : "";
+                                    stocks.get(position).code = response.has("data") ? response.getString("data") : "";
                                     setColor(holder, stocks.get(position));
                                 }catch(Exception e){
                                     e.printStackTrace();

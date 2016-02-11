@@ -13,13 +13,22 @@
         android:id="@+id/swipe_refresh"
         android:layout_below="@+id/include">
 
-    <ListView
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_list"
+            android:layout_below="@+id/include"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" >
+
+        </android.support.v7.widget.RecyclerView>
+    <!--<ListView
         android:id="@+id/search_friends_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true" />-->
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

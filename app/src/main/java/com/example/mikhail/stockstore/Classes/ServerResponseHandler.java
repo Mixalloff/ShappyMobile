@@ -57,6 +57,7 @@ public class ServerResponseHandler implements ResponseInterface{
             case "stocks": {
                 this.onUserGetStocksByCompany(response);
                 this.onUserGetStocksByFilter(response);
+                this.onUserGetStocksByWord(response);
                 break;
             }
 

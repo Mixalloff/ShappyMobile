@@ -85,12 +85,14 @@ public class CommonFunctions {
         }
     }
 
+    // Пустой тулбар
     public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar){
         Toolbar toolbar = (Toolbar) activity.findViewById(resourseToolbar);
         activity.setSupportActionBar(toolbar);
         return toolbar;
     }
 
+    // Установка тулбара, иконки навигации и стандартного действия при клике
     public static Toolbar setToolbar(final AppCompatActivity activity, int resourseToolbar, String typeNavBtn)
     {
         Toolbar toolbar = CommonFunctions.setToolbar(activity, resourseToolbar);
@@ -275,39 +277,6 @@ public class CommonFunctions {
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    // Добавление вкладок на экран друзей
-    public static void addFriendsTabs(final AppCompatActivity activity){
-        ViewPager pager;
-        FriendsViewPagerAdapter adapter;
-        SlidingTabLayout tabs;
-        // Заголовки вкладок
-        CharSequence Titles[]={"Друзья","Новости"};
-        // Количество вкладок
-        int Numboftabs = 2;
-        // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new FriendsViewPagerAdapter(activity.getSupportFragmentManager(),Titles,Numboftabs);
-
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) activity.findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) activity.findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(false); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                //return activity.getResources().getColor(R.color.tabsScrollColor);
-                return activity.getResources().getColor(R.color.default_app_white);
-            }
-        });
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
     }
 
     // Добавление вкладок с акциями

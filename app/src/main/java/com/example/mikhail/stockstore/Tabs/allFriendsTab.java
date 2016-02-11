@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -18,18 +17,15 @@ import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
-import com.example.mikhail.stockstore.Constants.CommonConstants;
+import com.example.mikhail.stockstore.Constants.ElementGroupSpecies;
 import com.example.mikhail.stockstore.Entities.Person;
-import com.example.mikhail.stockstore.MiniCardFragment;
 import com.example.mikhail.stockstore.R;
 import com.example.mikhail.stockstore.Search.SearchActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mikhail on 17.01.16.
@@ -68,7 +64,9 @@ public class allFriendsTab extends Fragment {
         friendSearchsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), SearchActivity.class));
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("type", ElementGroupSpecies.FRIENDS);
+                startActivity(intent);
             }
         });
 

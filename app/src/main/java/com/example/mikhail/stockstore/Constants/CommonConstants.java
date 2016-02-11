@@ -13,5 +13,6 @@ public class CommonConstants {
     public static final String SEARCH_BLOCK_TYPE_STOCKS = "stocks";
     public static final String SEARCH_BLOCK_TYPE_COMPANIES = "companies";
     public static final String SEARCH_BLOCK_TYPE_CATEGORIES = "categories";
+    public static final String SEARCH_BLOCK_TYPE_PERSONS = "persons";
 
 }

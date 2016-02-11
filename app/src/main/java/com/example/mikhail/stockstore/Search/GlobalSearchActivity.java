@@ -9,17 +9,15 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
-import com.example.mikhail.stockstore.Adapters.MiniCardsAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Constants.CommonConstants;
-import com.example.mikhail.stockstore.Entities.Stock;
-import com.example.mikhail.stockstore.MiniCardFragment;
+import com.example.mikhail.stockstore.Constants.ElementGroupSpecies;
+import com.example.mikhail.stockstore.Fragments.MiniCardContainerFragment;
 import com.example.mikhail.stockstore.R;
 
 import org.json.JSONArray;
@@ -44,7 +42,7 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
         setContentView(R.layout.activity_global_search);
 
         toolbar = CommonFunctions.setToolbar(this, R.id.include, CommonConstants.TOOLBAR_NAV_BACK);
-     //   initTest();
+        //initTest();
 
     }
 
@@ -65,7 +63,7 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
         @Override
         public void onUserGetStocksByFilter(JSONObject response) {
             // Удаление существующего блока
-            Fragment stocksFragment = getSupportFragmentManager().findFragmentByTag(CommonConstants.SEARCH_BLOCK_TYPE_STOCKS);
+            Fragment stocksFragment = getSupportFragmentManager().findFragmentByTag(ElementGroupSpecies.STOCKS.toString());
             if(stocksFragment != null)
                 getSupportFragmentManager().beginTransaction().remove(stocksFragment).commit();
 
@@ -85,7 +83,7 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
 
                     stocks.add(miniCardJSON(id, name, photo, type));
                 }
-                AddSearchBlock(stocks, "Stocks", CommonConstants.SEARCH_BLOCK_TYPE_STOCKS);
+                AddSearchBlock(stocks, "Stocks", ElementGroupSpecies.STOCKS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -131,13 +129,19 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
     }
 
     // Добавляет блок результатов поиска
-    public void AddSearchBlock(List<JSONObject> blockItems, String blockName, String tag){
-        MiniCardFragment block = new MiniCardFragment();
+    public void AddSearchBlock(List<JSONObject> blockItems, String blockName, ElementGroupSpecies tag){
+        // Удаление блока, если он уже есть
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag.toString());
+        if(fragment != null)
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+        MiniCardContainerFragment block = new MiniCardContainerFragment();
+        block.setElementsType(tag);
         block.setElems(blockItems);
         block.setBlockName(blockName);
         FragmentManager mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
-                .add(R.id.container_search, block, tag)
+                .add(R.id.container_search, block, tag.toString())
                 .commit();
     }
 
@@ -169,8 +173,8 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
         }
         list.add(obj1);
         list.add(obj2);
-        AddSearchBlock(list, "Companies", CommonConstants.SEARCH_BLOCK_TYPE_COMPANIES);
-        AddSearchBlock(list, "Stocks", CommonConstants.SEARCH_BLOCK_TYPE_STOCKS);
+        AddSearchBlock(list, "Companies", ElementGroupSpecies.COMPANIES);
+        AddSearchBlock(list, "Stocks", ElementGroupSpecies.STOCKS);
     }
 
     @Override
