@@ -31,6 +31,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,16 +42,8 @@ import java.util.Locale;
 public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.StocksViewHolder>{
     List<Stock> stocks;
 
-    // Вертикальное ли расположение recyclerView
-    private boolean isVertical = true;
-
     public StockCardAdapter(List<Stock> stocks){
         this.stocks = stocks;
-    }
-
-    public StockCardAdapter(List<Stock> stocks, boolean isVertical){
-        this.stocks = stocks;
-        this.isVertical = isVertical;
     }
 
     @Override
@@ -64,6 +58,27 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
         return new StocksViewHolder(v);
     }
 
+    // Находит разницу между текущей датой и переданной в параметрах
+    private long dateDifference(Date date){
+        long diff = date.getTime() - new Date().getTime();
+        return diff / (24 * 60 * 60 * 1000);
+    }
+
+    // Возвращает правильную форму фразы об окончании акции в соответствии с количеством дней
+    private String wordForm(long count){
+        if(count % 100 < 5 || count % 100 > 20){
+            if(count % 10 == 1){
+                return "остался " + count + " день";
+            }
+            else{
+                if(count % 10 >= 2 && count % 10 <= 4){
+                    return "осталось " + count + " дня";
+                }
+            }
+        }
+        return "осталось " + count + " дней";
+    }
+
     @Override
     public void onBindViewHolder(final StocksViewHolder holder, final int position) {
         holder.stockName.setText(stocks.get(position).name);
@@ -72,46 +87,19 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
       //  CommonFunctions.setPhotoToImageView(stocks.get(position).photo, holder.stockPhoto);
         ImageLoader.getInstance().displayImage(stocks.get(position).photo, holder.stockPhoto);
 
-
-        Locale ru = new Locale("ru");
+      /*  Locale ru = new Locale("ru");
         SimpleDateFormat format = new SimpleDateFormat("dd MMMM y",ru);
+        holder.stockDate.setText(format.format(stocks.get(position).dateFinish));*/
 
-        holder.stockDate.setText(format.format(stocks.get(position).dateFinish));
+        long diffDays = dateDifference(stocks.get(position).dateFinish);
+        holder.stockDate.setText(wordForm(diffDays));
+
         holder.companyName.setText(stocks.get(position).company.name);
 
        // CommonFunctions.setPhotoToImageView(stocks.get(position).company.photo, holder.companyLogo);
         ImageLoader.getInstance().displayImage(stocks.get(position).company.photo, holder.companyLogo);
 
         setColor(holder, stocks.get(position));
-        // если расоложение recyclerView горизонтальное
-        if (!this.isVertical){
-
-            holder.cardLayout.removeView(holder.companyLogo);
-            holder.cardLayout.removeView(holder.companyName);
-            holder.cardLayout.removeView(holder.stockDate);
-            holder.cardLayout.removeView(holder.stockDescription);
-            holder.cardLayout.removeView(holder.stockName);
-          //  holder.stockName.setTextSize(10);
-
-            int screenWidth = holder.itemView.getContext().getResources().getDisplayMetrics().widthPixels;
-
-            holder.cv.getLayoutParams().width = screenWidth / 2;
-           // holder.cv.getLayoutParams().height = 300;
-            holder.stockDescription.setLines(2);
-
-
-            // Максимальное количество символов в названии и описании
-            /*int maxNameSymb = 20;
-            int maxDescSymb = 50;
-            String name = stocks.get(position).name.length() <= maxNameSymb ?
-                    stocks.get(position).name : stocks.get(position).name.substring(0,maxNameSymb) + "...";
-            String description = stocks.get(position).description.length() <= maxDescSymb ?
-                    stocks.get(position).description : stocks.get(position).description.substring(0,maxDescSymb) + "...";
-
-
-            holder.stockName.setText(name);
-            holder.stockDescription.setText(description);*/
-        }
 
         holder.companyLogo.setOnClickListener(new View.OnClickListener() {
 

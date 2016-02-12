@@ -118,7 +118,7 @@ public class CompanyInfoActivity extends AppCompatActivity {
         rv.setLayoutManager(llm);
 
        // rv.setHasFixedSize(true);
-        adapter = new StockCardAdapter(stocks, false);
+        adapter = new StockCardAdapter(stocks);
         rv.setAdapter(adapter);
     }
 

@@ -80,9 +80,14 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
             // Получение типа объекта для поиска
             Intent intent = getIntent();
             typeSpecies = (ElementGroupSpecies) intent.getSerializableExtra("type");
+
         //elements = testItems();
             initLayoutByType(typeSpecies);
             initSwipe(searchLayout);
+
+           /* if(!startQuery.equals("")){
+                this.onQueryTextSubmit(startQuery);
+            }*/
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -273,6 +278,12 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         try {
             searchView = (SearchView) searchMenuItem.getActionView();
             searchView.setOnQueryTextListener(this);
+
+            Intent intent = getIntent();
+            String startQuery = intent.getStringExtra("query");
+            if(!startQuery.equals("")){
+                searchView.setQuery(startQuery, true);
+            }
         }
         catch(Exception e){
             e.printStackTrace();

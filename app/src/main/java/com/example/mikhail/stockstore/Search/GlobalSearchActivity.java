@@ -83,7 +83,7 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
 
                     stocks.add(miniCardJSON(id, name, photo, type));
                 }
-                AddSearchBlock(stocks, "Stocks", ElementGroupSpecies.STOCKS);
+                AddSearchBlock(stocks, "Stocks", searchView.getQuery().toString(), ElementGroupSpecies.STOCKS);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -129,13 +129,14 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
     }
 
     // Добавляет блок результатов поиска
-    public void AddSearchBlock(List<JSONObject> blockItems, String blockName, ElementGroupSpecies tag){
+    public void AddSearchBlock(List<JSONObject> blockItems, String blockName, String query, ElementGroupSpecies tag){
         // Удаление блока, если он уже есть
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag.toString());
         if(fragment != null)
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();
 
         MiniCardContainerFragment block = new MiniCardContainerFragment();
+        block.setQuery(query);
         block.setElementsType(tag);
         block.setElems(blockItems);
         block.setBlockName(blockName);
@@ -173,8 +174,8 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
         }
         list.add(obj1);
         list.add(obj2);
-        AddSearchBlock(list, "Companies", ElementGroupSpecies.COMPANIES);
-        AddSearchBlock(list, "Stocks", ElementGroupSpecies.STOCKS);
+        //AddSearchBlock(list, "Companies", ElementGroupSpecies.COMPANIES);
+        //AddSearchBlock(list, "Stocks", ElementGroupSpecies.STOCKS);
     }
 
     @Override

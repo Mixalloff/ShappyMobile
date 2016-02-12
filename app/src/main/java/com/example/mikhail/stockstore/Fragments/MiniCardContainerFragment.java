@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class MiniCardContainerFragment extends Fragment {
     RecyclerView rv;
     TextView blockHeader;
     String blockName = "default";
+    String query;
     int orientation = LinearLayoutManager.HORIZONTAL;
 
     public void setOrientation(int orientation){
@@ -52,6 +54,8 @@ public class MiniCardContainerFragment extends Fragment {
     public void setBlockName(String name){
         this.blockName = name;
     }
+
+    public void setQuery(String query){ this.query = query; }
 
     public void setElementsType(ElementGroupSpecies type){
         this.elemType = type;
@@ -67,6 +71,7 @@ public class MiniCardContainerFragment extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), SearchActivity.class);
                     intent.putExtra("type", elemType);
+                    intent.putExtra("query", query);
                     startActivity(intent);
                 }
             });
