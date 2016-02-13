@@ -1,7 +1,9 @@
 package com.example.mikhail.stockstore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.SearchView;
@@ -11,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+
+import java.util.List;
 
 public class StocksActivity extends ActionBarActivity  implements SearchView.OnQueryTextListener {
 
@@ -39,6 +43,15 @@ public class StocksActivity extends ActionBarActivity  implements SearchView.OnQ
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment fragment:
+             fragments) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

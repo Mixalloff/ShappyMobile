@@ -156,7 +156,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rv.setLayoutManager(llm);
 
-        stocksAdapter = new StockCardAdapter(stocks);
+        stocksAdapter = new StockCardAdapter(stocks, this);
         rv.setAdapter(stocksAdapter);
         rv.setItemAnimator(new DefaultItemAnimator());
     }

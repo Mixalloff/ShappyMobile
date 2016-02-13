@@ -118,7 +118,7 @@ public class friendsNewsTab extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rv.setLayoutManager(llm);
-        adapter = new StockCardAdapter(stocks);
+        adapter = new StockCardAdapter(stocks, getActivity());
         rv.setAdapter(adapter);
     }
 

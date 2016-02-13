@@ -1,8 +1,10 @@
 package com.example.mikhail.stockstore.Tabs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -71,6 +73,8 @@ public class allStocksTab extends Fragment {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "Pushed button", Snackbar.LENGTH_SHORT).show();
+               /* Intent intent = new Intent(getActivity(), GlobalSearchActivity.class);
+                getActivity().startActivityForResult(intent, 123);*/
                 startActivity(new Intent(v.getContext(), GlobalSearchActivity.class));
             }
         });
@@ -91,6 +95,28 @@ public class allStocksTab extends Fragment {
 
         return v;
 
+    }
+final allStocksTab self = this;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) {return;}
+        Stock changedStock = data.getParcelableExtra("changed_stock");
+        if(changedStock != null){
+            //Snackbar.make(this.getView(), changedStock.name, Snackbar.LENGTH_SHORT).show();
+            for (Stock stock :
+                    stocks) {
+                if(stock.id.equals(changedStock.id)) {
+                    stocks.set(stocks.indexOf(stock), changedStock);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+        }
+
+       /* if (data == null) {return;}
+        String name = data.getStringExtra("name");
+        Snackbar.make(this.getView(), name, Snackbar.LENGTH_SHORT).show();*/
     }
 
     // Инициализация SwipeLayout
@@ -119,7 +145,7 @@ public class allStocksTab extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rv.setLayoutManager(llm);
-        adapter = new StockCardAdapter(stocks);
+        adapter = new StockCardAdapter(stocks, getActivity());
         rv.setAdapter(adapter);
         rv.setItemAnimator(new DefaultItemAnimator());
     }

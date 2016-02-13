@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
 
         rv.setLayoutManager(llm);
-        adapter = new StockCardAdapter(stocks);
+        adapter = new StockCardAdapter(stocks, this);
         rv.setAdapter(adapter);
     }
 

@@ -41,9 +41,11 @@ import java.util.Locale;
  */
 public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.StocksViewHolder>{
     List<Stock> stocks;
+    Activity activity;
 
-    public StockCardAdapter(List<Stock> stocks){
+    public StockCardAdapter(List<Stock> stocks, Activity activity){
         this.stocks = stocks;
+        this.activity = activity;
     }
 
     @Override
@@ -180,7 +182,9 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), StockInfoActivity.class);
                 intent.putExtra("stock", (Parcelable) stocks.get(position));
-                holder.itemView.getContext().startActivity(intent);
+               // holder.itemView.getContext().startActivity(intent);
+                activity.startActivityForResult(intent, 1);
+
 
                 // holder.itemView.getContext().startActivity(intent.putExtras(b));
             }
