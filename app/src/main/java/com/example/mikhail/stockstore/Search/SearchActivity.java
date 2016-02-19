@@ -38,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -312,7 +313,12 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
        /* AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
         request.setParameters("FIO=" + query);
         request.execute(APIConstants.USER_GET_FRIENDS_FILTER);*/
-        RequestNeededSpecies(this.typeSpecies, query);
+        try {
+            RequestNeededSpecies(this.typeSpecies, URLEncoder.encode(query, "UTF-8"));
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return false;
     }
 

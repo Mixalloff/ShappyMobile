@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,9 +93,13 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
 
     // Запрос акций по искомому слову
     public void requestStocks(String searchWord){
-        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
-        request.setParameters("searchword=" + searchWord);
-        request.execute(APIConstants.USER_GET_STOCKS_BY_WORDPATH);
+        try {
+            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            request.setParameters("searchword=" + URLEncoder.encode(searchWord, "UTF-8"));
+            request.execute(APIConstants.USER_GET_STOCKS_BY_WORDPATH);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
