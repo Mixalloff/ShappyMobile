@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * Created by mikhail on 07.12.15.
  */
 // Класс обработки ответа сервера. Вызывает методы реализованного пользователем интерфейса
-public class ServerResponseHandler implements ResponseInterface{
+public class ServerResponseHandler{
 
     public void CheckResponse(JSONObject response) throws JSONException {
         String responseType = "";
@@ -112,107 +112,86 @@ public class ServerResponseHandler implements ResponseInterface{
 
     }
 
-    @Override
     public void onError400(JSONObject response) {
 
     }
 
-    @Override
     public void onError403(JSONObject response) {
 
     }
 
-    @Override
     public void onError404(JSONObject response) {
 
     }
 
-    @Override
     public void onError500(JSONObject response) {
 
     }
 
-    @Override
     public void onRegister(JSONObject response) {
 
     }
 
-    @Override
     public void onAuthorize(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetAllStocks(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetAllCompanies(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetAllCategories(JSONObject response) {
 
     }
 
-    @Override
     public void onUserSubscribeStock(JSONObject response) {
 
     }
 
-    @Override
     public void onUserUnsubscribeStock(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetFeed(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetStocksByCompany(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetStocksByWord(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetStocksByFilter(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetAllFriends(JSONObject response) {
 
     }
 
-    @Override
     public void onUserAddFriend(JSONObject response) {
 
     }
 
-    @Override
     public void onUserDeleteFriend(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetFriendsFeed(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetFriendsFilter(JSONObject response) {
 
     }
 
-    @Override
     public void onUserGetStocksInfo(JSONObject response) {
 
     }
