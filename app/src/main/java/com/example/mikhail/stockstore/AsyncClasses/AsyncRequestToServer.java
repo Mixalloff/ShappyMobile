@@ -106,7 +106,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         String line;
         String result = "";
         int code = 0;
-        String token = WorkWithResources.getToken(activity);
 
         try {
 
@@ -189,59 +188,59 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     }
                     switch (url) {
                         case APIConstants.GET_ALL_STOCKS: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_STOCKS_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_STOCKS + "?" + urlParams));
                         }
                         case APIConstants.GET_ALL_COMPANIES: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES + "?" + urlParams));
                         }
                         case APIConstants.USER_AUTH: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_AUTH_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_AUTH));
                         }
                         case APIConstants.USER_REGISTER: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER));
                         }
 
                         case APIConstants.GET_ALL_CATEGORIES: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES + "?" + urlParams));
                         }
 
                         case APIConstants.USER_SUBSCRIBE_STOCK: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK));
                         }
                         case APIConstants.USER_UNSUBSCRIBE_STOCK: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK));
                         }
 
                         case APIConstants.USER_GET_FEED: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED + "?" + urlParams));
                         }
 
                         case APIConstants.USER_GET_STOCKS_INFO: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO + "?" + urlParams));
                         }
                         case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY + "?" + urlParams));
                         }
                         case APIConstants.USER_GET_STOCKS_BY_WORDPATH: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH + "?" + urlParams));
                         }
                         case APIConstants.USER_GET_STOCKS_BY_FILTER: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER + "?" + urlParams));
                         }
                         case APIConstants.USER_GET_ALL_FRIENDS: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS_ROUTE) + "?" + urlParams);
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS) + "?" + urlParams);
                         }
                         case APIConstants.USER_ADD_FRIEND: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND));
                         }
                         case APIConstants.USER_DELETE_FRIEND: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND_ROUTE));
+                            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND));
                         }
                         case APIConstants.USER_GET_FRIENDS_FEED: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED + "?" + urlParams));
                         }
                         case APIConstants.USER_GET_FRIENDS_FILTER: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER_ROUTE + "?" + urlParams));
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER + "?" + urlParams));
                         }
 
                         default: {
