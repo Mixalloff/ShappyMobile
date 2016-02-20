@@ -126,7 +126,7 @@ public class StockInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AsyncRequestToServer request = new AsyncRequestToServer(self, handler);
-                request.setParameters(APIRequestConstructor.userAddStockParameters(self, stock.id));
+                request.setParameters(APIRequestConstructor.userAddStockParameters(stock.id));
                 request.execute(APIConstants.USER_UNSUBSCRIBE_STOCK);
             }
         });
@@ -142,7 +142,7 @@ public class StockInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AsyncRequestToServer request = new AsyncRequestToServer(self, handler);
-                request.setParameters(APIRequestConstructor.userAddStockParameters(self, stock.id));
+                request.setParameters(APIRequestConstructor.userAddStockParameters(stock.id));
                 request.execute(APIConstants.USER_SUBSCRIBE_STOCK);
             }
         });

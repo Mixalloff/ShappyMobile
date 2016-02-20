@@ -18,21 +18,14 @@ public class APIRequestConstructor {
     }
 
     public static String registerParameters(String name, String surname, String email, String phone, String password){
-        /*return "login=" + email +
-               "&password=" + password +
-               "&name=" + name +
-               "&surname=" + surname +
-               "&phone=" + phone;*/
         return "login=" + email +
                 "&password=" + password +
                 "&FIO=" + name + " " + surname +
                 "&phone=" + phone;
     }
 
-    public static String userAddStockParameters(Activity activity, String stockId){
-        String token = WorkWithResources.getToken(activity);
-        return "token=" + token +
-               "&id="+stockId;
+    public static String userAddStockParameters(String stockId){
+        return "id="+stockId;
     }
 
 

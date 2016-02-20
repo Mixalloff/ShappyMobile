@@ -26,18 +26,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         initFonts();
 
-        //WorkWithServer.deleteToken();
-      //  WorkWithServer.saveToken("e58dc32c33ee3d047236443080067af30af5ed5e644ea5f80ad1e866fdaab1f4");
-
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(SplashActivity.this, StocksActivity.class);
-                SplashActivity.this.startActivity(mainIntent);
-                SplashActivity.this.finish();
-            }
-        }, SPLASH_DISPLAY_LENGTH);*/
-
         request = new AsyncRequestToServer(this, handler);
 
         request.execute(APIConstants.GET_ALL_STOCKS);

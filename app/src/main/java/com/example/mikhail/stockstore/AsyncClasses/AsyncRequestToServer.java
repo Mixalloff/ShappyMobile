@@ -61,10 +61,17 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.callback = callback;
     }
 
+    // Установка параметров с подпиской токеном
     public void setParameters(String urlParams){
-     //   this.method = method;
-       this.urlParams = urlParams;
+       String token = WorkWithResources.getToken(activity);
+       this.urlParams = token != null ? "token=" + token + "&" + urlParams : urlParams;
     }
+
+    // Установка токена в параметры
+    public void setParameters(){
+        setParameters("");
+    }
+
 
     public void setActivity(Activity activity){
         this.activity = activity;
@@ -99,6 +106,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         String line;
         String result = "";
         int code = 0;
+        String token = WorkWithResources.getToken(activity);
 
         try {
 
@@ -175,66 +183,72 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     {
         if (AsyncRequestToServer.hasConnection(activity)) {
             for (String url : targetURL) {
+                try {
+                    if(urlParams.equals("")){
+                        setParameters();
+                    }
+                    switch (url) {
+                        case APIConstants.GET_ALL_STOCKS: {
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_STOCKS_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.GET_ALL_COMPANIES: {
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_AUTH: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_AUTH_ROUTE));
+                        }
+                        case APIConstants.USER_REGISTER: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER_ROUTE));
+                        }
 
-                switch (url) {
-                    case APIConstants.GET_ALL_STOCKS: {
-                        return getAllStocks();
-                    }
-                    case APIConstants.GET_ALL_COMPANIES: {
-                        return getAllCompanies();
-                    }
-                    case APIConstants.USER_AUTH: {
-                        return userAuthorize();
-                    }
-                    case APIConstants.USER_REGISTER: {
-                        return userRegister();
-                    }
+                        case APIConstants.GET_ALL_CATEGORIES: {
+                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES_ROUTE + "?" + urlParams));
+                        }
 
-                   case APIConstants.GET_ALL_CATEGORIES: {
-                       return userGetAllCategories();
-                   }
+                        case APIConstants.USER_SUBSCRIBE_STOCK: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK_ROUTE));
+                        }
+                        case APIConstants.USER_UNSUBSCRIBE_STOCK: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK_ROUTE));
+                        }
 
-                    case APIConstants.USER_SUBSCRIBE_STOCK: {
-                        return userSubscribeStock();
-                    }
-                    case APIConstants.USER_UNSUBSCRIBE_STOCK: {
-                        return userUnsubscribeStock();
-                    }
+                        case APIConstants.USER_GET_FEED: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?" + urlParams));
+                        }
 
-                    case APIConstants.USER_GET_FEED: {
-                        return userGetFeed();
-                    }
+                        case APIConstants.USER_GET_STOCKS_INFO: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_GET_STOCKS_BY_WORDPATH: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_GET_STOCKS_BY_FILTER: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_GET_ALL_FRIENDS: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS_ROUTE) + "?" + urlParams);
+                        }
+                        case APIConstants.USER_ADD_FRIEND: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND_ROUTE));
+                        }
+                        case APIConstants.USER_DELETE_FRIEND: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND_ROUTE));
+                        }
+                        case APIConstants.USER_GET_FRIENDS_FEED: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE + "?" + urlParams));
+                        }
+                        case APIConstants.USER_GET_FRIENDS_FILTER: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER_ROUTE + "?" + urlParams));
+                        }
 
-                    case APIConstants.USER_GET_STOCKS_INFO: {
-                        return userGetStocksInfo();
+                        default: {
+                        }
                     }
-                    case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
-                        return userGetStocksByCompany();
-                    }
-                    case APIConstants.USER_GET_STOCKS_BY_WORDPATH: {
-                        return userGetStocksByWord();
-                    }
-                    case APIConstants.USER_GET_STOCKS_BY_FILTER: {
-                        return userGetStocksByFilter();
-                    }
-                    case APIConstants.USER_GET_ALL_FRIENDS: {
-                        return userGetAllFriends();
-                    }
-                    case APIConstants.USER_ADD_FRIEND: {
-                        return userAddFriend();
-                    }
-                    case APIConstants.USER_DELETE_FRIEND: {
-                        return userDeleteFriend();
-                    }
-                    case APIConstants.USER_GET_FRIENDS_FEED: {
-                        return userGetFriendsFeed();
-                    }
-                    case APIConstants.USER_GET_FRIENDS_FILTER: {
-                        return userGetFilteredFriend();
-                    }
-
-                    default: {
-                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
 
                 // Ранний выход, если был вызван cancel().
@@ -272,221 +286,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         }
 
         //showNotification("Downloaded " + result + " bytes");
-    }
-
-    // Метод отравки запроса на регистрацию пользователя
-    // Возвращает JSON объект с ответом сервера
-    public JSONObject userRegister(){
-
-        try {
-            //String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Метод отравки запроса на авторизацию пользователя
-    // Возвращает JSON объект с ответом сервера
-    public JSONObject userAuthorize(){
-
-        try {
-           // String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_AUTH_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Метод отравки запроса на получение всех акций
-    // Возвращает JSON объект с ответом сервера
-    public JSONObject getAllStocks(){
-        String result;
-        try {
-            String token = WorkWithResources.getToken(activity);
-            result = sendGetRequest(APIConstants.GET_ALL_STOCKS_ROUTE + "?token=" + token);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        try {
-            return new JSONObject(result);
-        } catch (JSONException e) {
-            e.printStackTrace();return null;
-        }
-    }
-
-    // Получение всех компаний
-    public JSONObject getAllCompanies(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES_ROUTE + "?token=" + token));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Получение всех категорий
-    public JSONObject userGetAllCategories(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES_ROUTE + "?token=" + token));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Подписка на акцию с id = stockId
-    public JSONObject userSubscribeStock(){
-
-        try {
-            //String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Отписка от акции
-    public JSONObject userUnsubscribeStock(){
-        try {
-            //String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Получение всех акций на стене пользователя
-    public JSONObject userGetFeed(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED_ROUTE + "?token=" + token));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    // Получение пользователей по условию
-    public JSONObject userGetFilteredFriend(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER_ROUTE +
-                    "?token=" + token + "&" + urlParams ));
-                    /*"&FIO=" + fio +
-                    "&mail=" + mail +
-                    "&phone=" + phone*/
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetStocksInfo(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO_ROUTE +
-                    "?token=" + token +
-                    "&"+urlParams));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetStocksByCompany(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY_ROUTE +
-                    "?token=" + token +
-                    "&"+urlParams));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetStocksByWord(){
-        try {
-           // String word = URLEncoder.encode(urlParams, "UTF-8");
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH_ROUTE +
-                    "?token=" + token +
-                    "&"+urlParams));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetStocksByFilter(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER_ROUTE +
-                    "?token=" + token +
-                    "&"+urlParams));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetAllFriends(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS_ROUTE +
-                    "?token=" + token +
-                    "&"+urlParams));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userAddFriend(){
-        try {
-           // String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userDeleteFriend(){
-        try {
-            //String token = WorkWithToken.getToken(activity);
-            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND_ROUTE));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public JSONObject userGetFriendsFeed(){
-        try {
-            String token = WorkWithResources.getToken(activity);
-            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED_ROUTE +
-                    "?token=" + token));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
 }

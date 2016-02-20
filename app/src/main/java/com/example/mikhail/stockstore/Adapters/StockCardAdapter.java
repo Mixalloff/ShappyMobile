@@ -223,7 +223,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                                 }
                             }
                         });
-                        request.setParameters(APIRequestConstructor.userAddStockParameters((Activity) v.getContext(), stocks.get(position).id));
+                        request.setParameters(APIRequestConstructor.userAddStockParameters(stocks.get(position).id));
                         if (stocks.get(position).isAdded) {
                             Toast.makeText(v.getContext(),"Удаляется", Toast.LENGTH_SHORT).show();
                             request.execute(APIConstants.USER_UNSUBSCRIBE_STOCK);
