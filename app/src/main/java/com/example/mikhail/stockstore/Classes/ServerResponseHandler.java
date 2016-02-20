@@ -83,6 +83,11 @@ public class ServerResponseHandler{
                 break;
             }
 
+            case "subscribitions": {
+                this.onUserGetSubscriptionsStocks(response);
+                break;
+            }
+
             case "400": {
                 this.onError400(response);
                 break;
@@ -107,92 +112,50 @@ public class ServerResponseHandler{
 
     }
 
-    // Функция, выполняемая если ни один из известных тиов ответа не подошел
-    public void DefaultFunc(JSONObject response){
+    // Функция, выполняемая если ни один из известных типов ответа не подошел
+    public void DefaultFunc(JSONObject response){}
 
-    }
+    public void onError400(JSONObject response) {}
 
-    public void onError400(JSONObject response) {
+    public void onError403(JSONObject response) {}
 
-    }
+    public void onError404(JSONObject response) {}
 
-    public void onError403(JSONObject response) {
+    public void onError500(JSONObject response) {}
 
-    }
+    public void onRegister(JSONObject response) {}
 
-    public void onError404(JSONObject response) {
+    public void onAuthorize(JSONObject response) {}
 
-    }
+    public void onUserGetAllStocks(JSONObject response) {}
 
-    public void onError500(JSONObject response) {
+    public void onUserGetAllCompanies(JSONObject response) {}
 
-    }
+    public void onUserGetAllCategories(JSONObject response) {}
 
-    public void onRegister(JSONObject response) {
+    public void onUserSubscribeStock(JSONObject response) {}
 
-    }
+    public void onUserUnsubscribeStock(JSONObject response) {}
 
-    public void onAuthorize(JSONObject response) {
+    public void onUserGetFeed(JSONObject response) { }
 
-    }
+    public void onUserGetStocksByCompany(JSONObject response) {}
 
-    public void onUserGetAllStocks(JSONObject response) {
+    public void onUserGetStocksByWord(JSONObject response) {}
 
-    }
+    public void onUserGetStocksByFilter(JSONObject response) {}
 
-    public void onUserGetAllCompanies(JSONObject response) {
+    public void onUserGetAllFriends(JSONObject response) {}
 
-    }
+    public void onUserAddFriend(JSONObject response) {}
 
-    public void onUserGetAllCategories(JSONObject response) {
+    public void onUserDeleteFriend(JSONObject response) {}
 
-    }
+    public void onUserGetFriendsFeed(JSONObject response) {}
 
-    public void onUserSubscribeStock(JSONObject response) {
+    public void onUserGetFriendsFilter(JSONObject response) {}
 
-    }
+    public void onUserGetStocksInfo(JSONObject response) {}
 
-    public void onUserUnsubscribeStock(JSONObject response) {
-
-    }
-
-    public void onUserGetFeed(JSONObject response) {
-
-    }
-
-    public void onUserGetStocksByCompany(JSONObject response) {
-
-    }
-
-    public void onUserGetStocksByWord(JSONObject response) {
-
-    }
-
-    public void onUserGetStocksByFilter(JSONObject response) {
-
-    }
-
-    public void onUserGetAllFriends(JSONObject response) {
-
-    }
-
-    public void onUserAddFriend(JSONObject response) {
-
-    }
-
-    public void onUserDeleteFriend(JSONObject response) {
-
-    }
-
-    public void onUserGetFriendsFeed(JSONObject response) {
-
-    }
-
-    public void onUserGetFriendsFilter(JSONObject response) {
-
-    }
-
-    public void onUserGetStocksInfo(JSONObject response) {
-
-    }
+    public void onUserGetSubscriptionsStocks(JSONObject response){}
 }

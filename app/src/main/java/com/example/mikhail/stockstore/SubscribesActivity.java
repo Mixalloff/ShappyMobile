@@ -6,8 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Classes.IDifferentMode;
 
-public class SubscribesActivity extends AppCompatActivity {
+public class SubscribesActivity extends AppCompatActivity implements IDifferentMode{
+
+    // Режим подписок
+    String tabMode = "Subscriptions";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,4 +44,13 @@ public class SubscribesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public String getMode() {
+        return this.tabMode;
+    }
+
+    @Override
+    public void setMode(String mode) {
+        this.tabMode = mode;
+    }
 }

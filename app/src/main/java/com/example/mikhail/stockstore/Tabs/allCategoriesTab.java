@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.CategoryCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.IDifferentMode;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Category;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * Created by mikhail on 09.12.15.
  */
-public class allCategoriesTab extends Fragment {
+public class allCategoriesTab extends Fragment{
     CategoryCardAdapter adapter;
     private List<Category> categories = new ArrayList<>();
     int countOfLoadingCategories = 10;

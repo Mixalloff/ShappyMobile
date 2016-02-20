@@ -243,6 +243,10 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                             return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER + "?" + urlParams));
                         }
 
+                        case APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS: {
+                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS + "?" + urlParams));
+                        }
+
                         default: {
                         }
                     }

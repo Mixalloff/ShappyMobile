@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class StockInfoActivity extends AppCompatActivity {
 
     Stock stock;
-    Intent intent;;
+    Intent intent;
     ImageView stockPhoto;
     TextView stockName;
     TextView stockDescription ;

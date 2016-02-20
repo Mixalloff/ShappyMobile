@@ -22,4 +22,6 @@ public class APIConstants {
     public final static String USER_GET_FRIENDS_FEED = "user/stocks/filter/friends";
     public final static String USER_GET_FRIENDS_FILTER = "user/friends/filter";
 
+    public final static String USER_GET_SUBSCRIPTIONS_STOCKS =  "user/stocks/filter/subscribitions";
+
 }

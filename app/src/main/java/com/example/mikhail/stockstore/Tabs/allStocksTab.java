@@ -19,12 +19,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.Classes.IDifferentMode;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Stock;
 import com.example.mikhail.stockstore.Search.GlobalSearchActivity;
 import com.example.mikhail.stockstore.R;
+import com.example.mikhail.stockstore.StocksActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,18 +37,20 @@ import java.util.List;
 /**
  * Created by mikhail on 09.12.15.
  */
-public class allStocksTab extends Fragment {
-    StockCardAdapter adapter;
+public class allStocksTab extends Fragment implements IDifferentMode{
+    private StockCardAdapter adapter;
     private List<Stock> stocks = new ArrayList<>();
-    RecyclerView rv;
-    int countOfLoadingStocks = 15;
-    AsyncRequestToServer request;
+    private RecyclerView rv;
+    private int countOfLoadingStocks = 15;
+    private String mode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
+        // Установить режим
+        this.setMode(((IDifferentMode)getActivity()).getMode());
 
 // Тестовые карточки
        // initializeTestData();
@@ -89,14 +93,31 @@ public class allStocksTab extends Fragment {
             handler.onUserGetAllStocks(stocksJson);
         }catch(Exception e){
             e.printStackTrace();
-            request = new AsyncRequestToServer(getActivity(), handler);
-            request.execute(APIConstants.GET_ALL_STOCKS);
+
+            AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+            //request.execute(APIConstants.GET_ALL_STOCKS);
+            requestStocks(request);
         }
 
         return v;
 
     }
-final allStocksTab self = this;
+
+    public void requestStocks(AsyncRequestToServer request){
+        switch(getMode()){
+            case "All": {
+                request.execute(APIConstants.GET_ALL_STOCKS);
+                break;
+            }
+            case "Subscriptions": {
+                request.execute(APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -130,9 +151,10 @@ final allStocksTab self = this;
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                request = new AsyncRequestToServer(getActivity(), handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
                 request.setSwipeRefresh(swipe);
-                request.execute(APIConstants.GET_ALL_STOCKS);
+                requestStocks(request);
+                //request.execute(APIConstants.GET_ALL_STOCKS);
             }
         });
 
@@ -158,25 +180,34 @@ final allStocksTab self = this;
   // String s = v.getResources().getString(R.string.big_text);
     }
 
+    private void refreshStocksFromResponse(JSONObject response){
+        try {
+            // Обновляем список акций
+            stocks.clear();
+            // adapter.notifyItemRemoved(0);
+
+            JSONArray data = new JSONArray(response.get("data").toString());
+            int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
+            for (int i = 0; i < count; i++){
+                JSONObject stock = new JSONObject(data.get(i).toString());
+                stocks.add(new Stock(stock));
+                // adapter.notifyItemInserted(i);
+            }
+            adapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllStocks(JSONObject response) {
-            try {
-                // Обновляем список акций
-                stocks.clear();
-               // adapter.notifyItemRemoved(0);
+            refreshStocksFromResponse(response);
+        }
 
-                JSONArray data = new JSONArray(response.get("data").toString());
-                int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
-                for (int i = 0; i < count; i++){
-                    JSONObject stock = new JSONObject(data.get(i).toString());
-                    stocks.add(new Stock(stock));
-                   // adapter.notifyItemInserted(i);
-                }
-                adapter.notifyDataSetChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        @Override
+        public void onUserGetSubscriptionsStocks(JSONObject response){
+            refreshStocksFromResponse(response);
         }
 
         @Override
@@ -200,6 +231,15 @@ final allStocksTab self = this;
         }
     };
 
+    @Override
+    public String getMode() {
+        return this.mode;
+    }
+
+    @Override
+    public void setMode(String mode) {
+        this.mode = ((IDifferentMode)getActivity()).getMode();
+    }
 }
 
 

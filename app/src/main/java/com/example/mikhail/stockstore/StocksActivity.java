@@ -13,18 +13,28 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
+import com.example.mikhail.stockstore.Classes.IDifferentMode;
+import com.example.mikhail.stockstore.Constants.CommonConstants;
 
 import java.util.List;
 
-public class StocksActivity extends ActionBarActivity  implements SearchView.OnQueryTextListener {
+public class StocksActivity extends ActionBarActivity  implements SearchView.OnQueryTextListener, IDifferentMode {
 
     MenuItem searchMenuItem;
     SearchView searchView;
+
+    // Режим всех акций
+    String tabMode = "All";
+
+    public String getTabMode(){
+        return this.tabMode;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stocks);
+
         CommonFunctions.addNavigationView(this,CommonFunctions.setToolbar(this, R.id.toolbar));
         CommonFunctions.addStockTabs(this);
     }
@@ -80,5 +90,15 @@ public class StocksActivity extends ActionBarActivity  implements SearchView.OnQ
     public boolean onQueryTextChange(String newText) {
         //Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    @Override
+    public String getMode() {
+        return this.tabMode;
+    }
+
+    @Override
+    public void setMode(String mode) {
+        this.tabMode = mode == null ? "All" : mode;
     }
 }

@@ -15,4 +15,8 @@ public class CommonConstants {
     public static final String SEARCH_BLOCK_TYPE_CATEGORIES = "categories";
     public static final String SEARCH_BLOCK_TYPE_PERSONS = "persons";
 
+    // Наименования передаваемых в Intent объектов
+    public static final String EXTRA_STOCK = "stock";
+    public static final String EXTRA_TAB_MODE = "tab_mode";
+
 }
