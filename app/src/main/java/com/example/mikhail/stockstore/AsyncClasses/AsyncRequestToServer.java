@@ -37,10 +37,41 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     // Callback
     private OnTaskCompleted callback;
+    private OnTaskCompleted errorCallback;
 
     public void setCallback(OnTaskCompleted callback){
         this.callback = callback;
     }
+
+    public void setErrorCallback(OnTaskCompleted errorCallback){
+        this.errorCallback = errorCallback;
+    }
+
+    final List<String> POST_Request = Arrays.asList(
+            APIConstants.USER_AUTH,
+            APIConstants.USER_REGISTER,
+            APIConstants.USER_SUBSCRIBE_STOCK,
+            APIConstants.USER_UNSUBSCRIBE_STOCK,
+            APIConstants.USER_ADD_FRIEND,
+            APIConstants.USER_DELETE_FRIEND,
+            APIConstants.USER_SUBSCRIBE_COMPANY,
+            APIConstants.USER_UNSUBSCRIBE_COMPANY
+    );
+
+    final List<String> GET_Request = Arrays.asList(
+            APIConstants.GET_ALL_STOCKS,
+            APIConstants.GET_ALL_COMPANIES,
+            APIConstants.GET_ALL_CATEGORIES,
+            APIConstants.USER_GET_FEED,
+            APIConstants.USER_GET_STOCKS_INFO,
+            APIConstants.USER_GET_STOCKS_BY_COMPANY,
+            APIConstants.USER_GET_STOCKS_BY_WORDPATH,
+            APIConstants.USER_GET_STOCKS_BY_FILTER,
+            APIConstants.USER_GET_ALL_FRIENDS,
+            APIConstants.USER_GET_FRIENDS_FEED,
+            APIConstants.USER_GET_FRIENDS_FILTER,
+            APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS
+    );
 
     // Параметры запроса
     private String urlParams = "";
@@ -56,8 +87,13 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     }
 
     public AsyncRequestToServer(Activity activity, OnTaskCompleted callback){
+        this(activity, callback, null);
+    }
+
+    public AsyncRequestToServer(Activity activity, OnTaskCompleted callback, OnTaskCompleted errorCallback){
         this.activity = activity;
         this.callback = callback;
+        this.errorCallback = errorCallback;
     }
 
     // Установка параметров с подпиской токеном
@@ -184,32 +220,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                         setParameters();
                     }
 
-                    List<String> POST_Request = Arrays.asList(
-                            APIConstants.USER_AUTH,
-                            APIConstants.USER_REGISTER,
-                            APIConstants.USER_SUBSCRIBE_STOCK,
-                            APIConstants.USER_UNSUBSCRIBE_STOCK,
-                            APIConstants.USER_ADD_FRIEND,
-                            APIConstants.USER_DELETE_FRIEND,
-                            APIConstants.USER_SUBSCRIBE_COMPANY,
-                            APIConstants.USER_UNSUBSCRIBE_COMPANY
-                    );
-
-                    List<String> GET_Request = Arrays.asList(
-                            APIConstants.GET_ALL_STOCKS,
-                            APIConstants.GET_ALL_COMPANIES,
-                            APIConstants.GET_ALL_CATEGORIES,
-                            APIConstants.USER_GET_FEED,
-                            APIConstants.USER_GET_STOCKS_INFO,
-                            APIConstants.USER_GET_STOCKS_BY_COMPANY,
-                            APIConstants.USER_GET_STOCKS_BY_WORDPATH,
-                            APIConstants.USER_GET_STOCKS_BY_FILTER,
-                            APIConstants.USER_GET_ALL_FRIENDS,
-                            APIConstants.USER_GET_FRIENDS_FEED,
-                            APIConstants.USER_GET_FRIENDS_FILTER,
-                            APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS
-                    );
-
                     if(POST_Request.contains(url)){
                         return new JSONObject(sendPostRequest(url));
                     }
@@ -246,12 +256,16 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             }
             // Если ошибка показываем ее
             if (result.has("error")) {
-                showError(result.get("type").toString());
-            }
-                // Иначе вызов колбэка
-                else if (callback != null) {
-                    callback.onTaskCompleted(result);
+                if(errorCallback != null){
+                    errorCallback.onTaskCompleted(result);
                 }
+                else {
+                    showError(result.get("type").toString());
+                }
+            }// Иначе вызов колбэка
+            else if (callback != null) {
+                callback.onTaskCompleted(result);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
