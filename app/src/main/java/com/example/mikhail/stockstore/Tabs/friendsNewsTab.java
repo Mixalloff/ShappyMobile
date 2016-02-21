@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Entities.Stock;
@@ -32,7 +33,7 @@ public class friendsNewsTab extends Fragment {
     private List<Stock> stocks = new ArrayList<>();
     RecyclerView rv;
     int countOfLoadingStocks = 5;
-    AsyncRequestToServer request;
+    //AsyncRequestToServer request;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,12 @@ public class friendsNewsTab extends Fragment {
             request.execute(APIConstants.USER_GET_FRIENDS_FEED);
         }*/
 
-        request = new AsyncRequestToServer(getActivity(), handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetFriendsFeed(result);
+            }
+        });
         request.execute(APIConstants.USER_GET_FRIENDS_FEED);
 
         return v;
@@ -104,7 +110,12 @@ public class friendsNewsTab extends Fragment {
                     }
                 },0);*/
 
-                request = new AsyncRequestToServer(getActivity(), handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetAllFriends(result);
+                    }
+                });
                 request.setSwipeRefresh(swipe);
                 request.execute(APIConstants.USER_GET_ALL_FRIENDS);
             }

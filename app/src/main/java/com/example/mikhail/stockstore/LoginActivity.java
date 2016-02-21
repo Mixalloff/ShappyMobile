@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -95,9 +96,14 @@ public class LoginActivity extends ActionBarActivity {
         String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
 
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result) {
+                    handler.onAuthorize(result);
+                }
+            });
             request.setParameters(APIRequestConstructor.authParameters(Login, Password));
-            handler.CheckResponse(request.execute(APIConstants.USER_AUTH).get());
+            request.execute(APIConstants.USER_AUTH);
             //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
         } catch (Exception e) {
             e.printStackTrace();

@@ -211,7 +211,7 @@ public class StockCardAdapter extends RecyclerView.Adapter<StockCardAdapter.Stoc
                 switch (item.getItemId()) {
                     case 1: {
                         //действие
-                        AsyncRequestToServer request = new AsyncRequestToServer((Activity) v.getContext(), handler, new OnTaskCompleted() {
+                        AsyncRequestToServer request = new AsyncRequestToServer((Activity) v.getContext(), new OnTaskCompleted() {
                             @Override
                             public void onTaskCompleted(JSONObject response) {
                                 try {

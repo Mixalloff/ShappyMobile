@@ -22,6 +22,7 @@ import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.Adapters.MiniCardsAdapter;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
@@ -39,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.nio.channels.AsynchronousCloseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,8 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     SearchView searchView;
 
     ElementGroupSpecies typeSpecies;
+
+    String currentQuery = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,18 +102,30 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
 
 
-    public void RequestNeededSpecies(ElementGroupSpecies type, String query){
+    public void RequestNeededSpecies(AsyncRequestToServer request, ElementGroupSpecies type, String query){
 
-        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+        //AsyncRequestToServer request = new AsyncRequestToServer(this);
         switch(type){
             case FRIENDS:
             {
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetFriendsFilter(result);
+                    }
+                });
                 request.setParameters("FIO=" + query);
                 request.execute(APIConstants.USER_GET_FRIENDS_FILTER);
                 break;
             }
             case STOCKS:
             {
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetStocksByWord(result);
+                    }
+                });
                 request.setParameters("searchword=" + query);
                 request.execute(APIConstants.USER_GET_STOCKS_BY_WORDPATH);
                 break;
@@ -188,9 +204,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
                 public void onRefresh() {
                     //  request = new AsyncRequestToServer(getActivity(), handler);
                     try {
-                        AsyncRequestToServer request = new AsyncRequestToServer(self, handler);
+                        AsyncRequestToServer request = new AsyncRequestToServer(self);
                         request.setSwipeRefresh(swipe);
-                        request.execute(APIConstants.USER_GET_FRIENDS_FILTER);
+                        RequestNeededSpecies(request, typeSpecies, currentQuery);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -283,6 +299,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
             Intent intent = getIntent();
             String startQuery = intent.getStringExtra("query");
             if(!startQuery.equals("")){
+                this.currentQuery = startQuery;
                 searchView.setQuery(startQuery, true);
             }
         }
@@ -313,8 +330,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
        /* AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
         request.setParameters("FIO=" + query);
         request.execute(APIConstants.USER_GET_FRIENDS_FILTER);*/
+        this.currentQuery = query;
         try {
-            RequestNeededSpecies(this.typeSpecies, URLEncoder.encode(query, "UTF-8"));
+            RequestNeededSpecies(new AsyncRequestToServer(this), this.typeSpecies, URLEncoder.encode(query, "UTF-8"));
             return true;
         }catch(Exception e){
             e.printStackTrace();

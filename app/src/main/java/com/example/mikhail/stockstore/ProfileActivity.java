@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
@@ -40,7 +41,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetFeed(result);
+            }
+        });
         request.execute(APIConstants.USER_GET_FEED);
     }
 

@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ErrorsWorker;
@@ -34,14 +35,18 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     // Callback
     private OnTaskCompleted callback;
 
+    public void setCallback(OnTaskCompleted callback){
+        this.callback = callback;
+    }
+
     // Параметры запроса
-    private static String urlParams = "";
+    private String urlParams = "";
     // Активити в которой создан объект
     Activity activity;
     // Выполняющий действия обработчик ответа
-    private ServerResponseHandler handler = new ServerResponseHandler();
+   // private ServerResponseHandler handler = new ServerResponseHandler();
 
-    public void setHandler(ServerResponseHandler handler){ this.handler = handler; }
+   // public void setHandler(ServerResponseHandler handler){ this.handler = handler; }
 
     /*public AsyncRequestToServer(Activity activity){
         this.activity = activity;
@@ -51,13 +56,12 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.swipe = swipe;
     }
 
-    public AsyncRequestToServer(Activity activity, ServerResponseHandler handler){
-        this(activity, handler, null);
+    public AsyncRequestToServer(Activity activity){
+        this(activity, null);
     }
 
-    public AsyncRequestToServer(Activity activity, ServerResponseHandler handler, OnTaskCompleted callback){
+    public AsyncRequestToServer(Activity activity, OnTaskCompleted callback){
         this.activity = activity;
-        this.handler = handler;
         this.callback = callback;
     }
 
@@ -268,7 +272,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             }
         }
         return null;
-
     }
 
     // Этот метод будет вызван каждый раз, когда в потоке
@@ -282,21 +285,48 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     protected void onPostExecute(JSONObject result)
     {
         try {
-            // Если есть обработчик, выполняем соответствующую функцию
-            if (handler != null)
-                handler.CheckResponse(result);
-        } catch (JSONException e) {
+            // Окончание свайпа
+            if (swipe != null) {
+                swipe.setRefreshing(false);
+            }
+            // Если ошибка показываем ее
+            if (result.has("error")) {
+                showError(result.get("type").toString());
+            }
+                // Иначе вызов колбэка
+                else if (callback != null) {
+                    callback.onTaskCompleted(result);
+                }
+        }catch (Exception e){
             e.printStackTrace();
         }
-
-        if (swipe != null) { swipe.setRefreshing(false); }
-
-        // Вызов колбэка
-        if(callback != null) {
-            callback.onTaskCompleted(result);
-        }
-
-        //showNotification("Downloaded " + result + " bytes");
     }
 
+    // Показать ошибку
+    public void showError(String errType){
+        String result;
+        switch (errType){
+            case "400": {
+                result = "Ошибка: " + errType;
+                break;
+            }
+            case "403": {
+                result = "Ошибка: " + errType;
+                break;
+            }
+            case "404": {
+                result = "Ошибка: " + errType;
+                break;
+            }
+            case "500": {
+                result = "Ошибка: " + errType;
+                break;
+            }
+            default: {
+                result = "Ошибка: " + errType;
+                break;
+            }
+        }
+        Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+    }
 }

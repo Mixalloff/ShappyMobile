@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -58,7 +59,7 @@ public class StockInfoActivity extends AppCompatActivity {
         });
         setInterfaceElements();
 
-        AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(this);
         request.setParameters("id=" + stock.id);
         request.execute(APIConstants.USER_GET_STOCKS_INFO);
     }
@@ -125,7 +126,12 @@ public class StockInfoActivity extends AppCompatActivity {
         subscribedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncRequestToServer request = new AsyncRequestToServer(self, handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(self, new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserUnsubscribeStock(result);
+                    }
+                });
                 request.setParameters(APIRequestConstructor.userAddStockParameters(stock.id));
                 request.execute(APIConstants.USER_UNSUBSCRIBE_STOCK);
             }
@@ -141,7 +147,12 @@ public class StockInfoActivity extends AppCompatActivity {
         subscribedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncRequestToServer request = new AsyncRequestToServer(self, handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(self,  new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserSubscribeStock(result);
+                    }
+                });
                 request.setParameters(APIRequestConstructor.userAddStockParameters(stock.id));
                 request.execute(APIConstants.USER_SUBSCRIBE_STOCK);
             }

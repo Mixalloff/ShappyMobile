@@ -75,7 +75,12 @@ public class CompanyInfoActivity extends AppCompatActivity {
        setInterfaceElements();
 
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result) {
+                    handler.onUserGetStocksByCompany(result);
+                }
+            });
             // Тест поиска по компании
             request.setParameters("companyID=" + company.id);
             request.execute(APIConstants.USER_GET_STOCKS_BY_COMPANY);
@@ -116,7 +121,7 @@ public class CompanyInfoActivity extends AppCompatActivity {
         subscribedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncRequestToServer request = new AsyncRequestToServer(self, handler, new OnTaskCompleted() {
+                AsyncRequestToServer request = new AsyncRequestToServer(self, new OnTaskCompleted() {
                     @Override
                     public void onTaskCompleted(JSONObject result) {
                         setUnsubscribedView();
@@ -135,7 +140,7 @@ public class CompanyInfoActivity extends AppCompatActivity {
         subscribedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AsyncRequestToServer request = new AsyncRequestToServer(self, handler, new OnTaskCompleted() {
+                AsyncRequestToServer request = new AsyncRequestToServer(self, new OnTaskCompleted() {
                     @Override
                     public void onTaskCompleted(JSONObject result) {
                         setSubscribedView();

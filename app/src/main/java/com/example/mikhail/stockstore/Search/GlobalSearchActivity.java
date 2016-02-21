@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.Classes.GlobalVariables;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -94,7 +95,12 @@ public class GlobalSearchActivity extends AppCompatActivity implements SearchVie
     // Запрос акций по искомому слову
     public void requestStocks(String searchWord){
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result) {
+                    handler.onUserGetStocksByFilter(result);
+                }
+            });
             request.setParameters("searchword=" + URLEncoder.encode(searchWord, "UTF-8"));
             request.execute(APIConstants.USER_GET_STOCKS_BY_WORDPATH);
         }catch (Exception e){

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 
@@ -18,7 +19,7 @@ import org.json.JSONObject;
 public class SplashActivity extends AppCompatActivity {
 
    // private final int SPLASH_DISPLAY_LENGTH = 1000;
-    AsyncRequestToServer request;
+   // AsyncRequestToServer request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,12 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         initFonts();
 
-        request = new AsyncRequestToServer(this, handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetAllStocks(result);
+            }
+        });
 
         request.execute(APIConstants.GET_ALL_STOCKS);
     }

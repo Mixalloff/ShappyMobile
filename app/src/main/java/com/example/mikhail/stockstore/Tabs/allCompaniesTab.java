@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -39,7 +40,7 @@ public class allCompaniesTab extends Fragment {
     private List<Company> companies = new ArrayList<>();
     //RecyclerView rv;
     int countOfLoadingCompanies = 10;
-    AsyncRequestToServer request;
+    //AsyncRequestToServer request;
 
     RecyclerView recyclerView;
 
@@ -59,7 +60,12 @@ public class allCompaniesTab extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.companies_recyclerView);
         initRecyclerView(container);
 
-        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetAllCompanies(result);
+            }
+        });
         request.execute(APIConstants.GET_ALL_COMPANIES);
 
         return v;

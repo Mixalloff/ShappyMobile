@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.APIRequestConstructor;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -68,9 +69,14 @@ public class RegisterActivity extends AppCompatActivity {
         String Password =  ((EditText) findViewById(R.id.passwordText)).getText().toString();
 
         try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this, handler);
+            AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+                @Override
+                public void onTaskCompleted(JSONObject result) {
+                    handler.onRegister(result);
+                }
+            });
             request.setParameters(APIRequestConstructor.registerParameters(Name, Surname, Email, Phone, Password));
-            handler.CheckResponse(request.execute(APIConstants.USER_REGISTER).get());
+            request.execute(APIConstants.USER_REGISTER);
             //ServerResponseHandler.CheckResponse(APIRequestConstructor.userRegister(Name, Surname, Email, Phone, Password), handler);
         } catch (Exception e) {
             e.printStackTrace();

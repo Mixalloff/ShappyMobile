@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.mikhail.stockstore.Adapters.HorizontalListAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
 import com.example.mikhail.stockstore.Constants.ElementGroupSpecies;
@@ -38,7 +39,7 @@ public class allFriendsTab extends Fragment {
     HorizontalListAdapter adapter;
     ListView lv;
     int countOfLoadingPersons = 5;
-    AsyncRequestToServer request;
+    //AsyncRequestToServer request;
     FloatingActionButton friendSearchsBtn;
 
     @Override
@@ -70,7 +71,12 @@ public class allFriendsTab extends Fragment {
             }
         });
 
-        request = new AsyncRequestToServer(getActivity(), handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetAllFriends(result);
+            }
+        });
         request.execute(APIConstants.USER_GET_ALL_FRIENDS);
         //request.setParameters("");
        // request.execute(APIConstants.USER_GET_FRIENDS_FILTER);
@@ -89,7 +95,12 @@ public class allFriendsTab extends Fragment {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                request = new AsyncRequestToServer(getActivity(), handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetAllFriends(result);
+                    }
+                });
                 request.setSwipeRefresh(swipe);
                 request.execute(APIConstants.USER_GET_ALL_FRIENDS);
             }

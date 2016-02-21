@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.mikhail.stockstore.Adapters.CategoryCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.IDifferentMode;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -38,7 +39,12 @@ public class allCategoriesTab extends Fragment{
 
         initGridView(container,v);
         //initializeTestData();
-        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject result) {
+                handler.onUserGetAllCategories(result);
+            }
+        });
         request.execute(APIConstants.GET_ALL_CATEGORIES);
 
         return v;

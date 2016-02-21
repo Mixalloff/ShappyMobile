@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.IDifferentMode;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
@@ -94,7 +95,7 @@ public class allStocksTab extends Fragment implements IDifferentMode{
         }catch(Exception e){
             e.printStackTrace();
 
-            AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+            AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
             //request.execute(APIConstants.GET_ALL_STOCKS);
             requestStocks(request);
         }
@@ -106,10 +107,22 @@ public class allStocksTab extends Fragment implements IDifferentMode{
     public void requestStocks(AsyncRequestToServer request){
         switch(getMode()){
             case "All": {
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetAllStocks(result);
+                    }
+                });
                 request.execute(APIConstants.GET_ALL_STOCKS);
                 break;
             }
             case "Subscriptions": {
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetSubscriptionsStocks(result);
+                    }
+                });
                 request.execute(APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS);
                 break;
             }
@@ -151,7 +164,7 @@ public class allStocksTab extends Fragment implements IDifferentMode{
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
                 request.setSwipeRefresh(swipe);
                 requestStocks(request);
                 //request.execute(APIConstants.GET_ALL_STOCKS);
