@@ -147,10 +147,6 @@ public class allStocksTab extends Fragment implements IDifferentMode{
             }
 
         }
-
-       /* if (data == null) {return;}
-        String name = data.getStringExtra("name");
-        Snackbar.make(this.getView(), name, Snackbar.LENGTH_SHORT).show();*/
     }
 
     // Инициализация SwipeLayout
@@ -197,14 +193,11 @@ public class allStocksTab extends Fragment implements IDifferentMode{
         try {
             // Обновляем список акций
             stocks.clear();
-            // adapter.notifyItemRemoved(0);
-
             JSONArray data = new JSONArray(response.get("data").toString());
             int count = data.length() > countOfLoadingStocks ? countOfLoadingStocks : data.length();
             for (int i = 0; i < count; i++){
                 JSONObject stock = new JSONObject(data.get(i).toString());
                 stocks.add(new Stock(stock));
-                // adapter.notifyItemInserted(i);
             }
             adapter.notifyDataSetChanged();
         } catch (Exception e) {
@@ -221,26 +214,6 @@ public class allStocksTab extends Fragment implements IDifferentMode{
         @Override
         public void onUserGetSubscriptionsStocks(JSONObject response){
             refreshStocksFromResponse(response);
-        }
-
-        @Override
-        public void onError400(JSONObject response) {
-            Toast.makeText(getContext(), "400", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onError403(JSONObject response) {
-            Toast.makeText(getContext(), "403", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onError404(JSONObject response) {
-            Toast.makeText(getContext(), "404", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onError500(JSONObject response) {
-            Toast.makeText(getContext(), "500", Toast.LENGTH_SHORT).show();
         }
     };
 

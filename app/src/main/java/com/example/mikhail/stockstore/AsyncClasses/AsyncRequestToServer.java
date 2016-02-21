@@ -47,6 +47,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
         this.errorCallback = errorCallback;
     }
 
+    // Список POST-запросов
     final List<String> POST_Request = Arrays.asList(
             APIConstants.USER_AUTH,
             APIConstants.USER_REGISTER,
@@ -58,6 +59,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             APIConstants.USER_UNSUBSCRIBE_COMPANY
     );
 
+    // Список GET-запросов
     final List<String> GET_Request = Arrays.asList(
             APIConstants.GET_ALL_STOCKS,
             APIConstants.GET_ALL_COMPANIES,
@@ -70,7 +72,8 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             APIConstants.USER_GET_ALL_FRIENDS,
             APIConstants.USER_GET_FRIENDS_FEED,
             APIConstants.USER_GET_FRIENDS_FILTER,
-            APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS
+            APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS,
+            APIConstants.GET_SUBSCRIBED_COMPANIES
     );
 
     // Параметры запроса

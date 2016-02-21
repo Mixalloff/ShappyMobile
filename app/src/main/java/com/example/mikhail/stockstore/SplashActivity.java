@@ -47,37 +47,6 @@ public class SplashActivity extends AppCompatActivity {
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
         }
-
-        @Override
-        public void onError400(JSONObject response){
-            Toast.makeText(SplashActivity.this, "ошибка 400", Toast.LENGTH_SHORT).show();
-            OpenLoginActivity();
-        }
-
-        @Override
-        public void onError403(JSONObject response){
-            Toast.makeText(SplashActivity.this, "ошибка 403", Toast.LENGTH_SHORT).show();
-            OpenLoginActivity();
-        }
-
-        @Override
-        public void onError404(JSONObject response){
-            Toast.makeText(SplashActivity.this, "ошибка 404", Toast.LENGTH_SHORT).show();
-            OpenLoginActivity();
-        }
-
-        @Override
-        public void onError500(JSONObject response){
-            Toast.makeText(SplashActivity.this, "ошибка 500", Toast.LENGTH_SHORT).show();
-            OpenLoginActivity();
-        }
-
-        @Override
-        public void DefaultFunc(JSONObject response) {
-            Toast.makeText(SplashActivity.this, "ошибка при запросе", Toast.LENGTH_SHORT).show();
-            OpenLoginActivity();
-        }
-
     };
 
     // Открытие активити авторизации

@@ -21,9 +21,9 @@ public class APIConstants {
     public final static String USER_DELETE_FRIEND = "user/friends/delete";
     public final static String USER_GET_FRIENDS_FEED = "user/stocks/filter/friends";
     public final static String USER_GET_FRIENDS_FILTER = "user/friends/filter";
-
     public final static String USER_GET_SUBSCRIPTIONS_STOCKS =  "user/stocks/filter/subscribitions";
-
     public final static String USER_SUBSCRIBE_COMPANY = "user/companies/subscribe";
     public final static String USER_UNSUBSCRIBE_COMPANY = "user/companies/unsubscribe";
+
+    public final static String GET_SUBSCRIBED_COMPANIES = "user/companies/subscriptions";
 }

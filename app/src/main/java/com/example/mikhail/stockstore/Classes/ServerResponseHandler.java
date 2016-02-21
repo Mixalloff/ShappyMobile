@@ -9,8 +9,39 @@ import org.json.JSONObject;
 // Класс обработки ответа сервера. Вызывает методы реализованного пользователем интерфейса
 public class ServerResponseHandler{
 
+    // Обработка ошибок
+    public void errorsHandle(JSONObject response){
+        try {
+            String type = response.getString("type");
+            switch (type){
+                case "400": {
+                    this.onError400(response);
+                    break;
+                }
+                case "403": {
+                    this.onError403(response);
+                    break;
+                }
+                case "404": {
+                    this.onError404(response);
+                    break;
+                }
+                case "500": {
+                    this.onError500(response);
+                    break;
+                }
+                default: {
+                    this.defaultFunc(response);
+                    break;
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     // Функция, выполняемая если ни один из известных типов ответа не подошел
-    public void DefaultFunc(JSONObject response){}
+    public void defaultFunc(JSONObject response){}
 
     public void onError400(JSONObject response) {}
 
@@ -59,4 +90,6 @@ public class ServerResponseHandler{
     public void onUserSubscribeCompany(JSONObject response){}
 
     public void onUserUnsubscribeCompany(JSONObject response){}
+
+    public void onUserGetSubscribedCompanies(JSONObject response){}
 }

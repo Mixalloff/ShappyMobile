@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
+import com.example.mikhail.stockstore.Classes.IDifferentMode;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
 import com.example.mikhail.stockstore.Classes.ServerResponseHandler;
@@ -35,12 +36,13 @@ import java.util.List;
 /**
  * Created by mikhail on 09.12.15.
  */
-public class allCompaniesTab extends Fragment {
+public class allCompaniesTab extends Fragment implements IDifferentMode {
     CompanyCardAdapter adapter;
     private List<Company> companies = new ArrayList<>();
     //RecyclerView rv;
     int countOfLoadingCompanies = 10;
-    //AsyncRequestToServer request;
+
+    private String mode;
 
     RecyclerView recyclerView;
 
@@ -49,8 +51,36 @@ public class allCompaniesTab extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-       // request = new AsyncRequestToServer(getActivity(), handler);
-       // request.execute(APIConstants.GET_ALL_COMPANIES);
+        // Установить режим
+        this.setMode(((IDifferentMode) getActivity()).getMode());
+    }
+
+    private void requestCompanies(AsyncRequestToServer request){
+        switch (this.mode){
+            case "All":{
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetAllCompanies(result);
+                    }
+                });
+                request.execute(APIConstants.GET_ALL_COMPANIES);
+                break;
+            }
+            case "Subscriptions": {
+                request.setCallback( new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onUserGetSubscribedCompanies(result);
+                    }
+                });
+                request.execute(APIConstants.GET_SUBSCRIBED_COMPANIES);
+                break;
+            }
+            default:{
+
+            }
+        }
     }
 
     @Override
@@ -60,14 +90,10 @@ public class allCompaniesTab extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.companies_recyclerView);
         initRecyclerView(container);
 
-        AsyncRequestToServer request = new AsyncRequestToServer(getActivity(),  new OnTaskCompleted() {
-            @Override
-            public void onTaskCompleted(JSONObject result) {
-                handler.onUserGetAllCompanies(result);
-            }
-        });
-        request.execute(APIConstants.GET_ALL_COMPANIES);
-
+        AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
+        //request.execute(APIConstants.GET_ALL_COMPANIES);
+        this.requestCompanies(request);
+        
         return v;
     }
 
@@ -99,28 +125,45 @@ public class allCompaniesTab extends Fragment {
         String nike = "https://img.grouponcdn.com/coupons/gMH7PGJwA4KdS3teZNvpXD/nike-highres-500x500";
         companies.add(new Company("1","Adidas", adidas));
         companies.add(new Company("1","NIKE", nike));
-        //companies.add(new Company("NIKE", nike));
-        //companies.add(new Company("NIKE", nike));
         companies.add(new Company("1","Adidas", adidas));
     }
 
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
         public void onUserGetAllCompanies(JSONObject response) {
-            try {
-                // Обновляем список акций
-                companies.clear();
+            refreshCompaniesFromResponse(response);
+        }
 
-                JSONArray data = new JSONArray(response.get("data").toString());
-                int count = data.length() > countOfLoadingCompanies ? countOfLoadingCompanies : data.length();
-                for (int i = 0; i < count; i++){
-                    JSONObject company = new JSONObject(data.get(i).toString());
-                    companies.add(new Company(company));
-                }
-                adapter.notifyDataSetChanged();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        @Override
+        public void onUserGetSubscribedCompanies(JSONObject response) {
+            refreshCompaniesFromResponse(response);
         }
     };
+
+    private void refreshCompaniesFromResponse(JSONObject response){
+        try {
+            // Обновляем список акций
+            companies.clear();
+
+            JSONArray data = new JSONArray(response.get("data").toString());
+            int count = data.length() > countOfLoadingCompanies ? countOfLoadingCompanies : data.length();
+            for (int i = 0; i < count; i++){
+                JSONObject company = new JSONObject(data.get(i).toString());
+                companies.add(new Company(company));
+            }
+            adapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getMode() {
+        return this.mode;
+    }
+
+    @Override
+    public void setMode(String mode) {
+        this.mode = ((IDifferentMode)getActivity()).getMode();
+    }
 }
