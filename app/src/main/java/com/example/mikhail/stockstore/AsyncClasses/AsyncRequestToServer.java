@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by mikhail on 19.12.15.
@@ -180,78 +183,40 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                     if(urlParams.equals("")){
                         setParameters();
                     }
-                    switch (url) {
-                        case APIConstants.GET_ALL_STOCKS: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_STOCKS + "?" + urlParams));
-                        }
-                        case APIConstants.GET_ALL_COMPANIES: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_COMPANIES + "?" + urlParams));
-                        }
-                        case APIConstants.USER_AUTH: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_AUTH));
-                        }
-                        case APIConstants.USER_REGISTER: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_REGISTER));
-                        }
 
-                        case APIConstants.GET_ALL_CATEGORIES: {
-                            return new JSONObject(sendGetRequest(APIConstants.GET_ALL_CATEGORIES + "?" + urlParams));
-                        }
+                    List<String> POST_Request = Arrays.asList(
+                            APIConstants.USER_AUTH,
+                            APIConstants.USER_REGISTER,
+                            APIConstants.USER_SUBSCRIBE_STOCK,
+                            APIConstants.USER_UNSUBSCRIBE_STOCK,
+                            APIConstants.USER_ADD_FRIEND,
+                            APIConstants.USER_DELETE_FRIEND,
+                            APIConstants.USER_SUBSCRIBE_COMPANY,
+                            APIConstants.USER_UNSUBSCRIBE_COMPANY
+                    );
 
-                        case APIConstants.USER_SUBSCRIBE_STOCK: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_STOCK));
-                        }
-                        case APIConstants.USER_UNSUBSCRIBE_STOCK: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_STOCK));
-                        }
+                    List<String> GET_Request = Arrays.asList(
+                            APIConstants.GET_ALL_STOCKS,
+                            APIConstants.GET_ALL_COMPANIES,
+                            APIConstants.GET_ALL_CATEGORIES,
+                            APIConstants.USER_GET_FEED,
+                            APIConstants.USER_GET_STOCKS_INFO,
+                            APIConstants.USER_GET_STOCKS_BY_COMPANY,
+                            APIConstants.USER_GET_STOCKS_BY_WORDPATH,
+                            APIConstants.USER_GET_STOCKS_BY_FILTER,
+                            APIConstants.USER_GET_ALL_FRIENDS,
+                            APIConstants.USER_GET_FRIENDS_FEED,
+                            APIConstants.USER_GET_FRIENDS_FILTER,
+                            APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS
+                    );
 
-                        case APIConstants.USER_GET_FEED: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FEED + "?" + urlParams));
-                        }
-
-                        case APIConstants.USER_GET_STOCKS_INFO: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_INFO + "?" + urlParams));
-                        }
-                        case APIConstants.USER_GET_STOCKS_BY_COMPANY: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_COMPANY + "?" + urlParams));
-                        }
-                        case APIConstants.USER_GET_STOCKS_BY_WORDPATH: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_WORDPATH + "?" + urlParams));
-                        }
-                        case APIConstants.USER_GET_STOCKS_BY_FILTER: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_STOCKS_BY_FILTER + "?" + urlParams));
-                        }
-                        case APIConstants.USER_GET_ALL_FRIENDS: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_ALL_FRIENDS) + "?" + urlParams);
-                        }
-                        case APIConstants.USER_ADD_FRIEND: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_ADD_FRIEND));
-                        }
-                        case APIConstants.USER_DELETE_FRIEND: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_DELETE_FRIEND));
-                        }
-                        case APIConstants.USER_GET_FRIENDS_FEED: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FEED + "?" + urlParams));
-                        }
-                        case APIConstants.USER_GET_FRIENDS_FILTER: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_FRIENDS_FILTER + "?" + urlParams));
-                        }
-
-                        case APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS: {
-                            return new JSONObject(sendGetRequest(APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS + "?" + urlParams));
-                        }
-
-                        case APIConstants.USER_SUBSCRIBE_COMPANY: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_COMPANY));
-                        }
-
-                        case APIConstants.USER_UNSUBSCRIBE_COMPANY: {
-                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_COMPANY));
-                        }
-
-                        default: {
-                        }
+                    if(POST_Request.contains(url)){
+                        return new JSONObject(sendPostRequest(url));
                     }
+                    else if (GET_Request.contains(url)){
+                        return new JSONObject(sendGetRequest(url+ "?" + urlParams));
+                    }
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }
