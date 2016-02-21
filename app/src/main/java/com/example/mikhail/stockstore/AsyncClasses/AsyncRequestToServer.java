@@ -43,14 +43,6 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
     private String urlParams = "";
     // Активити в которой создан объект
     Activity activity;
-    // Выполняющий действия обработчик ответа
-   // private ServerResponseHandler handler = new ServerResponseHandler();
-
-   // public void setHandler(ServerResponseHandler handler){ this.handler = handler; }
-
-    /*public AsyncRequestToServer(Activity activity){
-        this.activity = activity;
-    }*/
 
     public void setSwipeRefresh(SwipeRefreshLayout swipe){
         this.swipe = swipe;
@@ -83,9 +75,7 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
 
     // Метод выполняется перед началом doInBackground()
     protected void onPreExecute(){
-        /*if(swipe != null){
-            swipe.setRefreshing(true);
-        }*/
+
     }
 
     // Проверяет, есть ли соединение
