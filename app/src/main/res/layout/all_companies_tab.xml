@@ -14,12 +14,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />-->
 
-   <!-- <android.support.v7.widget.RecyclerView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/cards" />-->
-
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/companies_gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -28,6 +23,16 @@
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" />
+        android:verticalSpacing="10dp" />-->
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_refresh">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/companies_recyclerView" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

@@ -247,6 +247,14 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
                             return new JSONObject(sendGetRequest(APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS + "?" + urlParams));
                         }
 
+                        case APIConstants.USER_SUBSCRIBE_COMPANY: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_SUBSCRIBE_COMPANY));
+                        }
+
+                        case APIConstants.USER_UNSUBSCRIBE_COMPANY: {
+                            return new JSONObject(sendPostRequest(APIConstants.USER_UNSUBSCRIBE_COMPANY));
+                        }
+
                         default: {
                         }
                     }

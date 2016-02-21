@@ -29,32 +29,19 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/card_name"
                 android:textStyle="bold"
                 android:paddingLeft="5dp"
                 style="@style/darkText"
-                android:textSize="12pt"
+                android:textSize="8pt"
                 android:text="Name"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:gravity="left"
                 android:textColor="#000"
                 android:paddingTop="3dp"
-                android:layout_alignTop="@+id/card_menu"
-                android:layout_toLeftOf="@+id/card_menu"
-                android:layout_toStartOf="@+id/card_menu" />
-
-            <ImageButton
-                android:layout_width="10dp"
-                android:layout_height="50dp"
-                android:id="@+id/card_menu"
-                android:tint="@color/default_app_black"
-                android:src="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
-                android:background="?attr/selectableItemBackground"
                 android:layout_below="@+id/card_photo"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentLeft="true" />
+
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

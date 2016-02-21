@@ -24,4 +24,6 @@ public class APIConstants {
 
     public final static String USER_GET_SUBSCRIPTIONS_STOCKS =  "user/stocks/filter/subscribitions";
 
+    public final static String USER_SUBSCRIBE_COMPANY = "user/companies/subscribe";
+    public final static String USER_UNSUBSCRIBE_COMPANY = "user/companies/unsubscribe";
 }

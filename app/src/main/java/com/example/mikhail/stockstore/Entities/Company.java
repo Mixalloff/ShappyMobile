@@ -19,6 +19,7 @@ public class Company implements Parcelable{
     public String photo;
     public String id;
     private String defaultName = "default name";
+    public boolean isAdded = false;
 
     public Company(String id, String name, String photo){
         this.id = id;
@@ -37,6 +38,7 @@ public class Company implements Parcelable{
             this.id = companyObj.has("id") ? companyObj.getString("id") : null;
             this.name = companyObj.has("name") ? companyObj.getString("name") : defaultName;
             this.photo = companyObj.has("logo") ? GlobalVariables.server + companyObj.getString("logo") : null;
+            this.isAdded = companyObj.has("subscribed") && companyObj.getBoolean("subscribed");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,6 +56,7 @@ public class Company implements Parcelable{
                 this.id = json.has("id") ? json.getString("id") : null;
                 this.name = json.has("name") ? json.getString("name") : defaultName;
                 this.photo = json.has("logo") ? GlobalVariables.server + json.getString("logo") : null;
+                this.isAdded = json.has("subscribed") && json.getBoolean("subscribed");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -64,6 +67,7 @@ public class Company implements Parcelable{
         id = in.readString();
         name = in.readString();
         photo = in.readString();
+        this.isAdded = in.readByte() != 0;
     }
 
     public static final Creator<Company> CREATOR = new Creator<Company>() {
@@ -88,5 +92,6 @@ public class Company implements Parcelable{
         dest.writeString(id);
         dest.writeString(name);
         dest.writeString(photo);
+        dest.writeByte((byte) (this.isAdded ? 1 : 0));
     }
 }

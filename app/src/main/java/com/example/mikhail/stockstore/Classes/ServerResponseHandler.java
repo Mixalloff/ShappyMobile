@@ -88,6 +88,12 @@ public class ServerResponseHandler{
                 break;
             }
 
+            case "company": {
+                this.onUserSubscribeCompany(response);
+                this.onUserUnsubscribeCompany(response);
+                break;
+            }
+
             case "400": {
                 this.onError400(response);
                 break;
@@ -158,4 +164,8 @@ public class ServerResponseHandler{
     public void onUserGetStocksInfo(JSONObject response) {}
 
     public void onUserGetSubscriptionsStocks(JSONObject response){}
+
+    public void onUserSubscribeCompany(JSONObject response){}
+
+    public void onUserUnsubscribeCompany(JSONObject response){}
 }

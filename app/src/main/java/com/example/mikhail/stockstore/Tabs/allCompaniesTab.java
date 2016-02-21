@@ -1,9 +1,14 @@
 package com.example.mikhail.stockstore.Tabs;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.mikhail.stockstore.Adapters.StockCardAdapter;
 import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
 import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Adapters.CompanyCardAdapter;
@@ -35,6 +41,8 @@ public class allCompaniesTab extends Fragment {
     int countOfLoadingCompanies = 10;
     AsyncRequestToServer request;
 
+    RecyclerView recyclerView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +56,8 @@ public class allCompaniesTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_companies_tab, container, false);
 
-        //rv = (RecyclerView) v.findViewById(R.id.cards);
-        initGridView(container, v);
-     //   initializeTestData();
+        recyclerView = (RecyclerView) v.findViewById(R.id.companies_recyclerView);
+        initRecyclerView(container);
 
         AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), handler);
         request.execute(APIConstants.GET_ALL_COMPANIES);
@@ -70,12 +77,15 @@ public class allCompaniesTab extends Fragment {
         }
     };
 
-    // Инициализация GridView
-    public void initGridView(ViewGroup container,View v) {
-        GridView gridview = (GridView) v.findViewById(R.id.companies_gridView);
-        this.adapter = new CompanyCardAdapter(companies, this.getContext());
-        gridview.setAdapter(adapter);
-        gridview.setOnItemClickListener(gridviewOnItemClickListener);
+    // Инициализация RecyclerView карточек
+    public void initRecyclerView(ViewGroup container){
+        Context context = this.getActivity();
+        GridLayoutManager llm = new GridLayoutManager(context, 3);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        adapter = new CompanyCardAdapter(companies, getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void initializeTestData() {
