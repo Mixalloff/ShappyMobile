@@ -166,7 +166,6 @@ public class allStocksTab extends Fragment implements IDifferentMode{
                 //request.execute(APIConstants.GET_ALL_STOCKS);
             }
         });
-
     }
 
     // Инициализация RecyclerView карточек

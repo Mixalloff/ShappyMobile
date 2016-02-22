@@ -29,55 +29,6 @@ import java.util.Locale;
 /**
  * Created by mikhail on 15.12.15.
  */
-/*public class CompanyCardAdapter extends BaseAdapter{
-    List<Company> companies;
-    Context mContext;
-
-    public CompanyCardAdapter(List<Company> companies, Context mContext){
-        this.companies = companies;
-        this.mContext = mContext;
-    }
-
-
-    @Override
-    public int getCount() {
-        return companies.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return companies.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View grid;
-
-        if (convertView == null) {
-            grid = new View(mContext);
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-            grid = inflater.inflate(R.layout.company_card, parent, false);
-            if (companies != null) {
-                TextView companyName = (TextView) grid.findViewById(R.id.company_name);
-                ImageView companyLogo = (ImageView)grid.findViewById(R.id.company_logo);
-                ImageLoader.getInstance().displayImage(companies.get(position).photo, companyLogo);
-               // CommonFunctions.setPhotoToImageView(companies.get(position).photo, companyLogo);
-                companyName.setText(companies.get(position).name);
-            }
-
-        } else {
-            grid = (View) convertView;
-        }
-
-        return grid;
-    }
-}*/
-
 public class CompanyCardAdapter extends RecyclerView.Adapter<CompanyCardAdapter.CompanyViewHolder>{
 
     List<Company> companies;

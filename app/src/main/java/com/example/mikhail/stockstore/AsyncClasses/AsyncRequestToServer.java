@@ -73,7 +73,8 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             APIConstants.USER_GET_FRIENDS_FEED,
             APIConstants.USER_GET_FRIENDS_FILTER,
             APIConstants.USER_GET_SUBSCRIPTIONS_STOCKS,
-            APIConstants.GET_SUBSCRIBED_COMPANIES
+            APIConstants.GET_SUBSCRIBED_COMPANIES,
+            APIConstants.GET_SUBSCRIBED_CATEGORIES
     );
 
     // Параметры запроса

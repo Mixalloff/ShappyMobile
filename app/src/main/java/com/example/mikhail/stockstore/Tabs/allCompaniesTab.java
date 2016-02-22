@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,15 +47,6 @@ public class allCompaniesTab extends Fragment implements IDifferentMode {
 
     RecyclerView recyclerView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-
-        // Установить режим
-        this.setMode(((IDifferentMode) getActivity()).getMode());
-    }
-
     private void requestCompanies(AsyncRequestToServer request){
         switch (this.mode){
             case "All":{
@@ -77,9 +69,7 @@ public class allCompaniesTab extends Fragment implements IDifferentMode {
                 request.execute(APIConstants.GET_SUBSCRIBED_COMPANIES);
                 break;
             }
-            default:{
-
-            }
+            default:{}
         }
     }
 
@@ -87,27 +77,18 @@ public class allCompaniesTab extends Fragment implements IDifferentMode {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.all_companies_tab, container, false);
 
+        // Установить режим
+        this.setMode(((IDifferentMode) getActivity()).getMode());
+
         recyclerView = (RecyclerView) v.findViewById(R.id.companies_recyclerView);
         initRecyclerView(container);
+        initSwipe(v);
 
         AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
-        //request.execute(APIConstants.GET_ALL_COMPANIES);
         this.requestCompanies(request);
-        
+
         return v;
     }
-
-    private GridView.OnItemClickListener gridviewOnItemClickListener = new GridView.OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View v, int position,long id) {
-            Toast.makeText(getContext().getApplicationContext(), companies.get(position).name, Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(getContext(), CompanyInfoActivity.class);
-            intent.putExtra("company", companies.get(position));
-            startActivity(intent);
-        }
-    };
 
     // Инициализация RecyclerView карточек
     public void initRecyclerView(ViewGroup container){
@@ -155,6 +136,25 @@ public class allCompaniesTab extends Fragment implements IDifferentMode {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Инициализация SwipeLayout
+    public void initSwipe(View v){
+        // Обновление при скролле вниз
+        final SwipeRefreshLayout swipe = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh);
+        swipe.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity());
+                request.setSwipeRefresh(swipe);
+                requestCompanies(request);
+                //request.execute(APIConstants.GET_ALL_STOCKS);
+            }
+        });
     }
 
     @Override
