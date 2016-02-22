@@ -56,7 +56,9 @@ public class AsyncRequestToServer extends AsyncTask<String, Integer, JSONObject>
             APIConstants.USER_ADD_FRIEND,
             APIConstants.USER_DELETE_FRIEND,
             APIConstants.USER_SUBSCRIBE_COMPANY,
-            APIConstants.USER_UNSUBSCRIBE_COMPANY
+            APIConstants.USER_UNSUBSCRIBE_COMPANY,
+            APIConstants.USER_SUBSCRIBE_CATEGORY,
+            APIConstants.USER_UNSUBSCRIBE_CATEGORY
     );
 
     // Список GET-запросов

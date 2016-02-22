@@ -25,6 +25,9 @@ public class APIConstants {
     public final static String USER_SUBSCRIBE_COMPANY = "user/companies/subscribe";
     public final static String USER_UNSUBSCRIBE_COMPANY = "user/companies/unsubscribe";
 
+    public final static String USER_SUBSCRIBE_CATEGORY = "user/categories/subscribe";
+    public final static String USER_UNSUBSCRIBE_CATEGORY = "user/categories/unsubscribe";
+
     public final static String GET_SUBSCRIBED_COMPANIES = "user/companies/subscriptions";
     public final static String GET_SUBSCRIBED_CATEGORIES = "user/categories/subscriptions";
 }

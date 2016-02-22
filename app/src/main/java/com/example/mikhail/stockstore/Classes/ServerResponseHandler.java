@@ -91,6 +91,10 @@ public class ServerResponseHandler{
 
     public void onUserUnsubscribeCompany(JSONObject response){}
 
+    public void onUserSubscribeCategory(JSONObject response){}
+
+    public void onUserUnsubscribeCategory(JSONObject response){}
+
     public void onUserGetSubscribedCompanies(JSONObject response){}
 
     public void onUserGetSubscribedCategories(JSONObject response){}

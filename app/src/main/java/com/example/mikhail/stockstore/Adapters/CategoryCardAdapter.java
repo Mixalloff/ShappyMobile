@@ -11,13 +11,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mikhail.stockstore.AsyncClasses.AsyncRequestToServer;
+import com.example.mikhail.stockstore.AsyncClasses.OnTaskCompleted;
 import com.example.mikhail.stockstore.Classes.CommonFunctions;
 import com.example.mikhail.stockstore.CompanyInfoActivity;
+import com.example.mikhail.stockstore.Constants.APIConstants;
 import com.example.mikhail.stockstore.Entities.Category;
 import com.example.mikhail.stockstore.Entities.Company;
 import com.example.mikhail.stockstore.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -48,11 +54,16 @@ public class CategoryCardAdapter extends RecyclerView.Adapter<CategoryCardAdapte
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(activity, CompanyInfoActivity.class);
-                intent.putExtra("company", categories.get(position));
-                activity.startActivity(intent);*/
 
-                // Обработка клика по категории
+                // Обработка клика по категории (тестовый обработчик)
+                AsyncRequestToServer request = new AsyncRequestToServer(activity, new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        Toast.makeText(activity, "Вы подписались на категорию", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                request.setParameters("id="+categories.get(position).id);
+                request.execute(APIConstants.USER_SUBSCRIBE_CATEGORY);
             }
         });
     }
