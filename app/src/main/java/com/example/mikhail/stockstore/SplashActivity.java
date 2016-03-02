@@ -27,12 +27,18 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         initFonts();
 
-        AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
+        AsyncRequestToServer request = new AsyncRequestToServer(this, new OnTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject result) {
                 handler.onUserGetAllStocks(result);
             }
-        });
+        },
+                new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        OpenLoginActivity();
+                    }
+                });
 
         request.execute(APIConstants.GET_ALL_STOCKS);
     }
