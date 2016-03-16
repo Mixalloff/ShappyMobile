@@ -1,7 +1,11 @@
 package com.example.mikhail.stockstore;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,51 +26,35 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends ActionBarActivity {
-    private ServerResponseHandler handler = new ServerResponseHandler() {
-        @Override
-        public void onError400(JSONObject response){
-            Toast.makeText(LoginActivity.this, "ошибка 400", Toast.LENGTH_SHORT).show();
-        }
 
-        @Override
-        public void onError403(JSONObject response){
-            Toast.makeText(LoginActivity.this, "ошибка 403", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onError404(JSONObject response){
-            Toast.makeText(LoginActivity.this, "ошибка 404", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onError500(JSONObject response){
-            Toast.makeText(LoginActivity.this, "ошибка 500", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onAuthorize(JSONObject response) {
-            try {
-                JSONObject data = new JSONObject(response.get("data").toString());
-                WorkWithResources.saveToken(data.get("token").toString());
-                WorkWithResources.saveUserInfo(data.get("surname").toString(), data.get("name").toString());
-
-                Intent intent = new Intent(LoginActivity.this, StocksActivity.class);
-                startActivity(intent);
-                LoginActivity.this.finish();
-                //WorkWithToken.saveToken(response.get("data").toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            /*Toast.makeText(getApplicationContext(), "Токен получен!",
-                    Toast.LENGTH_SHORT).show();*/
-        }
-
-    };
+    public static final String SOCIAL_NETWORK_TAG = "SocialIntegrationMain.SOCIAL_NETWORK_TAG";
+    private static ProgressDialog pd;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        context = this;
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new LoginFragment())
+                    .commit();
+        }
+    }
+
+    protected static void showProgress(String message) {
+        pd = new ProgressDialog(context);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage(message);
+        pd.setCancelable(false);
+        pd.setCanceledOnTouchOutside(false);
+        pd.show();
+    }
+
+    protected static void hideProgress() {
+        pd.dismiss();
     }
 
     @Override
@@ -91,30 +79,13 @@ public class LoginActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onEnterBtnClick(View view) {
-        String Login = ((EditText)findViewById(R.id.loginField)).getText().toString();
-        String Password = ((EditText)findViewById(R.id.passwordField)).getText().toString();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        try {
-            AsyncRequestToServer request = new AsyncRequestToServer(this,  new OnTaskCompleted() {
-                @Override
-                public void onTaskCompleted(JSONObject result) {
-                    handler.onAuthorize(result);
-                }
-            });
-            request.setParameters(APIRequestConstructor.authParameters(Login, Password));
-            request.execute(APIConstants.USER_AUTH);
-            //ServerResponseHandler.CheckResponse(APIRequestConstructor.userAuthorize(Login, Password), handler);
-        } catch (Exception e) {
-            e.printStackTrace();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(SOCIAL_NETWORK_TAG);
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
         }
-
-        /*Toast.makeText(getApplicationContext(), WorkWithResources.getToken(this),
-                Toast.LENGTH_SHORT).show();*/
-    }
-
-    public void OnRegisterBtnClick(View view) {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
     }
 }
