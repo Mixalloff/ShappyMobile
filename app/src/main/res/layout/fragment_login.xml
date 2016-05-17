@@ -56,7 +56,6 @@
         android:text="Вход"
         android:id="@+id/enterBtn"
         android:layout_below="@+id/textLayoutPassword"
-        android:onClick="onEnterBtnClick"
         android:nestedScrollingEnabled="false"
         android:layout_centerHorizontal="true"/>
 
@@ -66,7 +65,6 @@
         android:text="Регистрация"
         android:id="@+id/registerBtn"
         android:layout_below="@+id/enterBtn"
-        android:onClick="OnRegisterBtnClick"
         android:layout_centerHorizontal="true" />
 
     <Button

@@ -1,5 +1,6 @@
 package com.example.mikhail.stockstore;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,7 +43,10 @@ public class LoginFragment extends Fragment implements SocialNetworkManager.OnIn
      * 7 - Instagram
      */
 
+    final Fragment self = this;
     private Button vk;
+    private Button enterBtn;
+    private Button registerBtn;
 
     public LoginFragment() {
     }
@@ -60,6 +64,12 @@ public class LoginFragment extends Fragment implements SocialNetworkManager.OnIn
         // init buttons and set Listener
         vk = (Button) rootView.findViewById(R.id.vk);
         vk.setOnClickListener(loginClick);
+
+        enterBtn = (Button) rootView.findViewById(R.id.enterBtn);
+        enterBtn.setOnClickListener(onEnterBtnClick);
+
+        registerBtn = (Button) rootView.findViewById(R.id.registerBtn);
+        registerBtn.setOnClickListener(onRegisterBtnClick);
 
         //Get Keys for initiate SocialNetworks
         String VK_KEY = getActivity().getString(R.string.vk_app_id);
@@ -158,28 +168,35 @@ public class LoginFragment extends Fragment implements SocialNetworkManager.OnIn
         Toast.makeText(getActivity(), "ERROR: " + errorMessage, Toast.LENGTH_LONG).show();
     }
 
-    public void onEnterBtnClick(View view) {
-        String Login = ((EditText) getActivity().findViewById(R.id.loginField)).getText().toString();
-        String Password = ((EditText) getActivity().findViewById(R.id.passwordField)).getText().toString();
+    private View.OnClickListener onEnterBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            String Login = ((EditText) getActivity().findViewById(R.id.loginField)).getText().toString();
+            String Password = ((EditText) getActivity().findViewById(R.id.passwordField)).getText().toString();
 
-        try {
-            AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), new OnTaskCompleted() {
-                @Override
-                public void onTaskCompleted(JSONObject result) {
-                    handler.onAuthorize(result);
-                }
-            });
-            request.setParameters(APIRequestConstructor.authParameters(Login, Password));
-            request.execute(APIConstants.USER_AUTH);
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                AsyncRequestToServer request = new AsyncRequestToServer(getActivity(), new OnTaskCompleted() {
+                    @Override
+                    public void onTaskCompleted(JSONObject result) {
+                        handler.onAuthorize(result);
+                    }
+                });
+                request.setParameters(APIRequestConstructor.authParameters(Login, Password));
+                request.execute(APIConstants.USER_AUTH);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-    }
+    };
 
-    public void OnRegisterBtnClick(View view) {
-        Intent intent = new Intent(this.getActivity(), RegisterActivity.class);
-        startActivity(intent);
-    }
+    private View.OnClickListener onRegisterBtnClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(self.getActivity(), RegisterActivity.class);
+            startActivity(intent);
+        }
+    };
 
     private ServerResponseHandler handler = new ServerResponseHandler() {
         @Override
